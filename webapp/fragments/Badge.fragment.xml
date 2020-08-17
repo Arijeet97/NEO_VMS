@@ -1,0 +1,41 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog title="Your Badge" showHeader="false" draggable="true" verticalScrolling="true" class="sapUiSizeCompact AddDialog" resizable="true"
+		contentWidth="30rem" titleAlignment="Center">
+		<HeaderContainer class="badgehead">
+			<Image height="30%" width="60%" src="./image/inclogo.png" class="sapUiLargeMarginBeginEnd"></Image>
+		</HeaderContainer>
+		<content>
+			<HBox>
+				<VBox>
+				<Avatar src="data:image/png;base64,{oLoginModel>/getBadge/photo}" class="sapUiMediumMarginBegin sapUiMediumMarginTop" displaySize="L" imageFitType="Cover"/>
+				<Image src="data:image/png;base64,{oLoginModel>/getBadge/qrCode}" height="100px" width="100px" class="sapUiMediumMarginBegin sapUiSmallMarginTop" ></Image>
+			</VBox>
+				<VBox class="sapUiSmallMarginBeginEnd sapUiMediumMarginTop sapUiMediumMarginBottom">
+					<HBox>
+						<Label text="Name: " class="Badge"></Label>
+						<Text text="{oLoginModel>/getBadge/visitorName}" class="BadgeText sapUiLargeMarginBegin"></Text>
+					</HBox>
+					<HBox>
+						<Label text="Email: " class="Badge"></Label>
+						<Text text="{oLoginModel>/getBadge/email}" class="BadgeText sapUiLargeMarginBegin"></Text>
+					</HBox>
+					<HBox>
+						<Label text="Contact No: " class="Badge"></Label>
+						<Text text="{oLoginModel>/getBadge/contactNo}" class="BadgeText sapUiLargeMarginBegin"></Text>
+					</HBox>
+					<HBox>
+						<Label text="Purpose " class="Badge"></Label>
+						<Text text="{oLoginModel>/getBadge/purpose}" class="BadgeText sapUiLargeMarginBegin"></Text>
+					</HBox>
+					<HBox>
+						<Label text="HostName: " class="Badge"></Label>
+						<Text text="{oLoginModel>/getBadge/hostName}" class="BadgeText sapUiLargeMarginBegin "></Text>
+					</HBox>
+				</VBox>
+			</HBox>
+		</content>
+		<beginButton>
+			<Button text="CheckIn" type="Accept" press="onCheckIn"/>
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

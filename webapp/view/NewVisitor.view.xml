@@ -1,0 +1,136 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified" controllerName="inc.inkthn.neo.NEO_VMS.controller.NewVisitor"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form">
+	<App id="app">
+		<pages>
+			<Page id="page" enableScrolling="true" class="visitorBackground">
+				<customHeader >
+					<Bar class="landingheader">
+						<contentLeft>
+							<Image height="100%" width="10%" src="./image/inclogo.png" class="LandingLogo sapUiMediuMarginBegin"></Image>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<content class="NewVisitorContent">
+					<Panel width="80%" backgroundDesign="Translucent" class="visitor">
+						<VBox>
+							<f:SimpleForm layout="ColumnLayout" editable="true" id="idSimpleFormPreReg" title="Enter Personal Details">
+								<f:content>
+									<Label text="{i18n>firstname}"/>
+									<Input id="idfName" class="InputBox" value="{oVisitorModel>/firstName}"/>
+									<Label text="{i18n>lastname}"/>
+									<Input id="idlName" class="InputBox" value="{oVisitorModel>/lastName}"/>
+									<Label text="{i18n>Email}"/>
+									<Input id="idEmail" type="Email" class="InputBox" value="{oVisitorModel>/email}"/>
+									<Label text="{i18n>Phone}"/>
+									<Input id="idPhone" type="Number" class="InputBox" value="{oVisitorModel>/contactNo}"/>
+									<Label text="{i18n>Identity}"/>
+									<ComboBox id="idPerID" selectedKey="{oVisitorModel>/personalIdType}" items="{oViewModel>/list}" class="InputBox">
+										<core:Item text="{oViewModel>Identity}" key="{oViewModel>Identity}"></core:Item>
+									</ComboBox>
+									<Label text="{i18n>IDNUMBER}"/>
+									<Input id="idPerIDNum" type="Number" class="InputBox" value="{oVisitorModel>/identityNo}"/>
+									<Label text="{i18n>Organisation}"/>
+									<Input id="idVisOrg" class="MeetInputBox" value="{oVisitorModel>/organisation}"/>
+									
+								</f:content>
+							</f:SimpleForm >
+						</VBox>
+						<VBox>
+							<f:SimpleForm layout="ColumnLayout" editable="true" id="idSimpleFormPreReg1" title="Enter Meeting Details">
+								<f:content>
+									<Label text="{i18n>Purpose}"/>
+									<Input id="idVisPurp" class="MeetInputBox" value="{oVisitorModel>/purpose}"/>
+									<Label text="{i18n>hostmeet}"/>
+									<Input id="idHostName" class="InputBox" value="{oVisitorModel>/eId}" showSuggestion="true" showValueHelp="true"
+										suggestionItems="{oVisitorModel1>/getEmployeeList}">
+										<suggestionItems>
+											<core:Item text="{oVisitorModel1>name} (Eid)={oVisitorModel1>eId}"/>
+										</suggestionItems>
+									</Input>
+									<Label text="Date of Meeting"/>
+									<DatePicker id="iddate" value="{oVisitorModel>/date}"></DatePicker>
+									<Label text="{i18n>Start time}"/>
+									<TimePicker id="idMeetbegin" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" value="{oVisitorModel>/begin}" change="handleChange"
+										class="MeetInputBox"/>
+									<Label text="{i18n>End Time}"/>
+									<TimePicker id="idMeetend" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" value="{oVisitorModel>/end}" change="handleChange"
+										class="MeetInputBox"/>
+								</f:content>
+							</f:SimpleForm>
+							<Table id="idNewVisitor" inset="true" items="{path: 'oVisitorModel>/NewVisitor'}" visible="{oViewModel>/AddVisVisibility}">
+								<headerToolbar>
+									<OverflowToolbar>
+										<content>
+											<Title text="Add Visitor" level="H6" class="Visitortable"/>
+											<ToolbarSpacer></ToolbarSpacer>
+											<Button icon="sap-icon://add-employee" press="addVis"></Button>
+										</content>
+									</OverflowToolbar>
+								</headerToolbar>
+								<columns>
+									<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+										<Text text="{i18n>firstname}"/>
+									</Column>
+									<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+										<Text text="{i18n>lastname}"/>
+									</Column>
+									<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+										<Text text="{i18n>Email}"/>
+									</Column>
+									<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+										<Text text="{i18n>Phone}"/>
+									</Column>
+									<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+										<Text text="{i18n>idIDType}"/>
+									</Column>
+									<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+										<Text text="{i18n>IDNUMBER}"/>
+									</Column>
+									<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+										<Text text="{i18n>action}"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem >
+										<cells>
+											<Input id="idfname" value="{oVisitorModel>fName}"></Input>
+											<Input id="idlname" value="{oVisitorModel>lName}"></Input>
+											<Input id="idEmail1" value="{oVisitorModel>emailId}"></Input>
+											<Input id="idPhone1" value="{oVisitorModel>phoneNo}"></Input>
+											<ComboBox id="idPer" selectedKey="{oVisitorModel>proofType}" items="{oViewModel>/list}" class="InputBox">
+												<core:Item text="{oViewModel>Identity}" key="{oViewModel>Identity}"></core:Item>
+											</ComboBox>
+											<Input id="idPerIDNum1" value="{oVisitorModel>idNo}"></Input>
+											<Button icon="sap-icon://delete" type="Reject" press="onVisCancel"></Button>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</VBox>
+						<HBox class="checkHBox">
+						
+							<CheckBox id="ch1"  selected="false" select ="onTermsandCond" enabled="true" />
+							<Text text="I have read and agree to the " class="termsText1"  ></Text>
+							<Link text="  terms of service" press="handleLinkPress"  class="termsText2" />
+						</HBox>
+						<OverflowToolbar>
+								<ToolbarSpacer/>
+						<Button text="{i18n>ADD}" type="Emphasized" press="onAddVisible"/>
+						<Button id="idSubmitBtn" type="Accept" text="Submit" press="onSubmit" enabled="fasle" />
+						<Button text="Cancel" type="Reject" press="onCancel"/>
+					</OverflowToolbar>
+					</Panel>
+					
+				</content>
+				<!--<footer>-->
+				<!--	<Toolbar>-->
+				<!--		<ToolbarSpacer/>-->
+				<!--		<Button text="{i18n>ADD}" type="Emphasized" press="onAddVisible"/>-->
+				<!--		<Button id="idSubmitBtn" type="Accept" text="Submit" press="onSubmit" enabled="fasle" />-->
+				<!--		<Button text="Cancel" type="Reject" press="onCancel"/>-->
+				<!--	</Toolbar>-->
+				<!--</footer>-->
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

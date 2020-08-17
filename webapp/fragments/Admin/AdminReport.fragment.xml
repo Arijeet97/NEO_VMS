@@ -1,0 +1,81 @@
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core"  xmlns="sap.m" xmlns:viz="sap.viz.ui5.controls" 
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:ui="sap.suite.ui.microchart" xmlns:viz.data="sap.viz.ui5.data">
+	<l:HorizontalLayout class="date">
+		<Label class="dateReport" text=" Start Date:"/>
+		<DatePicker class="date" id="sdate" valueFormat="MMM dd, yyyy" />
+	</l:HorizontalLayout>
+	<l:HorizontalLayout class="date">
+		<Label class="dateReport" text="End Date:"/>
+		<DatePicker class="date" id="edate" valueFormat="MMM dd, yyyy" />
+	</l:HorizontalLayout>
+	<Button text="get data" class="date" type="Emphasized" press="onReports"></Button>
+	<!--<Button icon="sap-icon://download" class="date" id="idbtn1" text="Export Pdf"  type="Ghost" press="onDownloadPdf"></Button>-->
+	<!--<Button icon="sap-icon://download" class="date" text="Export Excel"   type="Ghost" press="onDownloadExcel"></Button>-->
+	<l:VerticalLayout width="100%">
+		<FlexBox width="22rem" height="13rem" class="donut" alignItems="Center" justifyContent="SpaceBetween">
+		<items>
+			<ui:InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="4" press="press">
+				<ui:segments>
+					<ui:InteractiveDonutChartSegment label="Frequent Visitors" value="{oAdminModel>/DFrequentVisitor}" displayedValue="{oAdminModel>/DFrequentVisitor}%"/>
+					<ui:InteractiveDonutChartSegment label="Blacklisted Visitors" value="{oAdminModel>/DBlacklisted}" displayedValue="{oAdminModel>/DBlacklisted}%"/>
+					<ui:InteractiveDonutChartSegment label="Others" value="{oAdminModel>/DOthers}" displayedValue="{oAdminModel>/DOthers}%"/>
+				</ui:segments>
+			</ui:InteractiveDonutChart>
+			
+			<ui:InteractiveBarChart labelWidth="25%" displayedBars="3" class="Microchart" selectionChanged="selectionChanged" press="press">
+						<ui:bars>
+							<ui:InteractiveBarChartBar label="Frequent Visitors" value="{oAdminModel>/DFrequentVisitor}" color="Critical"/>
+							<ui:InteractiveBarChartBar label="Blacklisted Visitors" value="{oAdminModel>/DBlacklisted}" color="Good" />
+							<ui:InteractiveBarChartBar label="Others" value="{oAdminModel>/DOthers}" color="Error"/>
+						</ui:bars>
+					</ui:InteractiveBarChart>
+		</items>
+	
+	</FlexBox>
+		 
+	</l:VerticalLayout>
+		<Table id="idAdminTotalVisitor" inset="true" items="{path: 'oAdminModel>/TotalVisitor'}" >
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="Total Visitors" level="H3"/>
+					<ToolbarSpacer ></ToolbarSpacer>
+				
+					<Button icon="sap-icon://download"  tooltip="Download" type="Emphasized" press="onDownload"></Button>
+				
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>name}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>Contact}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>Email}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>ORG}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>Purpose}"/>
+			</Column>
+
+		</columns>
+		<items>
+			<ColumnListItem >
+				<cells>
+					<Text text="{oAdminModel>name}"/>
+					<Text text="{oAdminModel>contactNo}"/>
+					<Text text="{oAdminModel>email}"/>
+					<Text text="{oAdminModel>organization}"/>
+					<Text text="{oAdminModel>purpose}"/>
+				
+					
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>
