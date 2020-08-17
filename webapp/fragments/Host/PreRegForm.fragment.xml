@@ -83,15 +83,15 @@
 				<items>
 					<ColumnListItem >
 						<cells>
-							<Input id="idfname" value="{oPreRegForm>fName}"></Input>
-							<Input id="idlname" value="{oPreRegForm>lName}"></Input>
-							<Input id="idEmail1" value="{oPreRegForm>emailId}"></Input>
-							<Input id="idPhone1" value="{oPreRegForm>phoneNo}"></Input>
-							<ComboBox id="idPer" selectedKey="{oPreRegForm>proofType}" items="{oViewModel>/list}" class="InputBox">
+							<Input  value="{oPreRegForm>fName}"></Input>
+							<Input  value="{oPreRegForm>lName}"></Input>
+							<Input  value="{oPreRegForm>emailId}"></Input>
+							<Input  value="{oPreRegForm>phoneNo}"></Input>
+							<ComboBox  selectedKey="{oPreRegForm>proofType}" items="{oViewModel>/list}" class="InputBox">
 							<core:Item text="{oViewModel>Identity}" key="{oViewModel>Identity}"></core:Item>
 					    	</ComboBox>
-							<Input id="idPerIDNum1" value="{oPreRegForm>idNo}"></Input>
-							<ComboBox id="idpark" selectedKey="{oPreRegForm>parkingStatus}" items="{oViewModel>/list1}">
+							<Input  value="{oPreRegForm>idNo}"></Input>
+							<ComboBox selectedKey="{oPreRegForm>parkingStatus}" items="{oViewModel>/list1}">
 							<core:Item text="{oViewModel>ParkingType}" key="{oViewModel>Parkingid}"></core:Item>
 							</ComboBox>
 							<Button icon="sap-icon://delete" type="Reject" press="onVisCancel"></Button>

@@ -1419,14 +1419,19 @@ sap.ui.define([
 			oPreRegForm.refresh();
 
 		},
-		deleteRow: function (oEvent) {
-			var oTable = sap.ui.core.Fragment.byId("idAddVisitorFrag", "tableId");
-			oTable.removeItem(oEvent.getParameter("listItem"));
+		onVisCancel: function (oEvent) {
+			
+             var oItemContextPath = oEvent.getSource().getBindingContext("oPreRegForm").getPath();
+				   var aPathParts = oItemContextPath.split("/");
+				   var iIndex = aPathParts[aPathParts.length - 1]; 
+				
+				   var oJSONData = this.getView().getModel("oPreRegForm").getProperty("/visitor");
+				   oJSONData.splice(iIndex, 1);
+				   this.getView().getModel("oPreRegForm").setProperty("/visitor",oJSONData); 
+				 
+            
 		},
-		remove: function (oEvent) {
-			var oTable = sap.ui.core.Fragment.byId("idAddVisitorFrag", "tableId");
-			oTable.removeItem(oEvent.getSource().getParent());
-		},
+	
 		onAddVisible: function () {
 			var visibility = this.getView().getModel("oViewModel").getProperty("/AddVisVisibility");
 			if (visibility === false) {
