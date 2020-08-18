@@ -29,7 +29,7 @@ sap.ui.define([
 			oDialog.open();
 			setTimeout(function () {
 				oDialog.close();
-			}, 5500);
+			}, 7500);
 			var username = this.getView().getModel("oLoginModel").getProperty("/eId");
 			var password = this.getView().getModel("oLoginModel").getProperty("/password");
 			var that = this;
@@ -87,7 +87,7 @@ sap.ui.define([
 						}
 						sap.m.MessageToast.show("Logged In Successfully!");
 					} else if (oData.status === false) {
-						sap.m.MessageToast.show("User doesn't exist");
+						alert("User doesn't exist");
 					}
 				},
 				error: function (e) {
@@ -146,7 +146,7 @@ sap.ui.define([
 						that.getView().addDependent(that._oDialog2);
 						that._oDialog2.open();
 					} else if (data.status === 500) {
-						sap.m.MessageToast.show("Could Not Send");
+						alert("Check Your Pin");
 					}
 				},
 				type: "POST"
@@ -255,9 +255,9 @@ sap.ui.define([
 							that.getView().addDependent(that._oDialog11);
 							that._oDialog11.open();
 						} else if (data.status === 300) {
-							sap.m.MessageToast.show("OTP expired");
+							alert("OTP expired");
 						} else {
-							sap.m.MessageToast.show("Could not verify");
+							alert("Could not verify");
 						}
 
 					}
@@ -392,7 +392,7 @@ sap.ui.define([
 						that.getView().addDependent(that._oDialog10);
 						that._oDialog10.open();
 					} else if (data.status === 500) {
-						sap.m.MessageToast.show("Could Not Send");
+						alert("Enter Correct Email Id");
 					}
 				},
 				type: "GET"
