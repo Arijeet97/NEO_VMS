@@ -1,5 +1,30 @@
 <core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<l:VerticalLayout width="100%" class="TileStyle">
+		<l:Grid>
+			<l:content>
+				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onTileRequest" header="Meeting Request" press="onCheckedIn">
+					<TileContent>
+							<NumericContent class="tileCount" icon="sap-icon://trend-down" value="{oSecurityModel>/CheckedInCount}" withMargin="false" ></NumericContent>
+						<!--<core:Icon src="sap-icon://trend-down"></core:Icon>-->
+					</TileContent>
+					<layoutData>
+						<l:GridData span="XL3 L3 M6 S12"/>
+					</layoutData>
+				</GenericTile>
+				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onTileOngoing" header="Ongoing Meeting" press="onCheckedOut">
+					<TileContent >
+						<NumericContent class="tileCount" icon="sap-icon://trend-up" value="{oSecurityModel>/CheckedOutCount}" withMargin="false" ></NumericContent>
+						<!--<core:Icon src="sap-icon://trend-up"></core:Icon>-->
+					</TileContent>
+					<layoutData>
+						<l:GridData span="XL3 L3 M6 S12"/>
+					</layoutData>
+				</GenericTile>
+				
+			</l:content>
+		</l:Grid>
+	</l:VerticalLayout>
 	<Table id="idHostMeetingRequest" inset="true" items="{ path: 'oHostModel>/getOnSpotMeetingRequest'}">
 		<headerToolbar>
 			<OverflowToolbar>

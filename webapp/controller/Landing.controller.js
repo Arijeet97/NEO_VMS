@@ -113,6 +113,7 @@ sap.ui.define([
 
 		//Existing Visitor
 		onPressVerify: function () {
+			this.blag = true;
 			var that = this;
 
 			var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");
@@ -152,79 +153,116 @@ sap.ui.define([
 			});
 		},
 		onVerifyOtp: function () {
-			var that = this;
-			that._oDialog1.close();
-			var oLoginModel = this.getOwnerComponent().getModel("oLoginModel");
-			var OTP = sap.ui.core.Fragment.byId("idOnotp", "otp").getValue();
-			var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");
-			var item = {
-				vhId: vhId,
-				OTP: OTP
+			if (this.bflag === true) {
+				var that = this;
+				that._oDialog1.close();
+				var oLoginModel = this.getOwnerComponent().getModel("oLoginModel");
+				var OTP = sap.ui.core.Fragment.byId("idOnotp", "otp").getValue();
+				var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");
+				var item = {
+					vhId: vhId,
+					OTP: OTP
 
-			};
-			var sUrl = "/JAVA_SERVICE/visitor/verification";
-			$.ajax({
-				url: sUrl,
-				data: item,
-				dataType: "json",
-				error: function (err) {
-					sap.m.MessageToast.show("Error");
+				};
+				var sUrl = "/JAVA_SERVICE/visitor/verification";
+				$.ajax({
+					url: sUrl,
+					data: item,
+					dataType: "json",
+					error: function (err) {
+						sap.m.MessageToast.show("Error");
 
-				},
-				success: function (data) {
-					if (data.status === 200) {
-						sap.m.MessageToast.show("User Verified");
-						var oRouter6 = sap.ui.core.UIComponent.getRouterFor(that);
-						oRouter6.navTo("RouteExistingVisitor");
-						var sUrl2 = "/JAVA_SERVICE/visitor/getVisitorDetails?vhId=" + vhId;
-						$.ajax({
-							url: sUrl2,
-							data: null,
-							async: true,
-							cache: false,
-							dataType: "json",
-							contentType: "application/json; charset=utf-8",
-							error: function (err) {
-								sap.m.MessageToast.show("Destination Failed");
-							},
-							success: function (data1) {
-								var ExvhId = data1.vhId;
-								var visitorName = data1.visitorName;
-								var eId = data1.eId;
-								var email = data1.email;
-								var contactNo = data1.contactNo;
-								var puprose = data1.puprose;
-								var organisation = data1.organisation;
-								var hostName = data1.hostName;
-								var date = data1.date;
-								var proofType = data1.proofType;
-								var proofNo = data1.proofNo;
-								oLoginModel.setProperty("/ExvhId", ExvhId);
-								oLoginModel.setProperty("/ExeId", eId);
-								oLoginModel.setProperty("/ExvisitorName", visitorName);
-								oLoginModel.setProperty("/Exemail", email);
-								oLoginModel.setProperty("/ExcontactNo", contactNo);
-								oLoginModel.setProperty("/Expuprose", puprose);
-								oLoginModel.setProperty("/Exorganisation", organisation);
-								oLoginModel.setProperty("/ExhostName", hostName);
-								oLoginModel.setProperty("/Exdate", date);
-								oLoginModel.setProperty("/ExpersonalIdType", proofType);
-								oLoginModel.setProperty("/ExidentityNo", proofNo);
+					},
+					success: function (data) {
+						if (data.status === 200) {
+							sap.m.MessageToast.show("User Verified");
+							var oRouter6 = sap.ui.core.UIComponent.getRouterFor(that);
+							oRouter6.navTo("RouteExistingVisitor");
+							var sUrl2 = "/JAVA_SERVICE/visitor/getVisitorDetails?vhId=" + vhId;
+							$.ajax({
+								url: sUrl2,
+								data: null,
+								async: true,
+								cache: false,
+								dataType: "json",
+								contentType: "application/json; charset=utf-8",
+								error: function (err) {
+									sap.m.MessageToast.show("Destination Failed");
+								},
+								success: function (data1) {
+									var ExvhId = data1.vhId;
+									var visitorName = data1.visitorName;
+									var eId = data1.eId;
+									var email = data1.email;
+									var contactNo = data1.contactNo;
+									var puprose = data1.puprose;
+									var organisation = data1.organisation;
+									var hostName = data1.hostName;
+									var date = data1.date;
+									var proofType = data1.proofType;
+									var proofNo = data1.proofNo;
+									oLoginModel.setProperty("/ExvhId", ExvhId);
+									oLoginModel.setProperty("/ExeId", eId);
+									oLoginModel.setProperty("/ExvisitorName", visitorName);
+									oLoginModel.setProperty("/Exemail", email);
+									oLoginModel.setProperty("/ExcontactNo", contactNo);
+									oLoginModel.setProperty("/Expuprose", puprose);
+									oLoginModel.setProperty("/Exorganisation", organisation);
+									oLoginModel.setProperty("/ExhostName", hostName);
+									oLoginModel.setProperty("/Exdate", date);
+									oLoginModel.setProperty("/ExpersonalIdType", proofType);
+									oLoginModel.setProperty("/ExidentityNo", proofNo);
 
-							},
-							type: "GET"
-						});
-					} else if (data.status === 300) {
-						sap.m.MessageToast.show("Otp Expired Please Try Again");
+								},
+								type: "GET"
+							});
+						} else if (data.status === 300) {
+							sap.m.MessageToast.show("Otp Expired Please Try Again");
 
-					} else if (data.status === 500) {
-						sap.m.MessageToast.show("Could Not Verify");
+						} else if (data.status === 500) {
+							sap.m.MessageToast.show("Could Not Verify");
+						}
+
+					},
+					type: "POST"
+				});
+
+			} else {
+				var that = this;
+				var Otp = sap.ui.core.Fragment.byId("idForgotOTP", "otp").getValue();
+				var username = this.getView().getModel("oLoginModel").getProperty("/eId");
+				var Payload = {
+					email: username,
+					OTP: Otp
+				};
+				var sUrl2 = "/JAVA_SERVICE/employee/verification";
+				$.ajax({
+					url: sUrl2,
+					data: Payload,
+					dataType: "json",
+					type: "POST",
+					error: function (err) {
+						sap.m.MessageToast.show("Error");
+
+					},
+					success: function (data) {
+						if (data.status === 200) {
+							sap.m.MessageToast.show("User Verified");
+							that._oDialog10.close();
+							if (!that._oDialog11) {
+								that._oDialog11 = sap.ui.xmlfragment("idForgotPassword", "inc.inkthn.neo.NEO_VMS.fragments.ForgotPassword", that);
+							}
+							that.getView().addDependent(that._oDialog11);
+							that._oDialog11.open();
+						} else if (data.status === 300) {
+							sap.m.MessageToast.show("OTP expired");
+						} else {
+							sap.m.MessageToast.show("Could not verify");
+						}
+
 					}
-
-				},
-				type: "POST"
-			});
-
+				});
+			}
 		},
 		onPressCheckOut: function () {
 
@@ -290,7 +328,6 @@ sap.ui.define([
 			});
 
 		},
-	
 		onCheckOutCancel: function () {
 			var that = this;
 			that._oDialog2.close();
@@ -315,19 +352,6 @@ sap.ui.define([
 			oRouter3.navTo("RouteNewVisitor");
 
 		},
-		// onScanBarcode:function(oEvent){
-		// 	sap.ndc.BarcodeScanner.scan(
-		// 		function(mResult) {
-		// 			alert("We got a bar code\n" +
-		// 				"Result: " + mResult.text + "\n" +
-		// 				"Format: " + mResult.format + "\n" +
-		// 				"Cancelled: " + mResult.cancelled);
-		// 		},
-		// 		function(Error) {
-		// 			alert("Scanning failed: " + Error);
-		// 		},
-		// 	);
-		// },
 		handleBarcodeScannerSuccess: function (oEvent) {
 			var that = this;
 			jQuery.sap.require("sap.ndc.BarcodeScanner");
@@ -344,6 +368,75 @@ sap.ui.define([
 					alert("Scanning failed: " + Error);
 				}
 			);
+		},
+
+		//FORGOT PASSWORD
+		onPressForgot: function () {
+			this.bflag = false;
+			var that = this;
+			var username = this.getView().getModel("oLoginModel").getProperty("/eId");
+			var sUrl = "/JAVA_SERVICE/employee/sendOtp?email=" + username;
+
+			$.ajax({
+				url: sUrl,
+				data: null,
+				dataType: "json",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+				},
+				success: function (data) {
+					if (data.status === 200) {
+						if (!that._oDialog10) {
+							that._oDialog10 = sap.ui.xmlfragment("idForgotOTP", "inc.inkthn.neo.NEO_VMS.fragments.EnterOtp", that);
+						}
+						that.getView().addDependent(that._oDialog10);
+						that._oDialog10.open();
+					} else if (data.status === 500) {
+						sap.m.MessageToast.show("Could Not Send");
+					}
+				},
+				type: "GET"
+			});
+
+		},
+		onConfirmPassword: function () {
+			var that = this;
+			var username = this.getView().getModel("oLoginModel").getProperty("/eId");
+			var password = sap.ui.core.Fragment.byId("idForgotPassword", "idPassForgot").getValue();
+			var confirmPassword = sap.ui.core.Fragment.byId("idForgotPassword", "idPassCNFForgot").getValue();
+			if (confirmPassword === password) {
+				var sUrl2 = "/JAVA_SERVICE/employee/forgotPassword";
+				var Payload = {
+					username: username,
+					password: password
+				};
+				$.ajax({
+					url: sUrl2,
+					data: {
+						"data": JSON.stringify(Payload)
+					},
+					dataType: "json",
+					type: "POST",
+					error: function (err) {
+						sap.m.MessageToast.show("Something Happened Wrong");
+
+					},
+					success: function (data) {
+						if (data.status === 200) {
+							alert("Password Reset Successful");
+							that._oDialog11.close();
+						}
+					}
+				});
+			} else {
+				alert("Password Didn't Match");
+			}
+
+		},
+		onCancelPassword: function(){
+			this._oDialog11.close();
+			this._oDialog11.destroy();
+			this._oDialog11 = null;
 		}
 
 	});

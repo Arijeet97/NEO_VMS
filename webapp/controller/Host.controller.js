@@ -18,15 +18,15 @@ sap.ui.define([
 ], function (Controller, JSONModel, Log, MessageToast, Fragment, Sorter, Popover, Button, library, Device, coreLibrary, Core, MessageBox,
 	UIComponent, Filter, FilterOperator) {
 	"use strict";
-	 var webSocket;
+	var webSocket;
 	var ButtonType = library.ButtonType,
 		PlacementType = library.PlacementType;
 	// var	ValueState = coreLibrary.ValueState;
 	return Controller.extend("inc.inkthn.neo.NEO_VMS.controller.Host", {
-          
+
 		onInit: function () {
 			var comboData = {
-				
+
 				"sSelect": "",
 				"UpcomingVisibility": true,
 				"CheckedInVisibility": false,
@@ -35,9 +35,9 @@ sap.ui.define([
 				"AddVisVisibility": false,
 				"TextVisibility": false,
 				"ButtonVisibility": true,
-				"AcceptVisibility":false,
-				"RejectVisibility":false,
-				
+				"AcceptVisibility": false,
+				"RejectVisibility": false,
+
 				"list": [
 
 					{
@@ -53,16 +53,15 @@ sap.ui.define([
 
 					{
 						"ParkingType": "NotRequired",
-						"Parkingid":0
+						"Parkingid": 0
 					}, {
 						"ParkingType": "TwoWheeler",
-						"Parkingid":2
+						"Parkingid": 2
 					}, {
 						"ParkingType": "FourWheeler",
-						"Parkingid":4
+						"Parkingid": 4
 					}
 				]
-				
 
 			};
 			var oModel1 = new JSONModel(comboData);
@@ -76,7 +75,7 @@ sap.ui.define([
 			var oHostModel = this.getOwnerComponent().getModel("oHostModel");
 			this.getView().setModel(oHostModel, "oHostModel");
 			var today = new Date();
-			this.getView().getModel("oHostModel").setProperty("/Date",today);
+			this.getView().getModel("oHostModel").setProperty("/Date", today);
 			//get Blacklist details
 			var sUrl = "/JAVA_SERVICE/employee/getBlacklistedVisitors?eId=" + oHostModel.getProperty("/eId");
 			$.ajax({
@@ -128,9 +127,9 @@ sap.ui.define([
 				},
 				type: "GET"
 			});
-			
+
 			//Notifications
-			
+
 			var sUrl6 = "/JAVA_SERVICE/employee/viewNotifications?eId=" + oHostModel.getProperty("/eId");
 			$.ajax({
 				url: sUrl6,
@@ -144,81 +143,78 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-						oHostModel.setProperty("/Notification", data);
-							for(var i=0;i<data.length;i++)
-							{
-							if(data[i].name==="Delivery")
-								{
-									oHostModel.setProperty("/Notification/"+i+"/AcceptVisibility",true);
-									
-								}
-							else{
-								oHostModel.setProperty("/Notification/"+i+"/AcceptVisibility",false);
-							}	
-						}			
+					oHostModel.setProperty("/Notification", data);
+					for (var i = 0; i < data.length; i++) {
+						if (data[i].name === "Delivery") {
+							oHostModel.setProperty("/Notification/" + i + "/AcceptVisibility", true);
+
+						} else {
+							oHostModel.setProperty("/Notification/" + i + "/AcceptVisibility", false);
+						}
+					}
 					sap.m.MessageToast.show("Notification loaded Successfully");
 				}
 			});
-			
-			
+
 			//notiF coUNT
-				var sUrl3= "/JAVA_SERVICE/employee/noOfNotifications?eId="+ oHostModel.getProperty("/eId");
-									$.ajax({
-										url: sUrl3,
-										data: null,
-										async: true,
-										cache: false,
-										dataType: "json",
-										contentType: "application/json; charset=utf-8",
-										error: function (err) {
-											sap.m.MessageToast.show("Destination Failed");
-										},
-										success: function (data) {
-											oHostModel.setProperty("/NotifCount", data);
-										},
-										type: "GET"
-									});
-			
-		  webSocket	 = new WebSocket("WSS://vms14p2002476963trial.hanatrial.ondemand.com/VMS/chat/"+oHostModel.getProperty("/eId"));
-           webSocket.onerror = function(event) {
-    	    var message = JSON.parse(event.data);
-			  MessageBox.alert(message.content);
-			     
-			  };
-			  webSocket.onopen = function(event) {
-	         	var message = JSON.parse(event.data);
-			  MessageBox.alert(message.content);
-			  };
-			 webSocket.onmessage = function(event) {
-			 var message = JSON.parse(event.data);
-			  var msg=MessageBox.alert(message.content);
-			  	var sUrl4= "/JAVA_SERVICE/employee/noOfNotifications?eId="+ oHostModel.getProperty("/eId");
-									$.ajax({
-										url: sUrl4,
-										data: null,
-										async: true,
-										cache: false,
-										dataType: "json",
-										contentType: "application/json; charset=utf-8",
-										error: function (err) {
-											sap.m.MessageToast.show("Destination Failed");
-										},
-										success: function (data) {
-											oHostModel.setProperty("/NotifCount", data);
-										},
-										type: "GET"
-									});
-			  setTimeout(function () {
-		           	msg.close();
-					}, 2000);
-			  };
-			  
+			var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+			$.ajax({
+				url: sUrl3,
+				data: null,
+				async: true,
+				cache: false,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+				},
+				success: function (data) {
+					var NotifCount = data.toString();
+					oHostModel.setProperty("/NotifCount", NotifCount);
+				},
+				type: "GET"
+			});
+
+			webSocket = new WebSocket("WSS://vms14p2002476963trial.hanatrial.ondemand.com/VMS/chat/" + oHostModel.getProperty("/eId"));
+			webSocket.onerror = function (event) {
+				var message = JSON.parse(event.data);
+				MessageBox.alert(message.content);
+
+			};
+			webSocket.onopen = function (event) {
+				var message = JSON.parse(event.data);
+				MessageBox.alert(message.content);
+			};
+			webSocket.onmessage = function (event) {
+				var message = JSON.parse(event.data);
+				var msg = MessageBox.alert(message.content);
+				var sUrl4 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+				$.ajax({
+					url: sUrl4,
+					data: null,
+					async: true,
+					cache: false,
+					dataType: "json",
+					contentType: "application/json; charset=utf-8",
+					error: function (err) {
+						sap.m.MessageToast.show("Destination Failed");
+					},
+					success: function (data) {
+						oHostModel.setProperty("/NotifCount", data);
+					},
+					type: "GET"
+				});
+				setTimeout(function () {
+					msg.close();
+				}, 2000);
+			};
+
 		},
 
 		// DATE
 		_data: {
 			"date": new Date()
-			
+
 		},
 
 		// PRE REGISTRATION
@@ -240,8 +236,7 @@ sap.ui.define([
 			// var vdate = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetDate").getValue();
 			// var vbeginTime = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetStart").getValue();
 			// var vendTime = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetEnd").getValue();
-			
-		
+
 			this._oDialog.close();
 			if (!this._oDialog1) {
 				this._oDialog1 = sap.ui.xmlfragment("idPreRegBookRoom", "inc.inkthn.neo.NEO_VMS.fragments.Host.PreRegBookRoom", this);
@@ -252,14 +247,13 @@ sap.ui.define([
 			var sTime1 = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetStart").getValue();
 			var eTime2 = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetEnd").getValue();
 			var date1 = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetDate").getValue();
-		
-			
+
 			var sUrl = "/JAVA_SERVICE/employee/getAvailableRooms?begin=" + date1 + " " + sTime1 + "&end=" + date1 + " " + eTime2;
 			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
 			$.ajax({
 				url: sUrl,
 				type: "GET",
-				cache: false,	
+				cache: false,
 				async: true,
 				dataType: "json",
 				data: null,
@@ -293,47 +287,44 @@ sap.ui.define([
 			var endTime = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetEnd").getValue();
 			var room = sap.ui.core.Fragment.byId("idPreRegBookRoom", "idBookRoom").getValue();
 			var roomId = room.split("=");
-			var wifi=sap.ui.core.Fragment.byId("idPreRegBookRoom", "idwifi").getSelected();
-			var ac=sap.ui.core.Fragment.byId("idPreRegBookRoom", "idAc").getSelected();
-			var Snacks=sap.ui.core.Fragment.byId("idPreRegBookRoom", "idSnacks").getSelected();
-			var f1="Wifi";
-			var f2="Air Conditioner";
-			var f3="Snacks and Bevarages";
-			var facilities=[];
-			if(wifi===true ){
+			var wifi = sap.ui.core.Fragment.byId("idPreRegBookRoom", "idwifi").getSelected();
+			var ac = sap.ui.core.Fragment.byId("idPreRegBookRoom", "idAc").getSelected();
+			var Snacks = sap.ui.core.Fragment.byId("idPreRegBookRoom", "idSnacks").getSelected();
+			var f1 = "Wifi";
+			var f2 = "Air Conditioner";
+			var f3 = "Snacks and Bevarages";
+			var facilities = [];
+			if (wifi === true) {
 				facilities.push(f1);
 			}
-			if(ac===true){
+			if (ac === true) {
 				facilities.push(f2);
 			}
-			if(Snacks===true){
+			if (Snacks === true) {
 				facilities.push(f3);
 			}
-			var Facility=facilities.toString();
+			var Facility = facilities.toString();
 			var eId = this.getView().getModel("oHostModel").getProperty("/eId");
 			var i = roomId[2];
 			var rId = parseInt(i, [0]);
 			var typeId = 1;
-			var park=this.getView().getModel("oHostModel").getProperty("/sParking");
+			var park = this.getView().getModel("oHostModel").getProperty("/sParking");
 			var parking = parseInt(park, [0]);
 			var visitor = this.getView().getModel("oPreRegForm").getProperty("/visitor");
-			var n=visitor.length;
-			var i=0;
-			var x=0;
-			for(i;i<n;i++)
-			{
-				if(visitor[i].parkingStatus==="0"){
-				 x=0;	
+			var n = visitor.length;
+			var i = 0;
+			var x = 0;
+			for (i; i < n; i++) {
+				if (visitor[i].parkingStatus === "0") {
+					x = 0;
+				} else if (visitor[i].parkingStatus === "2") {
+					x = 2;
+				} else if (visitor[i].parkingStatus === "4") {
+					x = 4;
 				}
-				else if(visitor[i].parkingStatus==="2"){
-				x=2;
-				}
-				else if(visitor[i].parkingStatus==="4"){
-				x=4	;
-				}
-			visitor[i].parkingStatus=x;	
+				visitor[i].parkingStatus = x;
 			}
-			
+
 			var payload = {
 				firstName: firstName,
 				lastName: lastName,
@@ -343,7 +334,7 @@ sap.ui.define([
 				personalIdType: personalIdType,
 				identityNo: identityNo,
 				parking: parking,
-				facilities:Facility,
+				facilities: Facility,
 				title: purpose,
 				beginTime: beginTime,
 				endTime: endTime,
@@ -365,13 +356,12 @@ sap.ui.define([
 				type: "POST",
 				dataType: "json",
 				success: function (data) {
-					var that=this;
-						if(data.mId === null){
+					var that = this;
+					if (data.mId === null) {
 						sap.m.MessageToast.show("Registration Unsuccessful");
-					}
-					else{
-							sap.m.MessageToast.show("Registration Successfully");
-								var oHostModel = that.getView().getModel("oHostModel");
+					} else {
+						sap.m.MessageToast.show("Registration Successfully");
+						var oHostModel = that.getView().getModel("oHostModel");
 						var sUrl1 = "/JAVA_SERVICE/employee/getPreregisterStatus?eId=" + oHostModel.getProperty("/eId");
 						$.ajax({
 							url: sUrl1,
@@ -390,7 +380,7 @@ sap.ui.define([
 							type: "GET"
 						});
 					}
-				
+
 				},
 				error: function (err) {
 					sap.m.MessageToast.show("Registration Failed");
@@ -412,8 +402,8 @@ sap.ui.define([
 			sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetDate").setValue("");
 			sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetStart").setValue("");
 			sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetEnd").setValue("");
-			this.getView().getModel("oPreRegForm").setProperty("/visitor",[]);
-			
+			this.getView().getModel("oPreRegForm").setProperty("/visitor", []);
+
 		},
 		addVis: function () {
 			var oPreRegForm = this.getView().getModel("oPreRegForm");
@@ -425,7 +415,7 @@ sap.ui.define([
 				"phoneNo": "",
 				"proofType": "",
 				"idNo": "",
-				"parkingStatus":""
+				"parkingStatus": ""
 			};
 			oPreRegForm.getData().visitor.push(obj);
 			// oVisitorModel.setData({
@@ -435,25 +425,23 @@ sap.ui.define([
 
 		},
 		onVisCancel: function (oEvent) {
-			
-             var oItemContextPath = oEvent.getSource().getBindingContext("oPreRegForm").getPath();
-				   var aPathParts = oItemContextPath.split("/");
-				   var iIndex = aPathParts[aPathParts.length - 1]; 
-				
-				   var oJSONData = this.getView().getModel("oPreRegForm").getProperty("/visitor");
-				   oJSONData.splice(iIndex, 1);
-				   this.getView().getModel("oPreRegForm").setProperty("/visitor",oJSONData); 
-				 
-            
+
+			var oItemContextPath = oEvent.getSource().getBindingContext("oPreRegForm").getPath();
+			var aPathParts = oItemContextPath.split("/");
+			var iIndex = aPathParts[aPathParts.length - 1];
+
+			var oJSONData = this.getView().getModel("oPreRegForm").getProperty("/visitor");
+			oJSONData.splice(iIndex, 1);
+			this.getView().getModel("oPreRegForm").setProperty("/visitor", oJSONData);
+
 		},
-		
-		onAddVisible:function(){
-			var visibility=this.getView().getModel("oViewModel").getProperty("/AddVisVisibility");
-			if(visibility===false){
-			this.getView().getModel("oViewModel").setProperty("/AddVisVisibility", true);
-			}
-			else{
-			this.getView().getModel("oViewModel").setProperty("/AddVisVisibility", false);	
+
+		onAddVisible: function () {
+			var visibility = this.getView().getModel("oViewModel").getProperty("/AddVisVisibility");
+			if (visibility === false) {
+				this.getView().getModel("oViewModel").setProperty("/AddVisVisibility", true);
+			} else {
+				this.getView().getModel("oViewModel").setProperty("/AddVisVisibility", false);
 			}
 		},
 		//  TNT PAGE
@@ -479,13 +467,13 @@ sap.ui.define([
 			var that = this;
 			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
 			var sUrl = "/JAVA_SERVICE/employee/logout";
-			var eId=that.getView().getModel("oHostModel").getProperty("/eId");
-			var item={
-				eId:eId
+			var eId = that.getView().getModel("oHostModel").getProperty("/eId");
+			var item = {
+				eId: eId
 			};
 			$.ajax({
 				url: sUrl,
-				data:item,
+				data: item,
 				dataType: "json",
 				error: function (err) {
 					sap.m.MessageToast.show("Logout Failed");
@@ -499,7 +487,7 @@ sap.ui.define([
 				},
 				type: "POST"
 			});
-          webSocket.close();
+			webSocket.close();
 		},
 
 		// NOTIFICATION
@@ -519,18 +507,15 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-						oHostModel.setProperty("/Notification", data);
-							for(var i=0;i<data.length;i++)
-							{
-							if(data[i].name==="Delivery")
-								{
-									oHostModel.setProperty("/Notification/"+i+"/AcceptVisibility",true);
-									
-								}
-							else{
-								oHostModel.setProperty("/Notification/"+i+"/AcceptVisibility",false);
-							}	
-						}			
+					oHostModel.setProperty("/Notification", data);
+					for (var i = 0; i < data.length; i++) {
+						if (data[i].name === "Delivery") {
+							oHostModel.setProperty("/Notification/" + i + "/AcceptVisibility", true);
+
+						} else {
+							oHostModel.setProperty("/Notification/" + i + "/AcceptVisibility", false);
+						}
+					}
 					sap.m.MessageToast.show("Notification loaded Successfully");
 				}
 			});
@@ -563,14 +548,14 @@ sap.ui.define([
 			oHostModel.getProperty("/Notification").splice(oDelitem);
 		},
 		onItemClose: function (oEvent) {
-			var that=this;
-				var oHostModel = that.getOwnerComponent().getModel("oHostModel");
+			var that = this;
+			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
 			var oItem = oEvent.getSource(),
-			oList = oItem.getParent();
+				oList = oItem.getParent();
 			oList.removeItem(oItem);
-			var del=oItem.getAuthorName();
-			var aDel=del.split(",");
-			var nId=aDel[0];
+			var del = oItem.getAuthorName();
+			var aDel = del.split(",");
+			var nId = aDel[0];
 			MessageToast.show("Closed: " + oItem.getAuthorName());
 			var sUrl = "/JAVA_SERVICE/employee/readNotifications";
 			var payload = {
@@ -585,41 +570,41 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-						var sUrl3= "/JAVA_SERVICE/employee/noOfNotifications?eId="+ oHostModel.getProperty("/eId");
-									$.ajax({
-										url: sUrl3,
-										data: null,
-										async: true,
-										cache: false,
-										dataType: "json",
-										contentType: "application/json; charset=utf-8",
-										error: function (err) {
-											sap.m.MessageToast.show("Destination Failed");
-										},
-										success: function (data1) {
-											oHostModel.setProperty("/NotifCount", data1);
-										},
-										type: "GET"
-									});
+					var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+					$.ajax({
+						url: sUrl3,
+						data: null,
+						async: true,
+						cache: false,
+						dataType: "json",
+						contentType: "application/json; charset=utf-8",
+						error: function (err) {
+							sap.m.MessageToast.show("Destination Failed");
+						},
+						success: function (data1) {
+							oHostModel.setProperty("/NotifCount", data1);
+						},
+						type: "GET"
+					});
 				}
 			});
 		},
 		onRejectPress: function (oEvent) {
-				var that=this;
-				var oHostModel = that.getOwnerComponent().getModel("oHostModel");
-				var oItem = oEvent.getSource().getBindingContext("oHostModel").getPath();
-				var x=oItem.split("/");
-				var y=x[2];
-				var Path=parseInt(y, 0);
-				var list=that.getView().getModel("oHostModel").getProperty("/Notification");
-				var data=list[Path];
-				var nId=data.nId;
-				var z=data.contents;
-				var z1=z.split(":");
-				var z2=z1[2];
-				var dId=parseInt(z2, 0);
-				
-				var sUrl = "/JAVA_SERVICE/employee/rejectDelivery";
+			var that = this;
+			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
+			var oItem = oEvent.getSource().getBindingContext("oHostModel").getPath();
+			var x = oItem.split("/");
+			var y = x[2];
+			var Path = parseInt(y, 0);
+			var list = that.getView().getModel("oHostModel").getProperty("/Notification");
+			var data = list[Path];
+			var nId = data.nId;
+			var z = data.contents;
+			var z1 = z.split(":");
+			var z2 = z1[2];
+			var dId = parseInt(z2, 0);
+
+			var sUrl = "/JAVA_SERVICE/employee/rejectDelivery";
 			var payload = {
 				dId: dId
 			};
@@ -632,59 +617,59 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (odata) {
-					if(odata.status===200){
+					if (odata.status === 200) {
 						sap.m.MessageToast.show("Delivery Rejected Successfully");
 						var sUrl1 = "/JAVA_SERVICE/employee/readNotifications";
-									var payload1 = {
-										nId: nId,
-									};
-									$.ajax({
-										url: sUrl1,
-										dataType: "json",
-										data: payload1,
-										type: "POST",
-										error: function (err) {
-											sap.m.MessageToast.show("Destination Failed");
-										},
-										success: function (data1) {
-												var sUrl3= "/JAVA_SERVICE/employee/noOfNotifications?eId="+ oHostModel.getProperty("/eId");
-															$.ajax({
-																url: sUrl3,
-																data: null,
-																async: true,
-																cache: false,
-																dataType: "json",
-																contentType: "application/json; charset=utf-8",
-																error: function (err) {
-																	sap.m.MessageToast.show("Destination Failed");
-																},
-																success: function (data2) {
-																	oHostModel.setProperty("/NotifCount", data2);
-																},
-																type: "GET"
-															});
-										}
-									});
+						var payload1 = {
+							nId: nId,
+						};
+						$.ajax({
+							url: sUrl1,
+							dataType: "json",
+							data: payload1,
+							type: "POST",
+							error: function (err) {
+								sap.m.MessageToast.show("Destination Failed");
+							},
+							success: function (data1) {
+								var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+								$.ajax({
+									url: sUrl3,
+									data: null,
+									async: true,
+									cache: false,
+									dataType: "json",
+									contentType: "application/json; charset=utf-8",
+									error: function (err) {
+										sap.m.MessageToast.show("Destination Failed");
+									},
+									success: function (data2) {
+										oHostModel.setProperty("/NotifCount", data2);
+									},
+									type: "GET"
+								});
+							}
+						});
 					}
 				}
 			});
 		},
 		onAcceptPress: function (oEvent) {
-			var that=this;
-				var oHostModel = that.getOwnerComponent().getModel("oHostModel");
-				var oItem = oEvent.getSource().getBindingContext("oHostModel").getPath();
-				var x=oItem.split("/");
-				var y=x[2];
-				var Path=parseInt(y, 0);
-				var list=that.getView().getModel("oHostModel").getProperty("/Notification");
-				var data=list[Path];
-				var nId=data.nId;
-				var z=data.contents;
-				var z1=z.split(":");
-				var z2=z1[2];
-				var dId=parseInt(z2, 0);
-				
-				var sUrl = "/JAVA_SERVICE/employee/acceptDelivery";
+			var that = this;
+			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
+			var oItem = oEvent.getSource().getBindingContext("oHostModel").getPath();
+			var x = oItem.split("/");
+			var y = x[2];
+			var Path = parseInt(y, 0);
+			var list = that.getView().getModel("oHostModel").getProperty("/Notification");
+			var data = list[Path];
+			var nId = data.nId;
+			var z = data.contents;
+			var z1 = z.split(":");
+			var z2 = z1[2];
+			var dId = parseInt(z2, 0);
+
+			var sUrl = "/JAVA_SERVICE/employee/acceptDelivery";
 			var payload = {
 				dId: dId
 			};
@@ -697,48 +682,48 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (odata) {
-					if(odata.status===200){
+					if (odata.status === 200) {
 						sap.m.MessageToast.show(" Delivery Accepted Successfully");
 						var sUrl1 = "/JAVA_SERVICE/employee/readNotifications";
-									var payload1 = {
-										nId: nId,
-									};
-									$.ajax({
-										url: sUrl1,
-										dataType: "json",
-										data: payload1,
-										type: "POST",
-										error: function (err) {
-											sap.m.MessageToast.show("Destination Failed");
-										},
-										success: function (data1) {
-												var sUrl3= "/JAVA_SERVICE/employee/noOfNotifications?eId="+ oHostModel.getProperty("/eId");
-															$.ajax({
-																url: sUrl3,
-																data: null,
-																async: true,
-																cache: false,
-																dataType: "json",
-																contentType: "application/json; charset=utf-8",
-																error: function (err) {
-																	sap.m.MessageToast.show("Destination Failed");
-																},
-																success: function (data2) {
-																	oHostModel.setProperty("/NotifCount", data2);
-																},
-																type: "GET"
-															});
-										}
-									});
+						var payload1 = {
+							nId: nId,
+						};
+						$.ajax({
+							url: sUrl1,
+							dataType: "json",
+							data: payload1,
+							type: "POST",
+							error: function (err) {
+								sap.m.MessageToast.show("Destination Failed");
+							},
+							success: function (data1) {
+								var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+								$.ajax({
+									url: sUrl3,
+									data: null,
+									async: true,
+									cache: false,
+									dataType: "json",
+									contentType: "application/json; charset=utf-8",
+									error: function (err) {
+										sap.m.MessageToast.show("Destination Failed");
+									},
+									success: function (data2) {
+										oHostModel.setProperty("/NotifCount", data2);
+									},
+									type: "GET"
+								});
+							}
+						});
 					}
 				}
 			});
-		
+
 		},
 
 		// DASHBOARD
 		onUpcoming: function () {
-		
+
 			this.getView().byId("onUpcoming").addStyleClass("TilePress");
 			this.getView().byId("onCheckInTile").removeStyleClass("TilePress");
 			this.getView().byId("onCheckOutTile").removeStyleClass("TilePress");
@@ -758,7 +743,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					var UpcomingCount=data.length;
+					var UpcomingCount = data.length;
 					oHostModel.setProperty("/UpcomingCount", UpcomingCount);
 					oHostModel.setProperty("/UpcomingMeeting", data);
 					sap.m.MessageToast.show("Data Successfully Loaded");
@@ -791,8 +776,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-						var CheckedInCount=data.length;
-						oHostModel.setProperty("/CheckedInCount", CheckedInCount);	
+					var CheckedInCount = data.length;
+					oHostModel.setProperty("/CheckedInCount", CheckedInCount);
 					oHostModel.setProperty("/CheckedIn", data);
 					sap.m.MessageToast.show("Data Successfully Loaded");
 				},
@@ -824,8 +809,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-						var CheckedOutCount=data.length;
-						oHostModel.setProperty("/CheckedOutCount", CheckedOutCount);
+					var CheckedOutCount = data.length;
+					oHostModel.setProperty("/CheckedOutCount", CheckedOutCount);
 					oHostModel.setProperty("/CheckedOut", data);
 					sap.m.MessageToast.show("Data Successfully Loaded");
 				},
@@ -856,8 +841,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-						var TotalVisitorCount=data.length;
-						oHostModel.setProperty("/TotalVisitorCount", TotalVisitorCount);
+					var TotalVisitorCount = data.length;
+					oHostModel.setProperty("/TotalVisitorCount", TotalVisitorCount);
 					oHostModel.setProperty("/TotalVisitor", data);
 					sap.m.MessageToast.show("Data Successfully Loaded");
 				},
@@ -892,24 +877,24 @@ sap.ui.define([
 				},
 				success: function (data) {
 					sap.m.MessageToast.show("Blacklisted Successfully");
-						var oHostModel = that.getOwnerComponent().getModel("oHostModel");
-	        		 	var sUrl1 = "/JAVA_SERVICE/employee/getBlacklistedVisitors?eId=" + oHostModel.getProperty("/eId");
-		        			$.ajax({
-								url: sUrl1,
-								data: null,
-								async: true,
-								cache: false,
-								dataType: "json",
-								contentType: "application/json; charset=utf-8",
-								error: function (err) {
-									sap.m.MessageToast.show("Destination Failed");
-								},
-								success: function (odata) {
-									oHostModel.setProperty("/GetBlacklisted", odata);
-								
-								},
-								type: "GET"
-							});
+					var oHostModel = that.getOwnerComponent().getModel("oHostModel");
+					var sUrl1 = "/JAVA_SERVICE/employee/getBlacklistedVisitors?eId=" + oHostModel.getProperty("/eId");
+					$.ajax({
+						url: sUrl1,
+						data: null,
+						async: true,
+						cache: false,
+						dataType: "json",
+						contentType: "application/json; charset=utf-8",
+						error: function (err) {
+							sap.m.MessageToast.show("Destination Failed");
+						},
+						success: function (odata) {
+							oHostModel.setProperty("/GetBlacklisted", odata);
+
+						},
+						type: "GET"
+					});
 				}
 			});
 			this._oDialog2.close();
@@ -960,19 +945,17 @@ sap.ui.define([
 		//PROFILE
 		onProfile: function (event) {
 			var that = this;
-		
-			var name=this.getView().getModel("oHostModel").getProperty("/name");
+
+			var name = this.getView().getModel("oHostModel").getProperty("/name");
 			var oPopover = new Popover({
 				showHeader: false,
 				placement: PlacementType.Bottom,
 				content: [
-				 new sap.m.Text(
-				    	{
-				    		text: name
-				    		
-				    	}
-				    ),
-				   
+					new sap.m.Text({
+						text: name
+
+					}),
+
 					new Button({
 						text: "Edit Profile",
 						type: ButtonType.Transparent,
@@ -1258,48 +1241,49 @@ sap.ui.define([
 		},
 		onOnSpotExtraDetailsCancel: function () {
 			this._oDialog6.close();
-			
+
 		},
 		onInformation: function () {
 			MessageBox.information("You can not cancel this. Please select the room and Save!!!");
 		},
-		onRemoveAccept: function(){
+		onRemoveAccept: function () {
 			this._oDialog8.close();
 			this._oDialog8.destroy();
 			this._oDialog8 = null;
 		},
-		onRemoveReject: function(){
+		onRemoveReject: function () {
 			this._oDialog7.close();
 			this._oDialog7.destroy();
 			this._oDialog7 = null;
 		},
 		
+
 		// ON_SPOT REQUEST
-          
-          onRejectOnSpot: function(oEvent){
-          	var odata = oEvent.getSource().getBindingContext("oHostModel").getObject();
+
+		onRejectOnSpot: function (oEvent) {
+			var odata = oEvent.getSource().getBindingContext("oHostModel").getObject();
 			var amId = odata.mId;
-			this.getView().getModel("oHostModel").setProperty("/amId",amId);
-          	if (!this._oDialog7) {
+			this.getView().getModel("oHostModel").setProperty("/amId", amId);
+			if (!this._oDialog7) {
 				this._oDialog7 = sap.ui.xmlfragment("idOnSpotReject", "inc.inkthn.neo.NEO_VMS.fragments.Host.RejectMeeting", this);
 			}
 			this.getView().addDependent(this._oDialog7);
 			this._oDialog7.open();
-			
-          },
-          onAcceptOnSpot: function(oEvent){
-          	var that = this;
+
+		},
+		onAcceptOnSpot: function (oEvent) {
+			var that = this;
 			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
-          	var odata = oEvent.getSource().getBindingContext("oHostModel").getObject();
+			var odata = oEvent.getSource().getBindingContext("oHostModel").getObject();
 			var amId = odata.mId;
-			var date=odata.date;
-			var beginTime=odata.beginTime;
-			var endTime=odata.endTime;
-			this.getView().getModel("oHostModel").setProperty("/amId",amId);
-			
+			var date = odata.date;
+			var beginTime = odata.beginTime;
+			var endTime = odata.endTime;
+			this.getView().getModel("oHostModel").setProperty("/amId", amId);
+
 			//get rooms
-				var sUrl = "/JAVA_SERVICE/employee/getAvailableRooms?begin=" + date + " " + beginTime + "&end=" + date+ " " + endTime;
-				$.ajax({
+			var sUrl = "/JAVA_SERVICE/employee/getAvailableRooms?begin=" + date + " " + beginTime + "&end=" + date + " " + endTime;
+			$.ajax({
 				url: sUrl,
 				type: "GET",
 				cache: false,
@@ -1320,25 +1304,25 @@ sap.ui.define([
 					sap.m.MessageToast.show("Internal server Error");
 				}
 			});
-          	if (!this._oDialog8) {
+			if (!this._oDialog8) {
 				this._oDialog8 = sap.ui.xmlfragment("idOnSpotAccept", "inc.inkthn.neo.NEO_VMS.fragments.Host.AcceptMeeting", this);
 			}
 			this.getView().addDependent(this._oDialog8);
 			this._oDialog8.open();
-          },
-          onAcceptSend: function(oEvent){
-          	var that = this;
+		},
+		onAcceptSend: function (oEvent) {
+			var that = this;
 			var sUrl = "/JAVA_SERVICE/employee/acceptOnSpotVisitor";
 			var eId = that.getView().getModel("oHostModel").getProperty("/eId");
 			var room = sap.ui.core.Fragment.byId("idOnSpotAccept", "idBookRoom").getValue();
 			var roomId = room.split("=");
 			var i = roomId[2];
 			var rId = parseInt(i, [0]);
-			var mId=that.getView().getModel("oHostModel").getProperty("/amId");
+			var mId = that.getView().getModel("oHostModel").getProperty("/amId");
 			var comment = that.getView().getModel("oHostModel").getProperty("/Acceptmessage");
 			var payload = {
 				eId: eId,
-				rId:rId,
+				rId: rId,
 				mId: mId,
 				comment: comment
 			};
@@ -1350,10 +1334,9 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-						if(data.status===200)
-				{
-					sap.m.MessageToast.show("Meeting Approved Successfully");
-				
+					if (data.status === 200) {
+						sap.m.MessageToast.show("Meeting Approved Successfully");
+
 						var oHostModel = that.getOwnerComponent().getModel("oHostModel");
 						var sUrl2 = "/JAVA_SERVICE/employee/getOnSpotRequests?eId=" + oHostModel.getProperty("/eId");
 						$.ajax({
@@ -1368,26 +1351,25 @@ sap.ui.define([
 							},
 							success: function (odata) {
 								oHostModel.setProperty("/getOnSpotMeetingRequest", odata);
-						
+
 							},
 							type: "GET"
 						});
-				}
-				else{
-					sap.m.MessageToast.show("Meeting Approval Unsuccessfull");
-				}
+					} else {
+						sap.m.MessageToast.show("Meeting Approval Unsuccessfull");
+					}
 				},
 				type: "POST"
 			});
 			this._oDialog8.close();
 			this._oDialog8.destroy();
 			this._oDialog8 = null;
-          },
-          onRejectSend: function(oEvent){
-          	var that = this;
+		},
+		onRejectSend: function (oEvent) {
+			var that = this;
 			var sUrl = "/JAVA_SERVICE/employee/rejectOnSpotVisitor";
 			var eId = that.getView().getModel("oHostModel").getProperty("/eId");
-			var mId=that.getView().getModel("oHostModel").getProperty("/amId");
+			var mId = that.getView().getModel("oHostModel").getProperty("/amId");
 			var comment = that.getView().getModel("oHostModel").getProperty("/Acceptmessage");
 			var payload = {
 				eId: eId,
@@ -1404,35 +1386,35 @@ sap.ui.define([
 				success: function (data) {
 					sap.m.MessageToast.show("Meeting Rejected ");
 					var oHostModel = that.getOwnerComponent().getModel("oHostModel");
-						var sUrl2 = "/JAVA_SERVICE/employee/getOnSpotRequests?eId=" + oHostModel.getProperty("/eId");
-						$.ajax({
-							url: sUrl2,
-							data: null,
-							async: true,
-							cache: false,
-							dataType: "json",
-							contentType: "application/json; charset=utf-8",
-							error: function (err) {
-								sap.m.MessageToast.show("Destination Failed");
-							},
-							success: function (data) {
-								oHostModel.setProperty("/getOnSpotMeetingRequest", data);
-							
-							},
-							type: "GET"
-						});
+					var sUrl2 = "/JAVA_SERVICE/employee/getOnSpotRequests?eId=" + oHostModel.getProperty("/eId");
+					$.ajax({
+						url: sUrl2,
+						data: null,
+						async: true,
+						cache: false,
+						dataType: "json",
+						contentType: "application/json; charset=utf-8",
+						error: function (err) {
+							sap.m.MessageToast.show("Destination Failed");
+						},
+						success: function (data) {
+							oHostModel.setProperty("/getOnSpotMeetingRequest", data);
+
+						},
+						type: "GET"
+					});
 				},
 				type: "POST"
 			});
 			this._oDialog7.close();
 			this._oDialog7.destroy();
 			this._oDialog7 = null;
-          },
-          
-         // SEARCHING  
-         onTotalVisSearch:function(oEvent){
+		},
 
-         	var aFilters = [];
+		// SEARCHING  
+		onTotalVisSearch: function (oEvent) {
+
+			var aFilters = [];
 			var sQuery = oEvent.getSource().getValue();
 			if (sQuery && sQuery.length > 0) {
 				var filter = new Filter("name", FilterOperator.Contains, sQuery);
@@ -1441,10 +1423,10 @@ sap.ui.define([
 			var oTable = this.byId("idHostTotalVisitor");
 			var oBinding = oTable.getBinding("items");
 			oBinding.filter(aFilters);
-         },
-          onUpcomingSearch:function(oEvent){
+		},
+		onUpcomingSearch: function (oEvent) {
 
-         	var aFilters = [];
+			var aFilters = [];
 			var sQuery = oEvent.getSource().getValue();
 			if (sQuery && sQuery.length > 0) {
 				var filter = new Filter("title", FilterOperator.Contains, sQuery);
@@ -1453,10 +1435,10 @@ sap.ui.define([
 			var oTable = this.byId("idHostUpcoming");
 			var oBinding = oTable.getBinding("items");
 			oBinding.filter(aFilters);
-         },
-          onCheckedInSearch:function(oEvent){
+		},
+		onCheckedInSearch: function (oEvent) {
 
-         	var aFilters = [];
+			var aFilters = [];
 			var sQuery = oEvent.getSource().getValue();
 			if (sQuery && sQuery.length > 0) {
 				var filter = new Filter("name", FilterOperator.Contains, sQuery);
@@ -1465,10 +1447,10 @@ sap.ui.define([
 			var oTable = this.byId("idHostCheckedIn");
 			var oBinding = oTable.getBinding("items");
 			oBinding.filter(aFilters);
-         },
-          onCheckedOutSearch:function(oEvent){
+		},
+		onCheckedOutSearch: function (oEvent) {
 
-         	var aFilters = [];
+			var aFilters = [];
 			var sQuery = oEvent.getSource().getValue();
 			if (sQuery && sQuery.length > 0) {
 				var filter = new Filter("name", FilterOperator.Contains, sQuery);
@@ -1477,21 +1459,18 @@ sap.ui.define([
 			var oTable = this.byId("idHostCheckedOut");
 			var oBinding = oTable.getBinding("items");
 			oBinding.filter(aFilters);
-         },
-         onTotalVisSOrt:function(){
-        
-            var sSort = this.getView().getModel("oHostModel").getProperty("/TotalVisitor/organization");
-            var oSorter = new Sorter(sSort);
-            var oTable = this.byId("idHostTotalVisitor");
-            var oBinding = oTable.getBinding("items");
-            oBinding.sort(oSorter);
-            MessageToast.show("Sorted By Date");
+		},
+		onTotalVisSOrt: function () {
 
-         }
-         
-         
-        		
-         
+			var sSort = this.getView().getModel("oHostModel").getProperty("/TotalVisitor/organization");
+			var oSorter = new Sorter(sSort);
+			var oTable = this.byId("idHostTotalVisitor");
+			var oBinding = oTable.getBinding("items");
+			oBinding.sort(oSorter);
+			MessageToast.show("Sorted By Date");
+
+		}
+
 	});
 
 });
