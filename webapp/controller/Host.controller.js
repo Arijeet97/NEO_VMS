@@ -37,7 +37,8 @@ sap.ui.define([
 				"ButtonVisibility": true,
 				"AcceptVisibility": false,
 				"RejectVisibility": false,
-
+				"MeetingReqVisibility":true,
+				"OnGoingMeetingVisibility":false,
 				"list": [
 
 					{
@@ -200,7 +201,8 @@ sap.ui.define([
 						sap.m.MessageToast.show("Destination Failed");
 					},
 					success: function (data) {
-						oHostModel.setProperty("/NotifCount", data);
+						var NotifCount = data.toString();
+						oHostModel.setProperty("/NotifCount", NotifCount);
 					},
 					type: "GET"
 				});
@@ -854,7 +856,132 @@ sap.ui.define([
 			this.getView().getModel("oViewModel").setProperty("/TotalVisitorVisibility", true);
 
 		},
+		
+		//Meeting Requests
+		onMeetingRequest:function(){
+		
+			this.getView().byId("onTileRequest").addStyleClass("TilePress");
+			this.getView().byId("onTileOngoing").removeStyleClass("TilePress");
+			
+			var that = this;
+			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
+			var sUrl2 = "/JAVA_SERVICE/employee/getOnSpotRequests?eId=" + oHostModel.getProperty("/eId");
+			$.ajax({
+				url: sUrl2,
+				data: null,
+				async: true,
+				cache: false,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+				},
+				success: function (data) {
+					oHostModel.setProperty("/getOnSpotMeetingRequest", data);
+				},
+				type: "GET"
+			});
+			this.getView().getModel("oViewModel").setProperty("/MeetingReqVisibility", true);
+			this.getView().getModel("oViewModel").setProperty("/OnGoingMeetingVisibility", false);
+		
+		},
+		OnGoingMeeting:function(){
+			  this.getView().byId("onTileRequest").removeStyleClass("TilePress");
+			this.getView().byId("onTileOngoing").addStyleClass("TilePress");
+			
+			var that = this;
+			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
+			var sUrl2 = "/JAVA_SERVICE/employee/getOngoingMeetings?eId=" + oHostModel.getProperty("/eId");
+			$.ajax({
+				url: sUrl2,
+				data: null,
+				async: true,
+				cache: false,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+				},
+				success: function (data) {
+					oHostModel.setProperty("/getOnGoingMeeting", data);
+				},
+				type: "GET"
+			});
+			this.getView().getModel("oViewModel").setProperty("/MeetingReqVisibility", false);
+			this.getView().getModel("oViewModel").setProperty("/OnGoingMeetingVisibility", true);
+		},
+		onExtendMeeting:function(oEvent){
+				var that = this;
+			var odata = oEvent.getSource().getBindingContext("oHostModel").getObject();
+			var mId = odata.mId;
+			that.getView().getModel("oHostModel").setProperty("/MeetingID",mId);
+			if (!this._oDialog9) {
+				this._oDialog9 = sap.ui.xmlfragment("idonExtendMeeting", "inc.inkthn.neo.NEO_VMS.fragments.Host.ExtendMeeting", this);
+			}
+			this.getView().addDependent(this._oDialog9);
+			this._oDialog9.open();
+		},
+		onExtendTime:function(){
+			var that=this;
+			var mId=that.getView().getModel("oHostModel").getProperty("/MeetingID");
+			var minutes=sap.ui.core.Fragment.byId("idonExtendMeeting", "idExtendTime").getValue();
+			var item = {
+				"mId": mId,
+				"minutes":minutes
+			};
+				var sUrl = "/JAVA_SERVICE/employee/meetingExtension";
+			$.ajax({
+				url: sUrl,
+				type: "POST",
+				dataType: "json",
+				async: true,
+				data: item,
+				success: function (oData) {
+					if (oData.status === 200) {
+						sap.m.MessageToast.show("Meeting Extended Successfully");
+							this._oDialog9.close();
+					}
+				
+				},
+				error: function (e) {
+					sap.m.MessageToast.show("Update Failed");
+						this._oDialog9.close();
+				}
 
+			});
+		
+		},
+		onRemoveExtend:function(){
+				this._oDialog9.close();
+			this._oDialog9.destroy();
+			this._oDialog9 = null;
+		},
+		onEndMeeting:function(oEvent){
+			var odata = oEvent.getSource().getBindingContext("oHostModel").getObject();
+			var mId = odata.mId;
+			var sUrl = "/JAVA_SERVICE/employee/endMeeting";
+			var item = {
+				"mId": mId
+			};
+			$.ajax({
+				url: sUrl,
+				type: "POST",
+				dataType: "json",
+				async: true,
+				data: item,
+				success: function (oData) {
+					if (oData.status === 200) {
+						sap.m.MessageToast.show("Meeting Ended Successfully");
+					}
+				
+				},
+				error: function (e) {
+					sap.m.MessageToast.show("Update Failed");
+				}
+
+			});
+		},
+		
 		//BLACKLIST
 		onEnterBlacklist: function () {
 			var that = this;

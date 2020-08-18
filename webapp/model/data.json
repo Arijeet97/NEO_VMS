@@ -90,7 +90,7 @@
        
             },
             {
-            "title": "Meeting Requests",
+            "title": "Meetings",
             "icon": "sap-icon://manager",
             "expanded": true,
             "key": "hostMeetingRequest"
@@ -121,7 +121,7 @@
        
         },
             {
-            "title": "Meeting Request",
+            "title": "Meetings",
             "icon": "sap-icon://travel-request",
             "expanded": true,
             "key": "adminRequest"

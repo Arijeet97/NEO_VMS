@@ -20,6 +20,15 @@
 							<l:GridData span="XL3 L3 M6 S12"/>
 						</layoutData>
 					</GenericTile>
+					<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onTileOngoing" header="Ongoing Meeting" press="OnGoingMeeting">
+					<TileContent >
+						<!--<NumericContent class="tileCount" icon="sap-icon://trend-up" value="{oSecurityModel>/CheckedOutCount}" withMargin="false" ></NumericContent>-->
+						<core:Icon src="sap-icon://present"></core:Icon>
+					</TileContent>
+					<layoutData>
+						<l:GridData span="XL3 L3 M6 S12"/>
+					</layoutData>
+				</GenericTile>
 					</l:content>
 			</l:Grid>
 		</l:VerticalLayout>
@@ -130,4 +139,55 @@
 			</ColumnListItem>
 		</items>
 	</Table>
+		<Table id="idAdminOnGoingMeeting" inset="true" items="{path: 'oAdminModel>/getOnGoingMeeting'}" visible="{oViewModel>/OnGoingMeetingVisibility}">
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="OnGoing Meetings" level="H3"/>
+					<ToolbarSpacer></ToolbarSpacer>
+					<!--<Label text="Sort By:"></Label>-->
+					<!--<ComboBox width="8%">-->
+					<!--	<core:Item text="{}"></core:Item>-->
+					<!--</ComboBox>-->
+						<SearchField width="20%" placeholder="Search by Purpose" liveChange="onUpcomingSearch" class="sapUiSmallMargin" />
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns class="tableColumns">
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+				<Text text="{i18n>Meeting ID}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>Purpose}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>room}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>startTime}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>idVisCount}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>action}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem >
+				<cells>
+					<Text text="{oAdminModel>mId}"></Text>
+					<Text text="{oAdminModel>title}"></Text>
+					<Text text="{oAdminModel>roomName}"></Text>
+					<Text text="{oAdminModel>beginTime}"></Text>
+					<Text text="{oAdminModel>participantCount}"></Text>
+					<Toolbar>
+					<Button text="Extend" type="Emphasized" press="onExtendMeeting" ></Button>
+					<Button text="End" type="Reject"  press="onEndMeeting" ></Button>
+					</Toolbar>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+
 </core:FragmentDefinition>
