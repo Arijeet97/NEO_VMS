@@ -209,7 +209,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					oAdminModel.setProperty("/NotifCount", data);
+					var NotifCount=data.toString();
+					oAdminModel.setProperty("/NotifCount", NotifCount);
 				},
 				type: "GET"
 			});
@@ -1023,37 +1024,38 @@ sap.ui.define([
 				success: function (odata) {
 					if (odata.status === 200) {
 						sap.m.MessageToast.show(" Delivery Accepted Successfully");
-						var sUrl1 = "/JAVA_SERVICE/employee/readNotifications";
-						var payload1 = {
-							nId: nId,
-						};
-						$.ajax({
-							url: sUrl1,
-							dataType: "json",
-							data: payload1,
-							type: "POST",
-							error: function (err) {
-								sap.m.MessageToast.show("Destination Failed");
-							},
-							success: function (data1) {
-								var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oAdminModel.getProperty("/eId");
-								$.ajax({
-									url: sUrl3,
-									data: null,
-									async: true,
-									cache: false,
-									dataType: "json",
-									contentType: "application/json; charset=utf-8",
-									error: function (err) {
-										sap.m.MessageToast.show("Destination Failed");
-									},
-									success: function (data2) {
-										oAdminModel.setProperty("/NotifCount", data2);
-									},
-									type: "GET"
-								});
-							}
-						});
+						// var sUrl1 = "/JAVA_SERVICE/employee/readNotifications";
+						// var payload1 = {
+						// 	nId: nId,
+						// };
+						// $.ajax({
+						// 	url: sUrl1,
+						// 	dataType: "json",
+						// 	data: payload1,
+						// 	type: "POST",
+						// 	error: function (err) {
+						// 		sap.m.MessageToast.show("Destination Failed");
+						// 	},
+						// 	success: function (data1) {
+						// 		var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oAdminModel.getProperty("/eId");
+						// 		$.ajax({
+						// 			url: sUrl3,
+						// 			data: null,
+						// 			async: true,
+						// 			cache: false,
+						// 			dataType: "json",
+						// 			contentType: "application/json; charset=utf-8",
+						// 			error: function (err) {
+						// 				sap.m.MessageToast.show("Destination Failed");
+						// 			},
+						// 			success: function (data2) {
+						// 				oAdminModel.setProperty("/NotifCount", data2);
+						// 			},
+						// 			type: "GET"
+						// 		});
+						// 	}
+						// });
+						that.onItemClose();
 					}
 				}
 			});

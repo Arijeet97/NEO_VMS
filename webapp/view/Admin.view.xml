@@ -3,7 +3,7 @@
 	<tnt:ToolPage id="ToolPage">
 		<tnt:header >
 			<f:ShellBar showMenuButton="true" homeIcon="./image/inclogo.png" showNotifications="true" menuButtonPressed=".onSideNavButtonPress"
-				notificationsNumber="'{oAdminModel>/NotifCount}'" notificationsPressed="onNotificationPopover" class="shellbar">
+				notificationsNumber="{oAdminModel>/NotifCount}" notificationsPressed="onNotificationPopover" class="shellbar">
 				<f:profile>
 					<f:Avatar src="data:image/png;base64,{oAdminModel>/image}" displaySize="XS" imageFitType="Cover" press="onProfile"/>
 				</f:profile>

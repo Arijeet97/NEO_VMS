@@ -17,8 +17,8 @@
 					showCloseButton="true" unread="true" priority="None" close=".onItemClose" press=".onListItemPress"
 					authorPicture="data:image/png;base64,{oAdminModel>image}" authorName="{oAdminModel>nId},{oAdminModel>name}">
 				<buttons >
-						<Button id="idAcceptDelivery" text="Accept" press=".onAcceptPress" visible="{oHostModel>AcceptVisibility}"/>
-						<Button id="idRejectDelivery" text="Reject" press=".onRejectPress" visible="{oHostModel>AcceptVisibility}"/>
+						<Button id="idAcceptDelivery" text="Accept" press=".onAcceptPress" visible="{oAdminModel>AcceptVisibility}"/>
+						<Button id="idRejectDelivery" text="Reject" press=".onRejectPress" visible="{oAdminModel>AcceptVisibility}"/>
 					</buttons>
 				</NotificationListItem>
 				</List>
