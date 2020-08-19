@@ -3,7 +3,11 @@
 		contentWidth="20rem" titleAlignment="Center">
 		<content>
 			<l:HorizontalLayout class="editProfilePic">
+				<l:VerticalLayout>
 			<Avatar src="data:image/png;base64,{oAdminModel>/image}" displaySize="M" imageFitType="Cover" />
+			<Link text="Change Picture" press="onChangePicture"></Link>
+			<Image id="idEditAdminPICTURE" height="100px" width="100px"></Image>
+			</l:VerticalLayout>
 			<l:VerticalLayout class="editProfile">
 			<Label text="Name"></Label>
 			<Input id="idEditName" value="{oAdminModel>/name}" editable="true"></Input>

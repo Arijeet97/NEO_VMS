@@ -84,7 +84,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Upcoming Meetings" level="H3"/>
+					<Title text="Ongoing Meetings" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<!--<Label text="Sort By:"></Label>-->
 					<!--<ComboBox width="8%">-->

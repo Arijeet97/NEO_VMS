@@ -3,15 +3,19 @@
 		contentWidth="20rem" titleAlignment="Center">
 		<content>
 			<l:HorizontalLayout class="editProfilePic">
-			<Avatar src="data:image/png;base64,{oHostModel>/image}" displaySize="M" imageFitType="Cover" />
-			<l:VerticalLayout class="editProfile">
-			<Label text="Name"></Label>
-			<Input id="idEditName" value="{oHostModel>/name}" editable="true"></Input>
-			<Label text="Email"></Label>
-			<Input id="idEditEmail" value="{oHostModel>/email}" editable="true"></Input>
-			<Label text="Contact Number"></Label>
-			<Input id="idEditContact" value="{oHostModel>/contactNo}" editable="true"></Input>
-			</l:VerticalLayout>
+				<l:VerticalLayout>
+					<Avatar  src="data:image/png;base64,{oHostModel>/image}" displaySize="M" imageFitType="Cover"/>
+					<Link text="Change Picture" press="onChangePicture"></Link>
+					<Image id="idEditPICTURE" height="100px" width="100px"></Image>
+				</l:VerticalLayout>
+				<l:VerticalLayout class="editProfile">
+					<Label text="Name"></Label>
+					<Input id="idEditName" value="{oHostModel>/name}" editable="true"></Input>
+					<Label text="Email"></Label>
+					<Input id="idEditEmail" value="{oHostModel>/email}" editable="true"></Input>
+					<Label text="Contact Number"></Label>
+					<Input id="idEditContact" value="{oHostModel>/contactNo}" editable="true"></Input>
+				</l:VerticalLayout>
 			</l:HorizontalLayout>
 		</content>
 		<beginButton>

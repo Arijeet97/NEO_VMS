@@ -21,9 +21,11 @@ sap.ui.define([
 	var webSocket;
 	var ButtonType = library.ButtonType,
 		PlacementType = library.PlacementType;
+	var oView;
 	return Controller.extend("inc.inkthn.neo.NEO_VMS.controller.Admin", {
-
+		oView: null,
 		onInit: function () {
+			oView = this.getView();
 			var comboData = {
 
 				"sSelect": "",
@@ -37,7 +39,7 @@ sap.ui.define([
 				"TextVisibility": false,
 				"ButtonVisibility": true,
 				"AcceptVisibility": false,
-				"OnGoingMeetingVisibility":false,
+				"OnGoingMeetingVisibility": false,
 
 				"list": [
 
@@ -210,7 +212,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					var NotifCount=data.toString();
+					var NotifCount = data.toString();
 					oAdminModel.setProperty("/NotifCount", NotifCount);
 				},
 				type: "GET"
@@ -241,7 +243,7 @@ sap.ui.define([
 						sap.m.MessageToast.show("Destination Failed");
 					},
 					success: function (data) {
-							var NotifCount = data.toString();
+						var NotifCount = data.toString();
 						oAdminModel.setProperty("/NotifCount", NotifCount);
 					},
 					type: "GET"
@@ -507,11 +509,20 @@ sap.ui.define([
 			var that = this;
 			var name = this.getView().getModel("oAdminModel").getProperty("/name");
 			var email = this.getView().getModel("oAdminModel").getProperty("/EMPemail");
+			var image = this.getView().getModel("oAdminModel").getProperty("/image");
 			var oPopover = new Popover({
 				showHeader: false,
 				placement: PlacementType.Bottom,
 				content: [
+					new sap.m.Avatar({
+						src: 'data:image/png;base64,' + image, // sap.ui.core.URI
+						displayShape: sap.m.AvatarShape.Circle, // sap.m.AvatarShape
+						displaySize: sap.m.AvatarSize.L, // sap.m.AvatarSize
+						customDisplaySize: "3rem", // sap.ui.core.CSSSize
+						customFontSize: "1.125rem", // sap.ui.core.CSSSize
+						imageFitType: sap.m.AvatarImageFitType.Cover, // sap.m.AvatarImageFitType
 
+					}),
 					new sap.m.Text({
 						text: name
 
@@ -535,7 +546,7 @@ sap.ui.define([
 						}
 					})
 				]
-			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName');
+			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName PopImage');
 			oPopover.openBy(event.getSource());
 		},
 		onEditProfile: function () {
@@ -577,11 +588,15 @@ sap.ui.define([
 			var eId = that.getView().getModel("oAdminModel").getProperty("/eId");
 			var email = that.getView().getModel("oAdminModel").getProperty("/email");
 			var contactNo = that.getView().getModel("oAdminModel").getProperty("/contactNo");
+			var NewImage = that.getView().getModel("oAdminModel").getProperty("/NewImage");
+			var imageb64 = NewImage.split(",");
+			var imageString = imageb64[1];
 			var sUrl = "/JAVA_SERVICE/employee/editDetails";
 			var item = {
 				"eId": eId,
 				"email": email,
-				"contactNo": contactNo
+				"contactNo": contactNo,
+				"image": imageString
 			};
 			$.ajax({
 				url: sUrl,
@@ -609,6 +624,50 @@ sap.ui.define([
 				}
 
 			});
+			var username = that.getView().getModel("oLoginModel").getProperty("/eId");
+			var password = that.getView().getModel("oLoginModel").getProperty("/password");
+			var sUrl2 = "/JAVA_SERVICE/employee/login2?username=" + username + "&password=" + password;
+			$.ajax({
+				url: sUrl2,
+				data: null,
+				async: true,
+				cache: false,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+				},
+				success: function (data) {
+					var email2 = data.email;
+					var image2 = data.image;
+					var name2 = data.name;
+					var contactNo2 = data.contactNo;
+					that.getView().getModel("oAdminModel").setProperty("/email", email2);
+					that.getView().getModel("oAdminModel").setProperty("/image", image2);
+					that.getView().getModel("oAdminModel").setProperty("/name", name2);
+					that.getView().getModel("oAdminModel").setProperty("/contactNo", contactNo2);
+					
+				},
+				type: "GET"
+			});
+		},
+		onChangePicture: function () {
+			navigator.camera.getPicture(this.onSuccessPic, this.onFail, {
+				quality: 75,
+				targetWidth: 300,
+				targetHeight: 300,
+				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+				destinationType: navigator.camera.DestinationType.FILE_URI
+			});
+		},
+		onSuccessPic: function (imageData) {
+			var imageId = sap.ui.core.Fragment.byId("idAdminEditProfile", "idEditAdminPICTURE");
+			imageId.setSrc(imageData);
+			oView.getModel("oAdminModel").setProperty("/NewImage", imageData);
+
+		},
+		onFail: function (message) {
+			alert("Failed because: " + message);
 		},
 
 		// SEARCHING  
@@ -921,8 +980,8 @@ sap.ui.define([
 							sap.m.MessageToast.show("Destination Failed");
 						},
 						success: function (data1) {
-						var NotifCount = data1.toString();
-						oAdminModel.setProperty("/NotifCount", NotifCount);
+							var NotifCount = data1.toString();
+							oAdminModel.setProperty("/NotifCount", NotifCount);
 						},
 						type: "GET"
 					});
@@ -987,8 +1046,8 @@ sap.ui.define([
 										sap.m.MessageToast.show("Destination Failed");
 									},
 									success: function (data2) {
-									var NotifCount = data2.toString();
-						oAdminModel.setProperty("/NotifCount", NotifCount);
+										var NotifCount = data2.toString();
+										oAdminModel.setProperty("/NotifCount", NotifCount);
 									},
 									type: "GET"
 								});
@@ -1426,18 +1485,17 @@ sap.ui.define([
 
 		},
 		onVisCancel: function (oEvent) {
-			
-             var oItemContextPath = oEvent.getSource().getBindingContext("oPreRegForm").getPath();
-				   var aPathParts = oItemContextPath.split("/");
-				   var iIndex = aPathParts[aPathParts.length - 1]; 
-				
-				   var oJSONData = this.getView().getModel("oPreRegForm").getProperty("/visitor");
-				   oJSONData.splice(iIndex, 1);
-				   this.getView().getModel("oPreRegForm").setProperty("/visitor",oJSONData); 
-				 
-            
+
+			var oItemContextPath = oEvent.getSource().getBindingContext("oPreRegForm").getPath();
+			var aPathParts = oItemContextPath.split("/");
+			var iIndex = aPathParts[aPathParts.length - 1];
+
+			var oJSONData = this.getView().getModel("oPreRegForm").getProperty("/visitor");
+			oJSONData.splice(iIndex, 1);
+			this.getView().getModel("oPreRegForm").setProperty("/visitor", oJSONData);
+
 		},
-	
+
 		onAddVisible: function () {
 			var visibility = this.getView().getModel("oViewModel").getProperty("/AddVisVisibility");
 			if (visibility === false) {
@@ -1550,11 +1608,11 @@ sap.ui.define([
 				type: "POST"
 			});
 		},
-		OnGoingMeeting:function(){
-			 this.getView().byId("onMyVisitors").removeStyleClass("TilePress");
+		OnGoingMeeting: function () {
+			this.getView().byId("onMyVisitors").removeStyleClass("TilePress");
 			this.getView().byId("onFacilities").removeStyleClass("TilePress");
 			this.getView().byId("onTileOngoing").addStyleClass("TilePress");
-			
+
 			var that = this;
 			var oAdminModel = that.getOwnerComponent().getModel("oAdminModel");
 			var sUrl2 = "/JAVA_SERVICE/employee/getOngoingMeetings?eId=" + oAdminModel.getProperty("/eId");
@@ -1573,30 +1631,30 @@ sap.ui.define([
 				},
 				type: "GET"
 			});
-		this.getView().getModel("oViewModel").setProperty("/FacilityVisibility", false);
+			this.getView().getModel("oViewModel").setProperty("/FacilityVisibility", false);
 			this.getView().getModel("oViewModel").setProperty("/MyVisitorsVisibility", false);
 			this.getView().getModel("oViewModel").setProperty("/OnGoingMeetingVisibility", true);
 		},
-		onExtendMeeting:function(oEvent){
-				var that = this;
+		onExtendMeeting: function (oEvent) {
+			var that = this;
 			var odata = oEvent.getSource().getBindingContext("oAdminModel").getObject();
 			var mId = odata.mId;
-			that.getView().getModel("oHostModel").setProperty("/MeetingID",mId);
+			that.getView().getModel("oHostModel").setProperty("/MeetingID", mId);
 			if (!this._oDialog10) {
 				this._oDialog10 = sap.ui.xmlfragment("idonAdminExtendMeeting", "inc.inkthn.neo.NEO_VMS.fragments.Admin.ExtendMeeting", this);
 			}
 			this.getView().addDependent(this._oDialog10);
 			this._oDialog10.open();
 		},
-		onExtendTime:function(){
-			var that=this;
-			var mId=that.getView().getModel("oHostModel").getProperty("/MeetingID");
-			var minutes=sap.ui.core.Fragment.byId("idonAdminExtendMeeting", "idADExtendTime").getValue();
+		onExtendTime: function () {
+			var that = this;
+			var mId = that.getView().getModel("oHostModel").getProperty("/MeetingID");
+			var minutes = sap.ui.core.Fragment.byId("idonAdminExtendMeeting", "idADExtendTime").getValue();
 			var item = {
 				"mId": mId,
-				"minutes":minutes
+				"minutes": minutes
 			};
-				var sUrl = "/JAVA_SERVICE/employee/meetingExtension";
+			var sUrl = "/JAVA_SERVICE/employee/meetingExtension";
 			$.ajax({
 				url: sUrl,
 				type: "POST",
@@ -1606,24 +1664,24 @@ sap.ui.define([
 				success: function (oData) {
 					if (oData.status === 200) {
 						sap.m.MessageToast.show("Meeting Extended Successfully");
-							this._oDialog10.close();
+						this._oDialog10.close();
 					}
-				
+
 				},
 				error: function (e) {
 					sap.m.MessageToast.show("Update Failed");
-						this._oDialog10.close();
+					this._oDialog10.close();
 				}
 
 			});
-		
+
 		},
-		onRemoveExtend:function(){
-				this._oDialog10.close();
+		onRemoveExtend: function () {
+			this._oDialog10.close();
 			this._oDialog10.destroy();
 			this._oDialog10 = null;
 		},
-		onEndMeeting:function(oEvent){
+		onEndMeeting: function (oEvent) {
 			var odata = oEvent.getSource().getBindingContext("oAdminModel").getObject();
 			var mId = odata.mId;
 			var sUrl = "/JAVA_SERVICE/employee/endMeeting";
@@ -1640,7 +1698,7 @@ sap.ui.define([
 					if (oData.status === 200) {
 						sap.m.MessageToast.show("Meeting Ended Successfully");
 					}
-				
+
 				},
 				error: function (e) {
 					sap.m.MessageToast.show("Update Failed");

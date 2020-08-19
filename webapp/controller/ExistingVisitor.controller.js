@@ -78,7 +78,7 @@ sap.ui.define([
 				}
 			});
 		},
-			ongetBatch:function(){
+		ongetBatch:function(){
 				var that=this;
 			var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");
 			var oLoginModel = that.getView().getModel("oLoginModel");
@@ -189,8 +189,6 @@ sap.ui.define([
 			});
 		},
 		onSuccessPic: function (imageData) {
-			
-		
 			var imageId = oView.byId("myImage");
 			imageId.setSrc(imageData);
             oView.getModel("oLoginModel").setProperty("/VistorImage",imageData);

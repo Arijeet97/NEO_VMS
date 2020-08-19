@@ -21,10 +21,12 @@ sap.ui.define([
 	var webSocket;
 	var ButtonType = library.ButtonType,
 		PlacementType = library.PlacementType;
+			var oView;
 	// var	ValueState = coreLibrary.ValueState;
 	return Controller.extend("inc.inkthn.neo.NEO_VMS.controller.Host", {
-
+		oView: null,
 		onInit: function () {
+				oView = this.getView();
 			var comboData = {
 
 				"sSelect": "",
@@ -1078,10 +1080,22 @@ sap.ui.define([
 
 			var name = this.getView().getModel("oHostModel").getProperty("/name");
 				var email = this.getView().getModel("oHostModel").getProperty("/EMPemail");
+				var image = this.getView().getModel("oHostModel").getProperty("/image");
 			var oPopover = new Popover({
 				showHeader: false,
 				placement: PlacementType.Bottom,
 				content: [
+					new sap.m.Avatar(
+						{
+							src: 'data:image/png;base64,'+image , // sap.ui.core.URI
+							displayShape: sap.m.AvatarShape.Circle, // sap.m.AvatarShape
+							displaySize: sap.m.AvatarSize.L, // sap.m.AvatarSize
+							customDisplaySize: "3rem", // sap.ui.core.CSSSize
+							customFontSize: "1.125rem", // sap.ui.core.CSSSize
+							imageFitType: sap.m.AvatarImageFitType.Cover, // sap.m.AvatarImageFitType
+							
+						}
+					),
 					new sap.m.Text({
 						text: name
 
@@ -1090,7 +1104,7 @@ sap.ui.define([
 						text: email
 
 					}),
-
+					
 					new Button({
 						text: "Edit Profile",
 						type: ButtonType.Transparent,
@@ -1106,7 +1120,7 @@ sap.ui.define([
 						}
 					})
 				]
-			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName');
+			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName PopImage');
 			oPopover.openBy(event.getSource());
 		},
 		onEditProfile: function () {
@@ -1148,11 +1162,15 @@ sap.ui.define([
 			var eId = that.getView().getModel("oHostModel").getProperty("/eId");
 			var email = that.getView().getModel("oHostModel").getProperty("/email");
 			var contactNo = that.getView().getModel("oHostModel").getProperty("/contactNo");
+			var NewImage = that.getView().getModel("oHostModel").getProperty("/NewImage");
+			var imageb64=NewImage.split(",");
+            var imageString=imageb64[1];
 			var sUrl = "/JAVA_SERVICE/employee/editDetails";
 			var item = {
 				"eId": eId,
 				"email": email,
-				"contactNo": contactNo
+				"contactNo": contactNo,
+				"image":imageString
 			};
 			$.ajax({
 				url: sUrl,
@@ -1181,6 +1199,50 @@ sap.ui.define([
 				}
 
 			});
+			var username = that.getView().getModel("oLoginModel").getProperty("/eId");
+			var password = that.getView().getModel("oLoginModel").getProperty("/password");
+			var sUrl1 = "/JAVA_SERVICE/employee/login2?username=" + username + "&password=" + password;
+			$.ajax({
+				url: sUrl1,
+				data: null,
+				async: true,
+				cache: false,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+				},
+				success: function (data) {
+					var email2 = data.email;
+					var image2 = data.image;
+					var name2 = data.name;
+					var contactNo2 = data.contactNo;
+					that.getView().getModel("oHostModel").setProperty("/email", email2);
+					that.getView().getModel("oHostModel").setProperty("/image", image2);
+					that.getView().getModel("oHostModel").setProperty("/name", name2);
+					that.getView().getModel("oHostModel").setProperty("/contactNo", contactNo2);
+					
+				},
+				type: "GET"
+			});
+		},
+		onChangePicture: function () {
+			navigator.camera.getPicture(this.onSuccessPic, this.onFail, {
+				quality: 75,
+				targetWidth: 300,
+				targetHeight: 300,
+				sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+				destinationType: navigator.camera.DestinationType.FILE_URI
+			});
+		},
+		onSuccessPic: function (imageData) {
+			var imageId = sap.ui.core.Fragment.byId("idEditProfile", "idEditPICTURE");
+			imageId.setSrc(imageData);
+            oView.getModel("oHostModel").setProperty("/NewImage",imageData);
+           
+		},
+		onFail: function (message) {
+			alert("Failed because: " + message);
 		},
 
 		//EXPAND FRAGMENT   

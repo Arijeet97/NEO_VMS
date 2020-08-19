@@ -29,7 +29,7 @@ sap.ui.define([
 			oDialog.open();
 			setTimeout(function () {
 				oDialog.close();
-			}, 5500);
+			}, 6000);
 			var username = this.getView().getModel("oLoginModel").getProperty("/eId");
 			var password = this.getView().getModel("oLoginModel").getProperty("/password");
 			var that = this;
@@ -89,7 +89,7 @@ sap.ui.define([
 						}
 						sap.m.MessageToast.show("Logged In Successfully!");
 					} else if (oData.status === false) {
-						sap.m.MessageToast.show("User doesn't exist");
+						alert("User doesn't exist");
 					}
 				},
 				error: function (e) {
@@ -148,7 +148,7 @@ sap.ui.define([
 						that.getView().addDependent(that._oDialog2);
 						that._oDialog2.open();
 					} else if (data.status === 500) {
-						sap.m.MessageToast.show("Could Not Send");
+						alert("Could Not Send");
 					}
 				},
 				type: "POST"
@@ -219,10 +219,10 @@ sap.ui.define([
 								type: "GET"
 							});
 						} else if (data.status === 300) {
-							sap.m.MessageToast.show("Otp Expired Please Try Again");
+							alert("Otp Expired Please Try Again");
 
 						} else if (data.status === 500) {
-							sap.m.MessageToast.show("Could Not Verify");
+							alert("Could Not Verify");
 						}
 
 					},
@@ -257,9 +257,9 @@ sap.ui.define([
 							that.getView().addDependent(that._oDialog11);
 							that._oDialog11.open();
 						} else if (data.status === 300) {
-							sap.m.MessageToast.show("OTP expired");
+							alert("expired");
 						} else {
-							sap.m.MessageToast.show("Could not verify");
+							alert("Could not verify");
 						}
 
 					}
@@ -359,7 +359,7 @@ sap.ui.define([
 			jQuery.sap.require("sap.ndc.BarcodeScanner");
 			sap.ndc.BarcodeScanner.scan(
 				function (mResult) {
-					alert("We got a bar code\n" +
+					alert("Scan Successful\n" +
 						"Result: " + mResult.text + "\n" +
 						"Format: " + mResult.format + "\n" +
 						"Cancelled: " + mResult.cancelled);
@@ -394,7 +394,7 @@ sap.ui.define([
 						that.getView().addDependent(that._oDialog10);
 						that._oDialog10.open();
 					} else if (data.status === 500) {
-						sap.m.MessageToast.show("Could Not Send");
+						alert("Could Not Send");
 					}
 				},
 				type: "GET"
