@@ -116,8 +116,8 @@
 						<OverflowToolbar>
 								<ToolbarSpacer/>
 						<Button text="{i18n>ADD}" type="Emphasized" press="onAddVisible"/>
-						<Button id="idSubmitBtn" type="Success" text="Submit" press="onSubmit" enabled="fasle" />
-						<Button text="Cancel" type="Reject" press="onCancel"/>
+						<Button id="idSubmitBtn" type="Success" text="Submit" press="onSubmit" enabled="false" />
+						<Button text="Close" type="Reject" press="onCancel"/>
 					</OverflowToolbar>
 					</Panel>
 					

@@ -466,6 +466,16 @@ sap.ui.define([
 				sap.ui.core.Fragment.byId("idForgotPassword", "ShowCNF").setVisible(false);
 				sap.ui.core.Fragment.byId("idForgotPassword", "HideCNF").setVisible(true);
 			}
+		},
+		
+		// CANCEL OTP
+		onCancelOtp:function(){
+			var that = this;
+			if(this.blag ===  true){
+				that._oDialog1.close();
+			}else{
+				that._oDialog10.close();
+			}
 		}
 
 	});

@@ -3,7 +3,7 @@
 		contentWidth="20rem" titleAlignment="Center">
 		<content>
 		  <Image height="100%" width="100%" src="./image/Success.gif"></Image>
-		  <Text text="You have Successful Completed" class="success" textAlign="Center"></Text>
+		  <Text text="Successful" class="success" textAlign="Center"></Text>
 		</content>
 		<beginButton>
 			<Button text="Ok" type="Accept" press="onSuccess"/>

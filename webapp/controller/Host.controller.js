@@ -55,13 +55,13 @@ sap.ui.define([
 				"list1": [
 
 					{
-						"ParkingType": "NotRequired",
+						"ParkingType": "Not Required",
 						"Parkingid": 0
 					}, {
-						"ParkingType": "TwoWheeler",
+						"ParkingType": "Two Wheeler",
 						"Parkingid": 2
 					}, {
-						"ParkingType": "FourWheeler",
+						"ParkingType": "Four Wheeler",
 						"Parkingid": 4
 					}
 				]
@@ -458,6 +458,7 @@ sap.ui.define([
 		},
 
 		onAddVisible: function () {
+		
 			var visibility = this.getView().getModel("oViewModel").getProperty("/AddVisVisibility");
 			if (visibility === false) {
 				this.getView().getModel("oViewModel").setProperty("/AddVisVisibility", true);

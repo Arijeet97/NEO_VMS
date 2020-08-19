@@ -44,7 +44,7 @@
 							<ToolbarSpacer ></ToolbarSpacer>
 							<Button id="badgeBtn" type="Emphasized" text="Get Badge" press="ongetBatch" enabled="false"></Button>
 							<Button type="Success" text="Submit" press="onEditDetailsSubmit"/>
-							<Button text="Cancel" type="Reject" press="onExVisCancel"/>
+							<Button text="Close" type="Reject" press="onExVisCancel"/>
 						</OverflowToolbar>
 					</Panel>
 				</content>

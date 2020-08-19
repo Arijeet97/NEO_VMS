@@ -184,7 +184,7 @@
 				<Text text="{i18n>visId}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
-				<Text text="{i18n>date_Time}"/>
+				<Text text="{i18n>Time}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>Blacklist}"/>
