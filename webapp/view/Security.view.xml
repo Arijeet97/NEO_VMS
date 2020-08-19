@@ -2,53 +2,14 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:tnt="sap.tnt">
 	<tnt:ToolPage id="ToolPage">
 		<tnt:header >
-		<!--	<tnt:ToolHeader  >-->
-		<!--		<Button id="sideNavigationToggleButton" tooltip="Show Menu" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress">-->
-		<!--			<layoutData>-->
-		<!--				<OverflowToolbarLayoutData priority="NeverOverflow"/>-->
-		<!--			</layoutData>-->
-		<!--		</Button>-->
-		<!--		<ToolbarSpacer width="5px"/>-->
-		<!--			<Image height="100%" width="10%" src="./image/inclogo.png">-->
-		<!--			<layoutData>-->
-		<!--				<OverflowToolbarLayoutData priority="Low"/>-->
-		<!--			</layoutData>-->
-		<!--		</Image>-->
-		<!--		<tnt:ToolHeaderUtilitySeparator/>-->
-		<!--		<ToolbarSpacer>-->
-		<!--			<layoutData>-->
-		<!--				<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="5px"/>-->
-		<!--			</layoutData>-->
-		<!--		</ToolbarSpacer>-->
-		<!--		<Text text="Welcome {oSecurityModel>/name}" >-->
-		<!--			<layoutData>-->
-		<!--				<OverflowToolbarLayoutData priority="Low"/>-->
-		<!--			</layoutData>-->
-		<!--		</Text>-->
-		<!--		<tnt:ToolHeaderUtilitySeparator/>-->
-		<!--		<ToolbarSpacer>-->
-		<!--			<layoutData>-->
-		<!--				<OverflowToolbarLayoutData priority="NeverOverflow" minWidth="5px"/>-->
-		<!--			</layoutData>-->
-		<!--		</ToolbarSpacer>-->
-		<!--		<Button tooltip="Notifications" icon="sap-icon://bell" press="onNotificationPopover">-->
-		<!--			<layoutData>-->
-		<!--				<OverflowToolbarLayoutData priority="Low"/>-->
-		<!--			</layoutData>-->
-		<!--		</Button>-->
-		<!--		<Avatar src="data:image/png;base64,{oSecurityModel>/image}" displaySize="XS" imageFitType="Cover" press="onProfile">-->
-		<!--		<layoutData>-->
-		<!--			<OverflowToolbarLayoutData priority="Low"/>-->
-		<!--		</layoutData>-->
-		<!--</Avatar>-->
-		<!--</tnt:ToolHeader>-->
+	
 			<f:ShellBar
 			
 				showMenuButton="true"
 				homeIcon="./image/inclogo.png"
 				showNotifications="true"
 				menuButtonPressed=".onSideNavButtonPress"
-				notificationsNumber="'{oSecurityModel>/NotifCount}'"  notificationsPressed="onNotificationPopover" class="shellbar">
+				notificationsNumber="{oSecurityModel>/NotifCount}"  notificationsPressed="onNotificationPopover" class="shellbar">
 			
 				<f:profile>
 					<f:Avatar src="data:image/png;base64,{oSecurityModel>/image}" displaySize="XS" imageFitType="Cover" press="onProfile" />

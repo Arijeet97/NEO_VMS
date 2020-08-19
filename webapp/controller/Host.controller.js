@@ -584,7 +584,8 @@ sap.ui.define([
 							sap.m.MessageToast.show("Destination Failed");
 						},
 						success: function (data1) {
-							oHostModel.setProperty("/NotifCount", data1);
+							var NotifCount = data1.toString();
+					oHostModel.setProperty("/NotifCount", NotifCount);
 						},
 						type: "GET"
 					});
@@ -646,7 +647,8 @@ sap.ui.define([
 										sap.m.MessageToast.show("Destination Failed");
 									},
 									success: function (data2) {
-										oHostModel.setProperty("/NotifCount", data2);
+										var NotifCount = data2.toString();
+					oHostModel.setProperty("/NotifCount", NotifCount);
 									},
 									type: "GET"
 								});
@@ -711,7 +713,8 @@ sap.ui.define([
 										sap.m.MessageToast.show("Destination Failed");
 									},
 									success: function (data2) {
-										oHostModel.setProperty("/NotifCount", data2);
+										var NotifCount = data2.toString();
+					oHostModel.setProperty("/NotifCount", NotifCount);
 									},
 									type: "GET"
 								});
@@ -1074,12 +1077,17 @@ sap.ui.define([
 			var that = this;
 
 			var name = this.getView().getModel("oHostModel").getProperty("/name");
+				var email = this.getView().getModel("oHostModel").getProperty("/EMPemail");
 			var oPopover = new Popover({
 				showHeader: false,
 				placement: PlacementType.Bottom,
 				content: [
 					new sap.m.Text({
 						text: name
+
+					}),
+					new sap.m.Text({
+						text: email
 
 					}),
 

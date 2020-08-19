@@ -57,31 +57,33 @@ sap.ui.define([
 							var eId = oData.eid;
 							var image = oData.image;
 							var name = oData.name;
-
+							var email=oData.email;
 							that.getView().getModel("oHostModel").setProperty("/eId", eId);
 							that.getView().getModel("oHostModel").setProperty("/image", image);
 							that.getView().getModel("oHostModel").setProperty("/name", name);
-
+							that.getView().getModel("oHostModel").setProperty("/EMPemail", email);
 							var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
 							oRouter.navTo("RouteHost");
 						} else if (oData.role === "Admin") {
 							var eId1 = oData.eid;
 							var image1 = oData.image;
 							var name1 = oData.name;
+							var email1=oData.email;
 							that.getView().getModel("oAdminModel").setProperty("/eId", eId1);
 							that.getView().getModel("oAdminModel").setProperty("/image", image1);
 							that.getView().getModel("oAdminModel").setProperty("/name", name1);
-
+							that.getView().getModel("oAdminModel").setProperty("/EMPemail", email1);
 							var oRouter1 = sap.ui.core.UIComponent.getRouterFor(that);
 							oRouter1.navTo("RouteAdmin");
 						} else if (oData.role === "Security") {
 							var eId2 = oData.eid;
 							var image2 = oData.image;
 							var name2 = oData.name;
+							var email2=oData.email;
 							that.getView().getModel("oSecurityModel").setProperty("/eId", eId2);
 							that.getView().getModel("oSecurityModel").setProperty("/image", image2);
 							that.getView().getModel("oSecurityModel").setProperty("/name", name2);
-
+							that.getView().getModel("oSecurityModel").setProperty("/EMPemail", email2);
 							var oRouter2 = sap.ui.core.UIComponent.getRouterFor(that);
 							oRouter2.navTo("RouteSecurity");
 						}
@@ -113,7 +115,7 @@ sap.ui.define([
 
 		//Existing Visitor
 		onPressVerify: function () {
-			this.blag = true;
+			this.bflag = true;
 			var that = this;
 
 			var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");

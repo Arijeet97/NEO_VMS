@@ -173,6 +173,17 @@ sap.ui.define([
 				this.getView().getModel("oViewModel").setProperty("/AddVisVisibility", false);
 			}
 		},
+		onVisCancel: function (oEvent) {
+
+			var oItemContextPath = oEvent.getSource().getBindingContext("oVisitorModel").getPath();
+			var aPathParts = oItemContextPath.split("/");
+			var iIndex = aPathParts[aPathParts.length - 1];
+
+			var oJSONData = this.getView().getModel("oVisitorModel").getProperty("/NewVisitor");
+			oJSONData.splice(iIndex, 1);
+			this.getView().getModel("oVisitorModel").setProperty("/NewVisitor", oJSONData);
+
+		},
 
 		handleLinkPress: function (evt) {
 			MessageBox.information(

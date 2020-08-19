@@ -175,7 +175,8 @@ sap.ui.define([
 											sap.m.MessageToast.show("Destination Failed");
 										},
 										success: function (data) {
-											oSecurityModel.setProperty("/NotifCount", data);
+											var NotifCount = data.toString();
+											oSecurityModel.setProperty("/NotifCount", NotifCount);
 										},
 										type: "GET"
 									});
@@ -205,7 +206,8 @@ sap.ui.define([
 											sap.m.MessageToast.show("Destination Failed");
 										},
 										success: function (data) {
-											oSecurityModel.setProperty("/NotifCount", data);
+											var NotifCount = data.toString();
+											oSecurityModel.setProperty("/NotifCount", NotifCount);
 										},
 										type: "GET"
 									});
@@ -742,7 +744,8 @@ sap.ui.define([
 											sap.m.MessageToast.show("Destination Failed");
 										},
 										success: function (data1) {
-											oSecurityModel.setProperty("/NotifCount", data1);
+											var NotifCount = data1.toString();
+											oSecurityModel.setProperty("/NotifCount", NotifCount);
 										},
 										type: "GET"
 									});
@@ -833,6 +836,7 @@ sap.ui.define([
 		onProfile: function (event) {
 			var that = this;
 			var name=this.getView().getModel("oSecurityModel").getProperty("/name");
+			var email = this.getView().getModel("oSecurityModel").getProperty("/EMPemail");
 			var oPopover = new Popover({
 				showHeader: false,
 				placement: PlacementType.Bottom,
@@ -843,6 +847,10 @@ sap.ui.define([
 				    		
 				    	}
 				    ),
+				    new sap.m.Text({
+						text: email
+
+					}),
 					new Button({
 						text: "Edit Profile",
 						type: ButtonType.Transparent,

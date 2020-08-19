@@ -2,7 +2,7 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 		<l:HorizontalLayout class="date">
 			<Label class="datelabel" text="Date:"/>
-			<DatePicker class="date" dateValue="{oAdminModel>/date}" valueFormat="MMM dd, yyyy"/>
+			<DatePicker class="date" value="{oAdminModel>/date}" valueFormat="MMM dd, yyyy"/>
 		</l:HorizontalLayout>
 		<l:VerticalLayout width="100%" class="TileStyle">
 				<l:Grid>

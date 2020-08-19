@@ -506,7 +506,7 @@ sap.ui.define([
 		onProfile: function (event) {
 			var that = this;
 			var name = this.getView().getModel("oAdminModel").getProperty("/name");
-			var email = this.getView().getModel("oAdminModel").getProperty("/email");
+			var email = this.getView().getModel("oAdminModel").getProperty("/EMPemail");
 			var oPopover = new Popover({
 				showHeader: false,
 				placement: PlacementType.Bottom,
@@ -921,7 +921,8 @@ sap.ui.define([
 							sap.m.MessageToast.show("Destination Failed");
 						},
 						success: function (data1) {
-							oAdminModel.setProperty("/NotifCount", data1);
+						var NotifCount = data1.toString();
+						oAdminModel.setProperty("/NotifCount", NotifCount);
 						},
 						type: "GET"
 					});
@@ -986,7 +987,8 @@ sap.ui.define([
 										sap.m.MessageToast.show("Destination Failed");
 									},
 									success: function (data2) {
-										oAdminModel.setProperty("/NotifCount", data2);
+									var NotifCount = data2.toString();
+						oAdminModel.setProperty("/NotifCount", NotifCount);
 									},
 									type: "GET"
 								});

@@ -21,7 +21,7 @@
 						<Label text="{i18n>IDNUMBER}"/>
 						<Input id="idPerIDNum" type="Number" class="InputBox" />
 						<Label text="{i18n>Parking }"/>
-						<ComboBox id="idPerPark" selectedKey="{oHostModel>/sParking}" items="{oViewModel>/list1}">
+						<ComboBox id="idPerPark" selectedKey="{oAdminModel>/sParking}" items="{oViewModel>/list1}">
 						<core:Item text="{oViewModel>ParkingType}" key="{oViewModel>Parkingid}"  ></core:Item>
 						</ComboBox>
 					</f:content>

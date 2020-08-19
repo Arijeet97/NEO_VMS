@@ -63,7 +63,7 @@
 										<content>
 											<Title text="Add Visitor" level="H6" class="Visitortable"/>
 											<ToolbarSpacer></ToolbarSpacer>
-											<Button icon="sap-icon://add-employee" press="addVis"></Button>
+											<Button icon="sap-icon://add-employee" type="Emphasized" press="addVis"></Button>
 										</content>
 									</OverflowToolbar>
 								</headerToolbar>
@@ -116,7 +116,7 @@
 						<OverflowToolbar>
 								<ToolbarSpacer/>
 						<Button text="{i18n>ADD}" type="Emphasized" press="onAddVisible"/>
-						<Button id="idSubmitBtn" type="Accept" text="Submit" press="onSubmit" enabled="fasle" />
+						<Button id="idSubmitBtn" type="Success" text="Submit" press="onSubmit" enabled="fasle" />
 						<Button text="Cancel" type="Reject" press="onCancel"/>
 					</OverflowToolbar>
 					</Panel>
