@@ -12,23 +12,23 @@
 			</VBox>
 				<VBox class="sapUiSmallMarginBeginEnd sapUiMediumMarginTop sapUiMediumMarginBottom">
 					<HBox>
-						<Label text="Name: " class="Badge"></Label>
+						<Label text="Name:" class="Badge"></Label>
 						<Text text="{oLoginModel>/getBadge/visitorName}" class="BadgeText sapUiLargeMarginBegin"></Text>
 					</HBox>
 					<HBox>
-						<Label text="Email: " class="Badge"></Label>
+						<Label text="Email:" class="Badge"></Label>
 						<Text text="{oLoginModel>/getBadge/email}" class="BadgeText sapUiLargeMarginBegin"></Text>
 					</HBox>
 					<HBox>
-						<Label text="Contact No: " class="Badge"></Label>
+						<Label text="Contact:" class="Badge"></Label>
 						<Text text="{oLoginModel>/getBadge/contactNo}" class="BadgeText sapUiLargeMarginBegin"></Text>
 					</HBox>
 					<HBox>
-						<Label text="Purpose " class="Badge"></Label>
+						<Label text="Purpose:" class="Badge"></Label>
 						<Text text="{oLoginModel>/getBadge/purpose}" class="BadgeText sapUiLargeMarginBegin"></Text>
 					</HBox>
 					<HBox>
-						<Label text="HostName: " class="Badge"></Label>
+						<Label text="Host:" class="Badge"></Label>
 						<Text text="{oLoginModel>/getBadge/hostName}" class="BadgeText sapUiLargeMarginBegin "></Text>
 					</HBox>
 				</VBox>

@@ -4,7 +4,7 @@
 	<!--	<Label class="datelabel" text="Date:"/>-->
 	<!--	<DatePicker class="date" id="evacDate" dateValue="{oSecurityModel>/Date}" valueFormat="MMM dd, yyyy"/>-->
 	<!--</l:HorizontalLayout>-->
-	<Table id="SecurityDelivery" inset="true" items="{ path: 'oSecurityModel>/getRecentDeliveries'}">
+	<Table id="SecurityDelivery" inset="true" items="{ path: 'oSecurityModel>/getRecentDeliveries'}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>

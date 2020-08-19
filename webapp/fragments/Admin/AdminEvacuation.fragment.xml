@@ -13,7 +13,7 @@
 			<l:Grid defaultSpan="XL6 L4 M6 S12" class="sapUiTinyMarginTopBottom ">
 		<l:content>
 				<ui:Table id="tableVis" selectionMode="MultiToggle" rows="{oAdminModel>/getAllPresent1}" visibleRowCount="4" enableCellFilter="{ui>/cellFilterOn}"
-				filter="name" ariaLabelledBy="title">
+				filter="name" ariaLabelledBy="title" alternateRowColors="true" >
 				<ui:extension>
 					<OverflowToolbar>
 						<Title id="Visitors" text="Visitors Present"/>
@@ -39,7 +39,7 @@
 		
 			</ui:Table>
 			<ui:Table id="tableEmp" selectionMode="MultiToggle" rows="{oAdminModel>/getAllPresent}" visibleRowCount="4" enableCellFilter="{ui>/cellFilterOn}"
-				filter="name" ariaLabelledBy="title">
+				filter="name" ariaLabelledBy="title"  alternateRowColors="true" >
 				<ui:extension>
 					<OverflowToolbar>
 						<Title id="Employees" text="Employees"/>

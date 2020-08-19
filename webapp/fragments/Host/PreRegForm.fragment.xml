@@ -36,7 +36,7 @@
 						<Label text="{i18n>Organisation}" required="true" />
 						<Input id="idVisOrg" class="MeetInputBox"/>
 						<Label text="{i18n>meetDate}" required="true"/>
-						<DatePicker valueFormat="MMM dd, yyyy" id="idMeetDate" minDate="{oHostModel>/Date}" class="MeetInputBox"/>
+						<DatePicker valueFormat="MMM dd, yyyy" id="idMeetDate" minDate="{oHostModel>/meetingDate}" class="MeetInputBox"/>
 						<Label text="{i18n>Start time}"/>
 						<TimePicker id="idMeetStart" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" change="handleChange" class="MeetInputBox"/>
 						<Label text="{i18n>End Time}"/>
@@ -44,7 +44,7 @@
 					</f:content>
 				</f:SimpleForm>
 			</VBox>
-			<Table id="idVisitor" inset="true" items="{path: 'oPreRegForm>/visitor'}" visible="{oViewModel>/AddVisVisibility}">
+			<Table id="idVisitor" inset="true" items="{path: 'oPreRegForm>/visitor'}" visible="{oViewModel>/AddVisVisibility}" alternateRowColors="true" >
 				<headerToolbar>
 					<OverflowToolbar>
 						<content>

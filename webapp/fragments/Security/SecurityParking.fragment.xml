@@ -29,7 +29,7 @@
 			</l:content>
 		</l:Grid>
 	</l:VerticalLayout>
-		<Table id="idSecurityParking" inset="true" items="{path: 'oSecurityModel>/getParkingStatus'}" >
+		<Table id="idSecurityParking" inset="true" alternateRowColors="true" items="{path: 'oSecurityModel>/getParkingStatus'}" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>

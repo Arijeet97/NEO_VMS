@@ -49,7 +49,7 @@
 			</l:Grid>
 		</l:VerticalLayout>
 		<Table id="idAdminUpcoming" class="detailtable" inset="true" items="{path: 'oAdminModel>/UpcomingMeeting'}"
-			visible="{oViewModel>/UpcomingVisibility}">
+			visible="{oViewModel>/UpcomingVisibility}" alternateRowColors="true" >
 			<headerToolbar>
 				<OverflowToolbar>
 					<content>
@@ -97,7 +97,7 @@
 			</items>
 		</Table>
 		<Table id="idAdminCheckedIn" class="detailtable" inset="true" items="{path: 'oAdminModel>/CheckedIn'}"
-			visible="{oViewModel>/CheckedInVisibility}">
+			visible="{oViewModel>/CheckedInVisibility}" alternateRowColors="true" >
 			<headerToolbar>
 				<OverflowToolbar>
 					<content>
@@ -147,7 +147,7 @@
 			</items>
 		</Table>
 		<Table id="idAdminCheckedOut" class="detailtable" inset="true" items="{path: 'oAdminModel>/CheckedOut'}"
-			visible="{oViewModel>/CheckedOutVisibility}">
+			visible="{oViewModel>/CheckedOutVisibility}" alternateRowColors="true" >
 			<headerToolbar>
 				<OverflowToolbar>
 					<content>
@@ -204,7 +204,7 @@
 			</items>
 		</Table>
 		<Table id="idAdminFrequentVisitor" class="detailtable" inset="true" items="{path: 'oAdminModel>/FrequentVisitors'}"
-			visible="{oViewModel>/FrequentVisitorVisibility}">
+			visible="{oViewModel>/FrequentVisitorVisibility}" alternateRowColors="true" >
 			<headerToolbar>
 				<OverflowToolbar>
 					<content>

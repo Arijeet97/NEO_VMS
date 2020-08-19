@@ -83,6 +83,9 @@ sap.ui.define([
 			var today = new Date();
 			var newdate=oDateFormat.format(today);
 			this.getView().getModel("oHostModel").setProperty("/Date", newdate);
+			
+			var meetingDate = new Date();
+			this.getView().getModel("oHostModel").setProperty("/meetingDate", meetingDate);
 			//get Blacklist details
 			var sUrl = "/JAVA_SERVICE/employee/getBlacklistedVisitors?eId=" + oHostModel.getProperty("/eId");
 			$.ajax({
@@ -382,24 +385,7 @@ sap.ui.define([
 						sap.m.MessageToast.show("Registration Unsuccessful");
 					} else {
 						sap.m.MessageToast.show("Registration Successfully");
-						var oHostModel = that.getView().getModel("oHostModel");
-						var sUrl1 = "/JAVA_SERVICE/employee/getPreregisterStatus?eId=" + oHostModel.getProperty("/eId");
-						$.ajax({
-							url: sUrl1,
-							data: null,
-							async: true,
-							cache: false,
-							dataType: "json",
-							contentType: "application/json; charset=utf-8",
-							error: function (err) {
-								sap.m.MessageToast.show("Destination Failed");
-							},
-							success: function (odata) {
-								oHostModel.setProperty("/getPreregister", odata);
-								sap.m.MessageToast.show("Refresh  Success");
-							},
-							type: "GET"
-						});
+						
 					}
 
 				},
@@ -408,6 +394,7 @@ sap.ui.define([
 				}
 			});
 			this._oDialog1.close();
+			this.onRefreshPreReg();
 			// this._oDialog1.destroy();
 			// this._oDialog1 = null;
 			// this._oDialog.destroy();
@@ -962,20 +949,20 @@ sap.ui.define([
 				success: function (oData) {
 					if (oData.status === 200) {
 						sap.m.MessageToast.show("Meeting Extended Successfully");
-							this._oDialog9.close();
+							that._oDialog9.close();
 					}
 				
 				},
 				error: function (e) {
 					sap.m.MessageToast.show("Update Failed");
-						this._oDialog9.close();
+						that._oDialog9.close();
 				}
 
 			});
-		
+		this.OnGoingMeeting();
 		},
 		onRemoveExtend:function(){
-				this._oDialog9.close();
+			this._oDialog9.close();
 			this._oDialog9.destroy();
 			this._oDialog9 = null;
 		},
@@ -1003,6 +990,7 @@ sap.ui.define([
 				}
 
 			});
+			this.OnGoingMeeting();
 		},
 		
 		//BLACKLIST
@@ -1065,7 +1053,7 @@ sap.ui.define([
 			}
 			this.getView().addDependent(this._oDialog2);
 			this._oDialog2.open();
-
+			this.onRefreshBlacklist();
 		},
 		onRemoveBlacklist: function (oEvent) {
 			var that = this;
@@ -1090,6 +1078,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Request Raised Successfully");
 				}
 			});
+			this.onRefreshBlacklist();
 		},
 
 		//PROFILE
@@ -1579,6 +1568,7 @@ sap.ui.define([
 			this._oDialog8.close();
 			this._oDialog8.destroy();
 			this._oDialog8 = null;
+			this.onRefreshMeetingReq();
 		},
 		onRejectSend: function (oEvent) {
 			var that = this;
@@ -1624,6 +1614,7 @@ sap.ui.define([
 			this._oDialog7.close();
 			this._oDialog7.destroy();
 			this._oDialog7 = null;
+			this.onRefreshMeetingReq();
 		},
 
 		// SEARCHING  

@@ -14,7 +14,7 @@
 	</l:VerticalLayout>
 	<l:Grid defaultSpan="XL6 L4 M6 S12" class="sapUiTinyMarginTopBottom ">
 		<l:content>
-				<ui:Table id="tableVis" selectionMode="MultiToggle" rows="{oSecurityModel>/getAllPresent1}" visibleRowCount="4" enableCellFilter="{ui>/cellFilterOn}"
+				<ui:Table id="tableVis" selectionMode="MultiToggle" alternateRowColors="true" rows="{oSecurityModel>/getAllPresent1}" visibleRowCount="4" enableCellFilter="{ui>/cellFilterOn}"
 				filter="name" ariaLabelledBy="title">
 				<ui:extension>
 					<OverflowToolbar>
@@ -40,7 +40,7 @@
 				</ui:columns>
 		
 			</ui:Table>
-			<ui:Table id="tableEmp" selectionMode="MultiToggle" rows="{oSecurityModel>/getAllPresent}" visibleRowCount="4" enableCellFilter="{ui>/cellFilterOn}"
+			<ui:Table id="tableEmp" selectionMode="MultiToggle" rows="{oSecurityModel>/getAllPresent}" alternateRowColors="true" visibleRowCount="4" enableCellFilter="{ui>/cellFilterOn}"
 				filter="name" ariaLabelledBy="title">
 				<ui:extension>
 					<OverflowToolbar>

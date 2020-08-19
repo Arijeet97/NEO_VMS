@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-		<Table id="AdminBlacklistedVisitor" inset="true" items="{ path: 'oAdminModel>/GetBlacklisted'}">
+		<Table id="AdminBlacklistedVisitor" inset="true" items="{ path: 'oAdminModel>/GetBlacklisted'}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>

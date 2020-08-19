@@ -55,13 +55,13 @@ sap.ui.define([
 				"list1": [
 
 					{
-						"ParkingType": "NotRequired",
+						"ParkingType": "Not Required",
 						"Parkingid": 0
 					}, {
-						"ParkingType": "TwoWheeler",
+						"ParkingType": "Two Wheeler",
 						"Parkingid": 2
 					}, {
-						"ParkingType": "FourWheeler",
+						"ParkingType": "Four Wheeler",
 						"Parkingid": 4
 					}
 				]
@@ -84,6 +84,9 @@ sap.ui.define([
 			var today = new Date();
 			var newdate=oDateFormat.format(today);
 			this.getView().getModel("oAdminModel").setProperty("/Date", newdate);
+			
+			var meetingDate = new Date();
+			this.getView().getModel("oAdminModel").setProperty("/meetingDate", meetingDate);
 			var evacMessage = "Please Evacuate this building As soon as possible";
 			this.getView().getModel("oAdminModel").setProperty("/evacMessage", evacMessage);
 			//get Blacklisted
@@ -1319,8 +1322,53 @@ sap.ui.define([
 					sap.m.MessageToast.show("Remove Blacklist Successful");
 				}
 			});
+			this.onRefreshBlacklist();
 		},
+		onEnterBlacklist: function () {
+			var that = this;
+			var sUrl = "/JAVA_SERVICE/employee/addBlacklisted";
+			var eId = that.getView().getModel("oAdminModel").getProperty("/eId");
+			var vId = that.getView().getModel("oAdminModel").getProperty("/vId");
+			var reason = that.getView().getModel("oAdminModel").getProperty("/reason");
+			var payload = {
+				eId: eId,
+				vId: vId,
+				reason: reason
+			};
+			$.ajax({
+				url: sUrl,
+				dataType: "json",
+				data: payload,
+				type: "POST",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+				},
+				success: function (data) {
+					sap.m.MessageToast.show("Blacklisted Successfully");
+				
+				}
+			});
+			this._oDialog2.close();
+			this._oDialog2.destroy();
+			this._oDialog2 = null;
+			this.onRefreshBlacklist();
+			// this.getView().getModel("oViewModel").setProperty("/TextVisibility", true);
+			// this.getView().getModel("oViewModel").setProperty("/ButtonVisibility", false);
 
+		},
+		onDoBlacklist: function (oEvent) {
+			var that = this;
+			var odata = oEvent.getSource().getBindingContext("oAdminModel").getObject();
+			var vId = odata.vId;
+			that.getView().getModel("oAdminModel").setProperty("/vId", vId);
+			this.bFlag = true;
+			if (!this._oDialog2) {
+				this._oDialog2 = sap.ui.xmlfragment("idAdminAddBlacklist", "inc.inkthn.neo.NEO_VMS.fragments.Admin.BlackList", this);
+			}
+			this.getView().addDependent(this._oDialog2);
+			this._oDialog2.open();
+			this.onRefreshBlacklist();
+		},
 		// PRE REGISTRATION
 		onAdd: function () {
 			this.bFlag = true;
@@ -1465,6 +1513,7 @@ sap.ui.define([
 				}
 			});
 			this._oDialog1.close();
+			this.onRefreshPreReg();
 			// this._oDialog1.destroy();
 			// this._oDialog1 = null;
 			// this._oDialog.destroy();
@@ -1600,6 +1649,7 @@ sap.ui.define([
 				},
 				type: "POST"
 			});
+			this.onRefreshFacilityReq();
 		},
 		onRejectFacilities: function (oEvent) {
 			var odata = oEvent.getSource().getBindingContext("oAdminModel").getObject();
@@ -1625,6 +1675,7 @@ sap.ui.define([
 				},
 				type: "POST"
 			});
+			this.onRefreshFacilityReq();
 		},
 		OnGoingMeeting: function () {
 			this.getView().byId("onMyVisitors").removeStyleClass("TilePress");
@@ -1692,7 +1743,7 @@ sap.ui.define([
 				}
 
 			});
-
+			this.OnGoingMeeting();
 		},
 		onRemoveExtend: function () {
 			this._oDialog10.close();
@@ -1723,6 +1774,7 @@ sap.ui.define([
 				}
 
 			});
+			this.OnGoingMeeting();
 		},
 
 		// ON_SPOT REQUEST
@@ -1830,6 +1882,7 @@ sap.ui.define([
 			this._oDialog8.close();
 			this._oDialog8.destroy();
 			this._oDialog8 = null;
+			this.onRefreshMyVisitorReq();
 		},
 		onRejectSend: function (oEvent) {
 			var that = this;
@@ -1875,6 +1928,7 @@ sap.ui.define([
 			this._oDialog7.close();
 			this._oDialog7.destroy();
 			this._oDialog7 = null;
+			this.onRefreshMyVisitorReq();
 		},
 
 		//Evacuation

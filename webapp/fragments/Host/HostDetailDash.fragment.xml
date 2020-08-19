@@ -53,7 +53,7 @@
 			</l:content>
 		</l:Grid>
 	</l:VerticalLayout>
-	<Table id="idHostUpcoming" inset="true" items="{path: 'oHostModel>/UpcomingMeeting'}" visible="{oViewModel>/UpcomingVisibility}">
+	<Table id="idHostUpcoming" inset="true" items="{path: 'oHostModel>/UpcomingMeeting'}" visible="{oViewModel>/UpcomingVisibility}" alternateRowColors="true">
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
@@ -100,7 +100,7 @@
 			</ColumnListItem>
 		</items>
 	</Table>
-	<Table id="idHostCheckedIn" inset="true" items="{path: 'oHostModel>/CheckedIn'}" visible="{oViewModel>/CheckedInVisibility}">
+	<Table id="idHostCheckedIn" inset="true" items="{path: 'oHostModel>/CheckedIn'}" visible="{oViewModel>/CheckedInVisibility}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
@@ -150,7 +150,7 @@
 			</ColumnListItem>
 		</items>
 	</Table>
-	<Table id="idHostCheckedOut" inset="true" items="{path: 'oHostModel>/CheckedOut'}" visible="{oViewModel>/CheckedOutVisibility}">
+	<Table id="idHostCheckedOut" inset="true" items="{path: 'oHostModel>/CheckedOut'}" visible="{oViewModel>/CheckedOutVisibility}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
@@ -207,7 +207,7 @@
 			</ColumnListItem>
 		</items>
 	</Table>
-	<Table id="idHostTotalVisitor" inset="true" items="{path: 'oHostModel>/TotalVisitor'}" visible="{oViewModel>/TotalVisitorVisibility}"
+	<Table id="idHostTotalVisitor" inset="true" items="{path: 'oHostModel>/TotalVisitor'}" visible="{oViewModel>/TotalVisitorVisibility}" alternateRowColors="true"
 	>
 		<headerToolbar>
 			<OverflowToolbar>

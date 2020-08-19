@@ -3,7 +3,7 @@
 	<Dialog title="{i18n>extraVisitors}" draggable="true" verticalScrolling="true" class="sapUiSizeCompact AddDialog" resizable="true"
 		contentWidth="50rem" titleAlignment="Center">
 		<content>
-	<Table id="idUpcomingVisitorsList" inset="true" items="{ path: 'oAdminModel>/getExtraPreRegVisitors'}">
+	<Table id="idUpcomingVisitorsList" inset="true" items="{ path: 'oAdminModel>/getExtraPreRegVisitors'}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>

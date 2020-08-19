@@ -12,14 +12,18 @@
 	<!--<Button icon="sap-icon://download" class="date" id="idbtn1" text="Export Pdf"  type="Ghost" press="onDownloadPdf"></Button>-->
 	<!--<Button icon="sap-icon://download" class="date" text="Export Excel"   type="Ghost" press="onDownloadExcel"></Button>-->
 	<l:VerticalLayout width="100%">
-		<FlexBox width="22rem" height="13rem" class="donut" alignItems="Center" justifyContent="SpaceBetween">
-		<items>
+		<!--<FlexBox width="22rem" height="13rem" class="donut" alignItems="Center" justifyContent="SpaceBetween">-->
+			<l:Grid defaultSpan="XL3 L6 M6 S12">
+			<l:content>
+	
 			<ui:InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="4" press="press">
+				
 				<ui:segments>
 					<ui:InteractiveDonutChartSegment label="Frequent Visitors" value="{oAdminModel>/DFrequentVisitor}" displayedValue="{oAdminModel>/DFrequentVisitor}%"/>
 					<ui:InteractiveDonutChartSegment label="Blacklisted Visitors" value="{oAdminModel>/DBlacklisted}" displayedValue="{oAdminModel>/DBlacklisted}%"/>
 					<ui:InteractiveDonutChartSegment label="Others" value="{oAdminModel>/DOthers}" displayedValue="{oAdminModel>/DOthers}%"/>
 				</ui:segments>
+				
 			</ui:InteractiveDonutChart>
 			
 			<ui:InteractiveBarChart labelWidth="25%" displayedBars="3" class="Microchart" selectionChanged="selectionChanged" press="press">
@@ -28,13 +32,15 @@
 							<ui:InteractiveBarChartBar label="Blacklisted Visitors" value="{oAdminModel>/DBlacklisted}" color="Good" />
 							<ui:InteractiveBarChartBar label="Others" value="{oAdminModel>/DOthers}" color="Error"/>
 						</ui:bars>
-					</ui:InteractiveBarChart>
-		</items>
+					
+				</ui:InteractiveBarChart>
 	
-	</FlexBox>
+	</l:content>
+		</l:Grid>
+	<!--</FlexBox>-->
 		 
 	</l:VerticalLayout>
-		<Table id="idAdminTotalVisitor" inset="true" items="{path: 'oAdminModel>/TotalVisitor'}" >
+		<Table id="idAdminTotalVisitor" inset="true" items="{path: 'oAdminModel>/TotalVisitor'}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>

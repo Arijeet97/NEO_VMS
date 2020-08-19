@@ -30,7 +30,7 @@
 			</l:content>
 		</l:Grid>
 	</l:VerticalLayout>
-	<Table id="idSecurityExpected" inset="true" items="{path: 'oSecurityModel>/Expected'}" visible="{oViewModel>/ExpectedVisibility}">
+	<Table id="idSecurityExpected" inset="true" items="{path: 'oSecurityModel>/Expected'}" alternateRowColors="true" visible="{oViewModel>/ExpectedVisibility}">
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
@@ -73,7 +73,7 @@
 			</ColumnListItem>
 		</items>
 	</Table>
-	<Table id="idSecurityNoshow" inset="true" items="{path: 'oSecurityModel>/NoShow'}" visible="{oViewModel>/NoShowVisibility}">
+	<Table id="idSecurityNoshow" inset="true" items="{path: 'oSecurityModel>/NoShow'}" alternateRowColors="true" visible="{oViewModel>/NoShowVisibility}">
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>

@@ -5,7 +5,7 @@
 	<!--	<DatePicker class="date" dateValue="{/date}"/>-->
 	<!--</l:HorizontalLayout>-->
 	
-	<Table id="HostBlacklistedVisitor" inset="true" items="{ path: 'oHostModel>/GetBlacklisted'}">
+	<Table id="HostBlacklistedVisitor" inset="true" items="{ path: 'oHostModel>/GetBlacklisted'}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>

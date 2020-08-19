@@ -4,7 +4,7 @@
 	<!--	<Label class="datelabel" text="Date:"/>-->
 	<!--	<DatePicker class="date" dateValue="{/date}"/>-->
 	<!--</l:HorizontalLayout>-->
-	<Table id="AdminVisitor" inset="true" items="{ path: 'oAdminModel>/getPreregister'}">
+	<Table id="AdminVisitor" inset="true" items="{ path: 'oAdminModel>/getPreregister'}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>

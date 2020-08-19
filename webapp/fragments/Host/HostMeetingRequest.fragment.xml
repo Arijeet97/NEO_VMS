@@ -25,7 +25,7 @@
 			</l:content>
 		</l:Grid>
 	</l:VerticalLayout>
-	<Table id="idHostMeetingRequest" inset="true" items="{ path: 'oHostModel>/getOnSpotMeetingRequest'}" visible="{oViewModel>/MeetingReqVisibility}" >
+	<Table id="idHostMeetingRequest" inset="true" items="{ path: 'oHostModel>/getOnSpotMeetingRequest'}" alternateRowColors="true" visible="{oViewModel>/MeetingReqVisibility}" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
@@ -80,7 +80,7 @@
 			</ColumnListItem>
 		</items>
 	</Table>
-	<Table id="idHostOnGoingMeeting" inset="true" items="{path: 'oHostModel>/getOnGoingMeeting'}" visible="{oViewModel>/OnGoingMeetingVisibility}">
+	<Table id="idHostOnGoingMeeting" inset="true" items="{path: 'oHostModel>/getOnGoingMeeting'}" alternateRowColors="true" visible="{oViewModel>/OnGoingMeetingVisibility}">
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>

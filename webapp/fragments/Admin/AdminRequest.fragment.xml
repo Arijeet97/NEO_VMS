@@ -32,7 +32,7 @@
 					</l:content>
 			</l:Grid>
 		</l:VerticalLayout>
-		<Table id="idFacilitiesRequest" class="detailtable" inset="true" items="{path: 'oAdminModel>/getMeetingRequests'}" visible="{oViewModel>/FacilityVisibility}" >
+		<Table id="idFacilitiesRequest" class="detailtable" inset="true" items="{path: 'oAdminModel>/getMeetingRequests'}" visible="{oViewModel>/FacilityVisibility}" alternateRowColors="true" >
 			<headerToolbar>
 				<OverflowToolbar>
 					<content>
@@ -84,7 +84,7 @@
 				</ColumnListItem>
 			</items>
 		</Table>
-	   	<Table id="idMyVisitors" inset="true" items="{ path: 'oAdminModel>/getOnSpotMeetingRequest'}" visible="{oViewModel>/MyVisitorsVisibility}" >
+	   	<Table id="idMyVisitors" inset="true" items="{ path: 'oAdminModel>/getOnSpotMeetingRequest'}" visible="{oViewModel>/MyVisitorsVisibility}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
@@ -139,7 +139,7 @@
 			</ColumnListItem>
 		</items>
 	</Table>
-		<Table id="idAdminOnGoingMeeting" inset="true" items="{path: 'oAdminModel>/getOnGoingMeeting'}" visible="{oViewModel>/OnGoingMeetingVisibility}">
+		<Table id="idAdminOnGoingMeeting" inset="true" items="{path: 'oAdminModel>/getOnGoingMeeting'}" visible="{oViewModel>/OnGoingMeetingVisibility}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
