@@ -100,8 +100,13 @@
 .checkOutbtn{
 	margin-left:35% !important;
 }
-
-
+.PasswordShow{
+	margin-top: 17%;
+    margin-left: 35%;
+}
+.PasswordVbox{
+margin-left: 20%;
+}
 /*Host Master Page*/
 .sapTntNavLIGroup {
 	border-color: #e5e5e500;
@@ -523,5 +528,5 @@ margin-left:10%;
     text-align: center;
     background-color: transparent;
     margin-top: 0.5rem;
-    margin-left: 5rem;
+    margin-left: 3rem;
 }

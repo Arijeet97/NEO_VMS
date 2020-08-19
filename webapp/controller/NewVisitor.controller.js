@@ -82,10 +82,11 @@ sap.ui.define([
 			var identityNo = this.getView().getModel("oVisitorModel").getProperty("/identityNo");
 			var organisation = this.getView().getModel("oVisitorModel").getProperty("/organisation");
 			var purpose = this.getView().getModel("oVisitorModel").getProperty("/purpose");
-			var oSplit = this.getView().getModel("oVisitorModel").getProperty("/eId");
-			var sId = oSplit.split("=");
-			var i = sId[1];
-			var eId = parseInt(i, [0]);
+			// var oSplit = this.getView().getModel("oVisitorModel").getProperty("/eId");
+			// var sId = oSplit.split("=");
+			// var i = sId[1];
+			// var eId = parseInt(i, [0]);
+			var eId=this.getView().getModel("oVisitorModel").getProperty("/eId");
 			var date = this.getView().getModel("oVisitorModel").getProperty("/date");
 			var begin = this.getView().getModel("oVisitorModel").getProperty("/begin");
 			var end = this.getView().getModel("oVisitorModel").getProperty("/end");

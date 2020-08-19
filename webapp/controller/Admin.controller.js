@@ -78,8 +78,12 @@ sap.ui.define([
 			this.getView().setModel(oModel3, "oGlobalModel");
 			var oAdminModel = this.getOwnerComponent().getModel("oAdminModel");
 			this.getView().setModel(oAdminModel, "oAdminModel");
+			var oDateFormat=sap.ui.core.format.DateFormat.getDateInstance({
+				pattern:"MMM dd, yyyy"
+			});
 			var today = new Date();
-			this.getView().getModel("oAdminModel").setProperty("/Date", today);
+			var newdate=oDateFormat.format(today);
+			this.getView().getModel("oAdminModel").setProperty("/Date", newdate);
 			var evacMessage = "Please Evacuate this building As soon as possible";
 			this.getView().getModel("oAdminModel").setProperty("/evacMessage", evacMessage);
 			//get Blacklisted
@@ -139,8 +143,8 @@ sap.ui.define([
 			});
 
 			//Evacuation
-			var date = this.getView().byId("evacDate").getValue();
-			var sUrl2 = "/JAVA_SERVICE/admin/getAllPresentInside?date=" + date;
+		
+			var sUrl2 = "/JAVA_SERVICE/admin/getAllPresentInside?date=" + newdate;
 			$.ajax({
 				url: sUrl2,
 				data: null,
@@ -218,6 +222,13 @@ sap.ui.define([
 				type: "GET"
 			});
 
+			//DashBoard
+            
+			this.onCheckedIn();
+			this.onCheckedOut();
+			this.onFrequentVisittor();
+			this.onUpcoming();
+			
 			webSocket = new WebSocket("WSS://vms14p2002476963trial.hanatrial.ondemand.com/VMS/chat/" + oAdminModel.getProperty("/eId"));
 			webSocket.onerror = function (event) {
 				var message = JSON.parse(event.data);
@@ -257,7 +268,14 @@ sap.ui.define([
 		_data: {
 			"date": new Date()
 		},
-
+			onDateChange:function(){
+			var that=this;
+			 
+			that.onCheckedIn();
+			that.onCheckedOut();
+			that.onFrequentVisittor();
+			that.onUpcoming();
+		},
 		//DashBoard
 		onUpcoming: function () {
 			this.getView().byId("onUpcoming").addStyleClass("TilePress");
@@ -267,7 +285,7 @@ sap.ui.define([
 			var that = this;
 			var oAdminModel = that.getOwnerComponent().getModel("oAdminModel");
 			var sUrl = "/JAVA_SERVICE/admin/getAllUpcomingMeetings?eId=" + oAdminModel.getProperty("/eId") + "&date=" + oAdminModel.getProperty(
-				"/date");
+				"/Date");
 			$.ajax({
 				url: sUrl,
 				data: null,
@@ -300,7 +318,7 @@ sap.ui.define([
 			var that = this;
 			var oAdminModel = that.getOwnerComponent().getModel("oAdminModel");
 			var sUrl1 = "/JAVA_SERVICE/admin/getCheckedInVisitors?eId=" + oAdminModel.getProperty("/eId") + "&date=" + oAdminModel.getProperty(
-				"/date");
+				"/Date");
 			$.ajax({
 				url: sUrl1,
 				data: null,
@@ -333,7 +351,7 @@ sap.ui.define([
 			var that = this;
 			var oAdminModel = that.getOwnerComponent().getModel("oAdminModel");
 			var sUrl2 = "/JAVA_SERVICE/admin/getCheckedOutVisitors?eId=" + oAdminModel.getProperty("/eId") + "&date=" + oAdminModel.getProperty(
-				"/date");
+				"/Date");
 			$.ajax({
 				url: sUrl2,
 				data: null,

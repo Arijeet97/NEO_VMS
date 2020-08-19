@@ -3,7 +3,7 @@
 		<l:HorizontalLayout class="date">
 		<Label class="datelabel" text="Date:"/>
 	
-		<DatePicker class="date" value="{oSecurityModel>/date}" valueFormat="MMM dd, yyyy"/>
+		<DatePicker class="date" value="{oSecurityModel>/Date}" valueFormat="MMM dd, yyyy" change="onDateChange2" />
 	</l:HorizontalLayout>
 	<l:VerticalLayout width="100%" class="TileStyle">
 		<l:Grid>

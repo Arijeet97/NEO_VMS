@@ -41,12 +41,12 @@
 									<Label text="{i18n>Purpose}"/>
 									<Input id="idVisPurp" class="MeetInputBox" value="{oVisitorModel>/purpose}"/>
 									<Label text="{i18n>hostmeet}"/>
-									<Input id="idHostName" class="InputBox" value="{oVisitorModel>/eId}" showSuggestion="true" showValueHelp="true"
-										suggestionItems="{oVisitorModel1>/getEmployeeList}">
-										<suggestionItems>
-											<core:Item text="{oVisitorModel1>name} (Eid)={oVisitorModel1>eId}"/>
-										</suggestionItems>
-									</Input>
+									<ComboBox id="idHostName" class="InputBox" selectedKey="{oVisitorModel>/eId}" 
+										items="{oVisitorModel1>/getEmployeeList}">
+											<core:Item text="{oVisitorModel1>name}" key="{oVisitorModel1>eId}"/>
+									</ComboBox>
+							
+									
 									<Label text="Date of Meeting"/>
 									<DatePicker id="iddate" value="{oVisitorModel>/date}"></DatePicker>
 									<Label text="{i18n>Start time}"/>

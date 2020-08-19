@@ -77,8 +77,12 @@ sap.ui.define([
 			this.getView().setModel(oModel4, "oPreRegForm");
 			var oHostModel = this.getOwnerComponent().getModel("oHostModel");
 			this.getView().setModel(oHostModel, "oHostModel");
+			var oDateFormat=sap.ui.core.format.DateFormat.getDateInstance({
+				pattern:"MMM dd, yyyy"
+			});
 			var today = new Date();
-			this.getView().getModel("oHostModel").setProperty("/Date", today);
+			var newdate=oDateFormat.format(today);
+			this.getView().getModel("oHostModel").setProperty("/Date", newdate);
 			//get Blacklist details
 			var sUrl = "/JAVA_SERVICE/employee/getBlacklistedVisitors?eId=" + oHostModel.getProperty("/eId");
 			$.ajax({
@@ -132,7 +136,6 @@ sap.ui.define([
 			});
 
 			//Notifications
-
 			var sUrl6 = "/JAVA_SERVICE/employee/viewNotifications?eId=" + oHostModel.getProperty("/eId");
 			$.ajax({
 				url: sUrl6,
@@ -178,6 +181,12 @@ sap.ui.define([
 				type: "GET"
 			});
 
+            //DashBoard
+            
+			this.onCheckedIn();
+			this.onCheckedOut();
+			this.onTotalVisittor();
+			this.onUpcoming();
 			webSocket = new WebSocket("WSS://vms14p2002476963trial.hanatrial.ondemand.com/VMS/chat/" + oHostModel.getProperty("/eId"));
 			webSocket.onerror = function (event) {
 				var message = JSON.parse(event.data);
@@ -219,6 +228,14 @@ sap.ui.define([
 		_data: {
 			"date": new Date()
 
+		},
+		onDateChange:function(){
+			var that=this;
+			 
+			that.onCheckedIn();
+			that.onCheckedOut();
+			that.onTotalVisittor();
+			that.onUpcoming();
 		},
 
 		// PRE REGISTRATION
@@ -738,7 +755,7 @@ sap.ui.define([
 			var that = this;
 			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
 			var sUrl = "/JAVA_SERVICE/employee/getUpcomingMeetings?eId=" + oHostModel.getProperty("/eId") + "&date=" + oHostModel.getProperty(
-				"/date");
+				"/Date");
 			$.ajax({
 				url: sUrl,
 				data: null,
@@ -771,7 +788,7 @@ sap.ui.define([
 			var that = this;
 			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
 			var sUrl1 = "/JAVA_SERVICE/employee/getCheckedInVisitors?eId=" + oHostModel.getProperty("/eId") + "&date=" + oHostModel.getProperty(
-				"/date");
+				"/Date");
 			$.ajax({
 				url: sUrl1,
 				data: null,
@@ -804,7 +821,7 @@ sap.ui.define([
 			var that = this;
 			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
 			var sUrl2 = "/JAVA_SERVICE/employee/getCheckedOutVisitors?eId=" + oHostModel.getProperty("/eId") + "&date=" + oHostModel.getProperty(
-				"/date");
+				"/Date");
 			$.ajax({
 				url: sUrl2,
 				data: null,

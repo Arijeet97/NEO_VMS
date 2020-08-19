@@ -2,7 +2,7 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<l:HorizontalLayout class="date">
 		<Label class="datelabel" text="Date:"/>
-		<DatePicker class="date" id="evacDate" dateValue="{oAdminModel>/Date}" valueFormat="MMM dd, yyyy"/>
+		<DatePicker class="date" id="evacDate" value="{oAdminModel>/Date}" valueFormat="MMM dd, yyyy"/>
 	</l:HorizontalLayout>
 	<l:VerticalLayout width="100%">
 		<TextArea   value="{oAdminModel>/evacMessage}"  cols="60" rows="5" class="sapUiMediumMarginBegin sapUiMediumMarginTop sapUiSmallMarginEnd" placeholder="Type the Evacuation Message"></TextArea>

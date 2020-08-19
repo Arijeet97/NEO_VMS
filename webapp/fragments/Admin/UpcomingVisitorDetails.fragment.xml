@@ -31,8 +31,8 @@
 				<cells>
 					<Text text="{oAdminModel>vhId}"></Text>
 					<Text text="{oAdminModel>name}"></Text>
-					<Text text="{oAdminModel>contactNo}"></Text>
 					<Text text="{oAdminModel>email}"></Text>
+					<Text text="{oAdminModel>contactNo}"></Text>
 				</cells>
 			</ColumnListItem>
 		</items>

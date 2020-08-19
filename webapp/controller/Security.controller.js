@@ -55,14 +55,25 @@ sap.ui.define([
 
 			var oSecurityModel = this.getOwnerComponent().getModel("oSecurityModel");
 			this.getView().setModel(oSecurityModel, "oSecurityModel");
+				var oDateFormat=sap.ui.core.format.DateFormat.getDateInstance({
+				pattern:"MMM dd, yyyy"
+			});
 			var today = new Date();
-			this.getView().getModel("oSecurityModel").setProperty("/Date", today);
+			var newdate=oDateFormat.format(today);
+			this.getView().getModel("oSecurityModel").setProperty("/Date", newdate);
 			var evacMessage = "Please Evacuate this building As soon as possible";
 			this.getView().getModel("oSecurityModel").setProperty("/evacMessage", evacMessage);
-
+            
+            this.onCheckedOut();
+            this.onCheckedIn();
+            
+            this.onAvailableSlots();
+            this.onNoShow();
+            this.onExpected();
+            
 			//Evacuation
-			var date = this.getView().getModel("oSecurityModel").getProperty("/Date");
-			var sUrl2 = "/JAVA_SERVICE/admin/getAllPresentInside?date=" + date;
+		
+			var sUrl2 = "/JAVA_SERVICE/admin/getAllPresentInside?date=" + newdate;
 			$.ajax({
 				url: sUrl2,
 				data: null,
@@ -104,7 +115,7 @@ sap.ui.define([
 
 			//Recent Deliveries
 
-			var sUrl4 = "/JAVA_SERVICE/security/getRecentDelivery?date=" + date;
+			var sUrl4 = "/JAVA_SERVICE/security/getRecentDelivery?date=" + newdate;
 			$.ajax({
 				url: sUrl4,
 				data: null,
@@ -224,6 +235,18 @@ sap.ui.define([
 			"date": new Date()
 
 		},
+			onDateChange1:function(){
+			var that=this;
+			 that.onCheckedOut();
+			that.onCheckedIn();
+			
+			},
+				onDateChange2:function(){
+			var that=this;
+			 that.onExpected();
+			that.onNoShow();
+			
+			},
 		//Delivery
 		onAdd: function () {
 			this.bFlag = true;
@@ -489,7 +512,7 @@ sap.ui.define([
 			this.getView().byId("onParkingTile").removeStyleClass("TilePress");
 			var that = this;
 			var oSecurityModel = that.getOwnerComponent().getModel("oSecurityModel");
-			var sUrl1 = "/JAVA_SERVICE/security/getCheckedInVisitors?date=" + oSecurityModel.getProperty("/date");
+			var sUrl1 = "/JAVA_SERVICE/security/getCheckedInVisitors?date=" + oSecurityModel.getProperty("/Date");
 			$.ajax({
 				url: sUrl1,
 				data: null,
@@ -518,7 +541,7 @@ sap.ui.define([
 			this.getView().byId("onParkingTile").removeStyleClass("TilePress");
 			var that = this;
 			var oSecurityModel = that.getOwnerComponent().getModel("oSecurityModel");
-			var sUrl1 = "/JAVA_SERVICE/security/getCheckedOutVisitors?date=" + oSecurityModel.getProperty("/date");
+			var sUrl1 = "/JAVA_SERVICE/security/getCheckedOutVisitors?date=" + oSecurityModel.getProperty("/Date");
 			$.ajax({
 				url: sUrl1,
 				data: null,
@@ -580,7 +603,7 @@ sap.ui.define([
 
 			var that = this;
 			var oSecurityModel = that.getOwnerComponent().getModel("oSecurityModel");
-			var sUrl1 = "/JAVA_SERVICE/security/getExpectedVisitors?date=" + oSecurityModel.getProperty("/date");
+			var sUrl1 = "/JAVA_SERVICE/security/getExpectedVisitors?date=" + oSecurityModel.getProperty("/Date");
 			$.ajax({
 				url: sUrl1,
 				data: null,
@@ -609,7 +632,7 @@ sap.ui.define([
 
 			var that = this;
 			var oSecurityModel = that.getOwnerComponent().getModel("oSecurityModel");
-			var sUrl1 = "/JAVA_SERVICE/security/getNoShowVisitors?date=" + oSecurityModel.getProperty("/date");
+			var sUrl1 = "/JAVA_SERVICE/security/getNoShowVisitors?date=" + oSecurityModel.getProperty("/Date");
 			$.ajax({
 				url: sUrl1,
 				data: null,

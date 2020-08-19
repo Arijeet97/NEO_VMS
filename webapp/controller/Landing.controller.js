@@ -57,7 +57,7 @@ sap.ui.define([
 							var eId = oData.eid;
 							var image = oData.image;
 							var name = oData.name;
-							var email=oData.email;
+							var email = oData.email;
 							that.getView().getModel("oHostModel").setProperty("/eId", eId);
 							that.getView().getModel("oHostModel").setProperty("/image", image);
 							that.getView().getModel("oHostModel").setProperty("/name", name);
@@ -68,7 +68,7 @@ sap.ui.define([
 							var eId1 = oData.eid;
 							var image1 = oData.image;
 							var name1 = oData.name;
-							var email1=oData.email;
+							var email1 = oData.email;
 							that.getView().getModel("oAdminModel").setProperty("/eId", eId1);
 							that.getView().getModel("oAdminModel").setProperty("/image", image1);
 							that.getView().getModel("oAdminModel").setProperty("/name", name1);
@@ -79,7 +79,7 @@ sap.ui.define([
 							var eId2 = oData.eid;
 							var image2 = oData.image;
 							var name2 = oData.name;
-							var email2=oData.email;
+							var email2 = oData.email;
 							that.getView().getModel("oSecurityModel").setProperty("/eId", eId2);
 							that.getView().getModel("oSecurityModel").setProperty("/image", image2);
 							that.getView().getModel("oSecurityModel").setProperty("/name", name2);
@@ -435,10 +435,37 @@ sap.ui.define([
 			}
 
 		},
-		onCancelPassword: function(){
+		onCancelPassword: function () {
 			this._oDialog11.close();
 			this._oDialog11.destroy();
 			this._oDialog11 = null;
+		},
+
+		//Password
+		onShow: function () {
+
+			var Type = sap.ui.core.Fragment.byId("idForgotPassword", "idPassForgot").getType();
+			if (Type === "Text") {
+				sap.ui.core.Fragment.byId("idForgotPassword", "idPassForgot").setType("Password");
+				sap.ui.core.Fragment.byId("idForgotPassword", "Show").setVisible(true);
+				sap.ui.core.Fragment.byId("idForgotPassword", "Hide").setVisible(false);
+			} else if (Type === "Password") {
+				sap.ui.core.Fragment.byId("idForgotPassword", "idPassForgot").setType("Text");
+				sap.ui.core.Fragment.byId("idForgotPassword", "Show").setVisible(false);
+				sap.ui.core.Fragment.byId("idForgotPassword", "Hide").setVisible(true);
+			}
+		},
+		onShowCNF: function () {
+			var Type = sap.ui.core.Fragment.byId("idForgotPassword", "idPassCNFForgot").getType();
+			if (Type === "Text") {
+				sap.ui.core.Fragment.byId("idForgotPassword", "idPassCNFForgot").setType("Password");
+				sap.ui.core.Fragment.byId("idForgotPassword", "ShowCNF").setVisible(true);
+				sap.ui.core.Fragment.byId("idForgotPassword", "HideCNF").setVisible(false);
+			} else if (Type === "Password") {
+				sap.ui.core.Fragment.byId("idForgotPassword", "idPassCNFForgot").setType("Text");
+				sap.ui.core.Fragment.byId("idForgotPassword", "ShowCNF").setVisible(false);
+				sap.ui.core.Fragment.byId("idForgotPassword", "HideCNF").setVisible(true);
+			}
 		}
 
 	});
