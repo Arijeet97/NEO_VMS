@@ -9,7 +9,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Blacklisted Visitor" level="H3"/>
+					<Title text="Blacklisted Visitor" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<!--<Label text="Sort By:"></Label>-->
 					<!--<ComboBox width="8%">-->

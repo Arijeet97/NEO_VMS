@@ -33,7 +33,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="CheckedIn" level="H3"/>
+					<Title text="CheckedIn" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedOutSearch" class="sapUiSmallMargin" />
 				</content>
@@ -76,7 +76,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="CheckedOut" level="H3"/>
+					<Title text="CheckedOut" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedOutSearch" class="sapUiSmallMargin" />
 				</content>

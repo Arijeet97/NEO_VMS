@@ -8,7 +8,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Pre Registered Visitors" level="H3"/>
+					<Title text="Pre Registered Visitors" class="TableTitle" level="H3"/>
 					<ToolbarSpacer width="43%"></ToolbarSpacer>
 					<Label text="Select Employee:"></Label>
 					<ComboBox id="idPerID" selectedKey="{oAdminModel>/selectedEid}" items="{oAdminModel>/getEmployeeList}">

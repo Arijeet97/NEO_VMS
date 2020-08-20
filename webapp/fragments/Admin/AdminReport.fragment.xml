@@ -44,7 +44,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Total Visitors" level="H3"/>
+					<Title text="Total Visitors" class="TableTitle" level="H3"/>
 					<ToolbarSpacer ></ToolbarSpacer>
 				
 					<Button icon="sap-icon://download"  tooltip="Download" type="Emphasized" press="onDownload"></Button>

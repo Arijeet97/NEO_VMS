@@ -34,7 +34,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Expected Visitors" level="H3"/>
+					<Title text="Expected Visitors" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					
 				</content>
@@ -77,7 +77,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="No Show Visitors" level="H3"/>
+					<Title text="No Show Visitors" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 
 				</content>

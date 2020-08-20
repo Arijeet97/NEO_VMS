@@ -4,7 +4,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="FeedBack From Visitors" level="H3"/>
+					<Title text="FeedBack From Visitors" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					
 					<Button icon="sap-icon://synchronize" tooltip="Refresh" press="onRefreshFeedBack"></Button>

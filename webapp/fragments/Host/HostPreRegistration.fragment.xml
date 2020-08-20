@@ -8,7 +8,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Upcoming Meetings" level="H3"/>
+					<Title text="Upcoming Meetings" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<Button icon="sap-icon://synchronize" tooltip="Refresh" press="onRefreshPreReg"></Button>
 					<Label text="Sort By:"></Label>

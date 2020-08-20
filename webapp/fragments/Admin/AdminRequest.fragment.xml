@@ -36,7 +36,7 @@
 			<headerToolbar>
 				<OverflowToolbar>
 					<content>
-						<Title text="Requests" level="H3"/>
+						<Title text="Requests" class="TableTitle" level="H3"/>
 						<ToolbarSpacer></ToolbarSpacer>
 							<Button icon="sap-icon://synchronize" tooltip="Refresh" press="onRefreshFacilityReq"></Button>
 						<!--<Label text="Sort By:"></Label>-->
@@ -88,7 +88,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Meeting Request" level="H3"/>
+					<Title text="Meeting Request" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<Button icon="sap-icon://synchronize" tooltip="Refresh" press="onRefreshMyVisitorReq"></Button>
 					<!--<Label text="Sort By:"></Label>-->
@@ -143,7 +143,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="OnGoing Meetings" level="H3"/>
+					<Title text="OnGoing Meetings" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<!--<Label text="Sort By:"></Label>-->
 					<!--<ComboBox width="8%">-->

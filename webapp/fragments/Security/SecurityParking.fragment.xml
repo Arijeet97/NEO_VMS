@@ -33,7 +33,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Parked Vehicles" level="H3"/>
+					<Title text="Parked Vehicles" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<Button icon="sap-icon://synchronize" tooltip="Refresh" press="onRefreshParking"></Button>
 				</content>
