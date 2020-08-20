@@ -55,24 +55,24 @@ sap.ui.define([
 
 			var oSecurityModel = this.getOwnerComponent().getModel("oSecurityModel");
 			this.getView().setModel(oSecurityModel, "oSecurityModel");
-				var oDateFormat=sap.ui.core.format.DateFormat.getDateInstance({
-				pattern:"MMM dd, yyyy"
+			var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+				pattern: "MMM dd, yyyy"
 			});
 			var today = new Date();
-			var newdate=oDateFormat.format(today);
+			var newdate = oDateFormat.format(today);
 			this.getView().getModel("oSecurityModel").setProperty("/Date", newdate);
 			var evacMessage = "Please Evacuate this building As soon as possible";
 			this.getView().getModel("oSecurityModel").setProperty("/evacMessage", evacMessage);
-            
-            this.onCheckedOut();
-            this.onCheckedIn();
-            
-            this.onAvailableSlots();
-            this.onNoShow();
-            this.onExpected();
-            
+
+			this.onCheckedOut();
+			this.onCheckedIn();
+
+			this.onAvailableSlots();
+			this.onNoShow();
+			this.onExpected();
+
 			//Evacuation
-		
+
 			var sUrl2 = "/JAVA_SERVICE/admin/getAllPresentInside?date=" + newdate;
 			$.ajax({
 				url: sUrl2,
@@ -235,18 +235,18 @@ sap.ui.define([
 			"date": new Date()
 
 		},
-			onDateChange1:function(){
-			var that=this;
-			 that.onCheckedOut();
+		onDateChange1: function () {
+			var that = this;
+			that.onCheckedOut();
 			that.onCheckedIn();
-			
-			},
-				onDateChange2:function(){
-			var that=this;
-			 that.onExpected();
+
+		},
+		onDateChange2: function () {
+			var that = this;
+			that.onExpected();
 			that.onNoShow();
-			
-			},
+
+		},
 		//Delivery
 		onAdd: function () {
 			this.bFlag = true;
@@ -289,7 +289,7 @@ sap.ui.define([
 						sap.m.MessageToast.show("Notification Sent Successfully");
 
 					} else if (data.status === 300) {
-						sap.m.MessageToast.show("Mobile Number Incorrect");
+						alert("Mobile Number Doesn't Exist");
 					} else {
 						sap.m.MessageToast.show("Server Not Responding");
 					}
@@ -334,7 +334,7 @@ sap.ui.define([
 								sap.m.MessageToast.show("Destination Failed");
 							},
 							success: function (odata1) {
-								sap.m.MessageToast.show("Refresh Success");
+
 								oSecurityModel.setProperty("/getRecentDeliveries", odata1);
 							},
 							type: "GET"
@@ -378,9 +378,9 @@ sap.ui.define([
 							error: function (err) {
 								sap.m.MessageToast.show("Destination Failed");
 							},
-							success: function (data) {
-								sap.m.MessageToast.show("Refresh Success");
-								oSecurityModel.setProperty("/getRecentDeliveries", data);
+							success: function (odata1) {
+
+								oSecurityModel.setProperty("/getRecentDeliveries", odata1);
 							},
 							type: "GET"
 						});
@@ -390,7 +390,6 @@ sap.ui.define([
 				type: "POST"
 			});
 		},
-		
 
 		//Parking
 		onSpotRegister: function () {
@@ -490,7 +489,7 @@ sap.ui.define([
 								sap.m.MessageToast.show("Destination Failed");
 							},
 							success: function (data) {
-								sap.m.MessageToast.show("Refresh Success");
+
 								oSecurityModel.setProperty("/getParkingStatus", data);
 							},
 							type: "GET"
@@ -527,7 +526,7 @@ sap.ui.define([
 					var CheckedInCount = data.length;
 					oSecurityModel.setProperty("/CheckedInCount", CheckedInCount);
 					oSecurityModel.setProperty("/CheckedIn", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -556,7 +555,7 @@ sap.ui.define([
 					var CheckedOutCount = data.length;
 					oSecurityModel.setProperty("/CheckedOutCount", CheckedOutCount);
 					oSecurityModel.setProperty("/CheckedOut", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -618,7 +617,7 @@ sap.ui.define([
 					var ExpectedCount = data.length;
 					oSecurityModel.setProperty("/ExpectedCount", ExpectedCount);
 					oSecurityModel.setProperty("/Expected", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -647,7 +646,7 @@ sap.ui.define([
 					var NoShowCount = data.length;
 					oSecurityModel.setProperty("/NoShowCount", NoShowCount);
 					oSecurityModel.setProperty("/NoShow", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -693,7 +692,7 @@ sap.ui.define([
 				},
 				success: function (data) {
 					oSecurityModel.setProperty("/Notification", data);
-					sap.m.MessageToast.show("Notification loaded Successfully");
+
 				}
 
 			});
@@ -734,7 +733,7 @@ sap.ui.define([
 			var del = oItem.getAuthorName();
 			var aDel = del.split(",");
 			var nId = aDel[0];
-			MessageToast.show("Closed: " + oItem.getAuthorName());
+
 			var sUrl = "/JAVA_SERVICE/employee/readNotifications";
 			var payload = {
 				nId: nId,
@@ -775,7 +774,36 @@ sap.ui.define([
 			MessageToast.show("Accepted");
 		},
 
-		//Profile	
+		//Profile
+		onRefreshPicture: function(){
+			var that = this;
+			var username = that.getView().getModel("oLoginModel").getProperty("/eId");
+			var password = that.getView().getModel("oLoginModel").getProperty("/password");
+			var sUrl = "/JAVA_SERVICE/employee/login2?username=" + username + "&password=" + password;
+			$.ajax({
+				url: sUrl,
+				data: null,
+				async: true,
+				cache: false,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+				},
+				success: function (data) {
+					var email = data.email;
+					var image = data.image;
+					var name = data.name;
+					var contactNo = data.contactNo;
+					that.getView().getModel("oSecurityModel").setProperty("/email", email);
+					that.getView().getModel("oSecurityModel").setProperty("/image", image);
+					that.getView().getModel("oSecurityModel").setProperty("/name", name);
+					that.getView().getModel("oSecurityModel").setProperty("/contactNo", contactNo);
+
+				},
+				type: "GET"
+			});
+		},
 		onEditProfile: function () {
 			if (!this._oDialog3) {
 				this._oDialog3 = sap.ui.xmlfragment("idSecurityEditProfile", "inc.inkthn.neo.NEO_VMS.fragments.Security.EditProfile", this);
@@ -805,7 +833,7 @@ sap.ui.define([
 					that.getView().getModel("oSecurityModel").setProperty("/image", image);
 					that.getView().getModel("oSecurityModel").setProperty("/name", name);
 					that.getView().getModel("oSecurityModel").setProperty("/contactNo", contactNo);
-					sap.m.MessageToast.show("You can Edit your Profile Now");
+
 				},
 				type: "GET"
 			});
@@ -839,7 +867,8 @@ sap.ui.define([
 				// },
 				success: function (oData) {
 					if (oData.status === 200) {
-						sap.m.MessageToast.show("Profile Updated Successfully");
+						alert("Profile Updated Successfully");
+						that.onRefreshPicture();
 					}
 					// this._oDialog3.close();
 					that._oDialog3.close();
@@ -847,37 +876,12 @@ sap.ui.define([
 					// this._oDialog3 = null;
 				},
 				error: function (e) {
-					sap.m.MessageToast.show("Update Failed");
+					alert("Update Failed");
 					// this._oDialog3.close();
 				}
 
 			});
-			var username = that.getView().getModel("oLoginModel").getProperty("/eId");
-			var password = that.getView().getModel("oLoginModel").getProperty("/password");
-			var sUrl2 = "/JAVA_SERVICE/employee/login2?username=" + username + "&password=" + password;
-			$.ajax({
-				url: sUrl2,
-				data: null,
-				async: true,
-				cache: false,
-				dataType: "json",
-				contentType: "application/json; charset=utf-8",
-				error: function (err) {
-					sap.m.MessageToast.show("Destination Failed");
-				},
-				success: function (data) {
-					var email2 = data.email;
-					var image2 = data.image;
-					var name2 = data.name;
-					var contactNo2 = data.contactNo;
-					that.getView().getModel("oSecurityModel").setProperty("/email", email2);
-					that.getView().getModel("oSecurityModel").setProperty("/image", image2);
-					that.getView().getModel("oSecurityModel").setProperty("/name", name2);
-					that.getView().getModel("oSecurityModel").setProperty("/contactNo", contactNo2);
-					
-				},
-				type: "GET"
-			});
+			
 		},
 		onProfile: function (event) {
 			var that = this;
@@ -940,7 +944,7 @@ sap.ui.define([
 				},
 				success: function (data) {
 					if (data.status === 200) {
-						sap.m.MessageToast.show("Logout Successful");
+
 						var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
 						oRouter.navTo("RouteLanding");
 					}
@@ -967,9 +971,9 @@ sap.ui.define([
 		onFail: function (message) {
 			alert("Failed because: " + message);
 		},
-		onCancelProfile: function(){
+		onCancelProfile: function () {
 			this._oDialog3.close();
-			
+
 		},
 
 		//Evacuation
@@ -1000,9 +1004,7 @@ sap.ui.define([
 			// }
 
 			if (aContexts && aContexts.length) {
-				MessageToast.show("You have chosen " + aContexts.map(function (oContext) {
-					return oContext.getObject().email;
-				}).join(", "));
+
 				var email = aContexts.map(function (oContext) {
 					return oContext.getObject().email;
 				});
@@ -1043,7 +1045,7 @@ sap.ui.define([
 
 				},
 				error: function (e) {
-					sap.m.MessageToast.show("Update Failed");
+					sap.m.MessageToast.show("Failed");
 
 				}
 
@@ -1090,7 +1092,7 @@ sap.ui.define([
 
 				},
 				error: function (e) {
-					sap.m.MessageToast.show("Update Failed");
+					sap.m.MessageToast.show("Failed");
 
 				}
 
@@ -1115,7 +1117,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					sap.m.MessageToast.show("Refresh Success");
+
 					oSecurityModel.setProperty("/getRecentDeliveries", data);
 				},
 				type: "GET"
@@ -1136,7 +1138,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					sap.m.MessageToast.show("Refresh Success");
+
 					oSecurityModel.setProperty("/getParkingStatus", data);
 				},
 				type: "GET"

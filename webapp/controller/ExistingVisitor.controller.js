@@ -33,7 +33,7 @@ sap.ui.define([
 		},
 
 		onEditDetailsSubmit: function () {
-				var that=this;
+			var that=this;
 			var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");
 			var visitorName = this.getView().getModel("oLoginModel").getProperty("/ExvisitorName");
 			var email = this.getView().getModel("oLoginModel").getProperty("/Exemail");
@@ -70,11 +70,11 @@ sap.ui.define([
 							that.getView().byId("badgeBtn").setEnabled(true);
 
 					} else {
-						sap.m.MessageToast.show("Edit Details Failed");
+						alert("Edit Details Failed");
 					}
 				},
 				error: function (err) {
-					sap.m.MessageToast.show("Registration Failed");
+					alert("Registration Failed");
 				}
 			});
 		},
@@ -125,7 +125,7 @@ sap.ui.define([
 				},
 				success: function (data) {
 					if (data.status === 200) {
-						sap.m.MessageToast.show("CheckedIn  Successful");
+						
 						if (!that._oDialog4) {
 							that._oDialog4 = sap.ui.xmlfragment("idOnSuccess", "inc.inkthn.neo.NEO_VMS.fragments.ExistSuccess", that);
 						}
@@ -150,21 +150,21 @@ sap.ui.define([
 			var oRouter2 = sap.ui.core.UIComponent.getRouterFor(that);
 			oRouter2.navTo("RouteLanding");
 		},
-		handleUploadComplete: function (oEvent) {
-			var sResponse = oEvent.getParameter("response");
-			if (sResponse) {
-				var sMsg = "";
-				var m = /^\[(\d\d\d)\]:(.*)$/.exec(sResponse);
-				if (m[1] == "200") {
-					sMsg = "Return Code: " + m[1] + "\n" + m[2] + "(Upload Success)";
-					oEvent.getSource().setValue("");
-				} else {
-					sMsg = "Return Code: " + m[1] + "\n" + m[2] + "(Upload Error)";
-				}
+		// handleUploadComplete: function (oEvent) {
+		// 	var sResponse = oEvent.getParameter("response");
+		// 	if (sResponse) {
+		// 		var sMsg = "";
+		// 		var m = /^\[(\d\d\d)\]:(.*)$/.exec(sResponse);
+		// 		if (m[1] == "200") {
+		// 			sMsg = "Return Code: " + m[1] + "\n" + m[2] + "(Upload Success)";
+		// 			oEvent.getSource().setValue("");
+		// 		} else {
+		// 			sMsg = "Return Code: " + m[1] + "\n" + m[2] + "(Upload Error)";
+		// 		}
 
-				MessageToast.show(sMsg);
-			}
-		},
+		// 		MessageToast.show(sMsg);
+		// 	}
+		// },
 
 		handleUploadPress: function () {
 			var oFileUploader = this.byId("fileUploader");

@@ -9,7 +9,7 @@
 						<Label text="{i18n>selectRoom}"/>
 						<Input id="idBookRoom" class="InputBox"  showSuggestion="true" showValueHelp="true" suggestionItems="{oHostModel>/AvailableRooms}">
 							<suggestionItems>
-								<core:Item text="{oHostModel>name} Capacity= {oHostModel>capacity} RoomId={oHostModel>rid}"/>
+								<core:Item text="{oHostModel>name} Capacity= {oHostModel>capacity}						 RoomId={oHostModel>rid}"/>
 							</suggestionItems>
 						</Input>
 					</f:content>

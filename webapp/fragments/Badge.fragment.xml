@@ -21,15 +21,19 @@
 					</HBox>
 					<HBox>
 						<Label text="Contact:" class="Badge"></Label>
-						<Text text="{oLoginModel>/getBadge/contactNo}" class="BadgeText sapUiLargeMarginBegin"></Text>
+						<Text text="{oLoginModel>/getBadge/contactNo}" class="BadgeText sapUiMediumMarginBegin"></Text>
 					</HBox>
 					<HBox>
 						<Label text="Purpose:" class="Badge"></Label>
-						<Text text="{oLoginModel>/getBadge/purpose}" class="BadgeText sapUiLargeMarginBegin"></Text>
+						<Text text="{oLoginModel>/getBadge/purpose}" class="BadgeText sapUiMediumMarginBegin"></Text>
 					</HBox>
 					<HBox>
-						<Label text="Host:" class="Badge"></Label>
-						<Text text="{oLoginModel>/getBadge/hostName}" class="BadgeText sapUiLargeMarginBegin "></Text>
+						<Label text="Host: " class="Badge"></Label>
+						<Text text="{oLoginModel>/getBadge/hostName}" class="BadgeText sapUiLargeMarginBegin"></Text>
+					</HBox>
+					<HBox>
+						<Label text="Room:" class="Badge"></Label>
+						<Text text="{oLoginModel>/getBadge/meetingRoom}" class="BadgeText sapUiLargeMarginBegin "></Text>
 					</HBox>
 				</VBox>
 			</HBox>

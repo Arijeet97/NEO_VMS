@@ -6,21 +6,21 @@
 				<f:SimpleForm layout="ColumnLayout" editable="true" id="idSimpleFormAddPer">
 					<f:content >
 						<Text text="Personal Details"></Text>
-						<Label text="{i18n>firstname}" />
-						<Input id="idfirstName" class="InputBox"/>
-						<Label text="{i18n>lastname}"/>
-						<Input id="idlastName" class="InputBox"/>
-						<Label text="{i18n>Email}"/>
-						<Input id="idEmail" type="Email" class="InputBox"/>
-						<Label text="{i18n>Phone}"/>
-						<Input id="idPhone" type="Number" class="InputBox"/>
+						<Label text="{i18n>firstname}" required="true" />
+						<Input id="idfirstName" class="InputBox" required="true"/>
+						<Label text="{i18n>lastname}" required="true"/>
+						<Input id="idlastName" class="InputBox" required="true"/>
+						<Label text="{i18n>Email}" required="true"/>
+						<Input id="idEmail" type="Email" class="InputBox" required="true"/>
+						<Label text="{i18n>Phone}" required="true"/>
+						<Input id="idPhone" type="Number" class="InputBox" required="true"/>
 						<Label text="{i18n>Identity}"/>
 						<ComboBox id="idPerID" selectedKey="{oViewModel>/sSelect}" items="{oViewModel>/list}" class="InputBox">
 							<core:Item text="{oViewModel>Identity}" key="{oViewModel>Identity}"></core:Item>
 						</ComboBox>
 						<Label text="{i18n>IDNUMBER}"/>
 						<Input id="idPerIDNum" type="Number" class="InputBox" />
-						<Label text="{i18n>Parking }"/>
+						<Label text="{i18n>Parking }" required="true"/>
 						<ComboBox id="idPerPark" selectedKey="{oAdminModel>/sParking}" items="{oViewModel>/list1}">
 						<core:Item text="{oViewModel>ParkingType}" key="{oViewModel>Parkingid}"  ></core:Item>
 						</ComboBox>
@@ -32,11 +32,11 @@
 					<f:content>
 						<Text text="Meeting Details"></Text>
 						<Label text="{i18n>Purpose}"/>
-						<Input id="idVisPurp" class="MeetInputBox"/>
+						<Input id="idVisPurp" class="MeetInputBox" required="true"/>
 						<Label text="{i18n>Organisation}"/>
-						<Input id="idVisOrg" class="MeetInputBox"/>
-						<Label text="{i18n>meetDate}"/>
-						<DatePicker valueFormat="MMM dd, yyyy" id="idMeetDate" minDate="{oAdminModel>/meetingDate}" class="MeetInputBox"/>
+						<Input id="idVisOrg" class="MeetInputBox" required="true"/>
+						<Label text="{i18n>meetDate}" required="true"/>
+						<DatePicker valueFormat="MMM dd, yyyy" id="idMeetDate" minDate="{oAdminModel>/meetingDate}" class="MeetInputBox" required="true"/>
 						<Label text="{i18n>Start time}"/>
 						<TimePicker id="idMeetStart" valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" change="handleChange" class="MeetInputBox"/>
 						<Label text="{i18n>End Time}"/>

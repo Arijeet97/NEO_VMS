@@ -450,9 +450,9 @@ sap.ui.define([
 				sap.ui.core.Fragment.byId("idForgotPassword", "Show").setVisible(true);
 				sap.ui.core.Fragment.byId("idForgotPassword", "Hide").setVisible(false);
 			} else if (Type === "Password") {
-				sap.ui.core.Fragment.byId("idForgotPassword", "idPassForgot").setType("Text");
-				sap.ui.core.Fragment.byId("idForgotPassword", "Show").setVisible(false);
-				sap.ui.core.Fragment.byId("idForgotPassword", "Hide").setVisible(true);
+				sap.ui.core.Fragment.byId("idForgotPassword", "idPassCNFForgot").setType("Text");
+				sap.ui.core.Fragment.byId("idForgotPassword", "ShowCNF").setVisible(false);
+				sap.ui.core.Fragment.byId("idForgotPassword", "HideCNF").setVisible(true);
 			}
 		},
 		onShowCNF: function () {

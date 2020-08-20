@@ -297,7 +297,8 @@ margin-left: 20%;
 }
 
 .acptMeet{
-	margin-left:1rem;
+	margin-top: 0.7rem !important;
+	margin-left: 2.5rem !important;
 }
 
 
@@ -399,10 +400,34 @@ margin-left:10%;
     border-top-color: #ffffff00;
     background-color: #354a5f47;
 }
-.success{
-	margin-left:15%;
+.success.sapMText {
+    display: inline-block;
+    box-sizing: border-box;
+    white-space: pre-line;
+    word-wrap: break-word;
+    cursor: text;
+    font-size: .875rem;
+    font-family: roboto,sans-serif;
+    font-weight: bold;
+    line-height: normal;
+    color: #32363a;
+	margin-left:2%;
 	margin-bottom:5%;
 }
+.exitSuccess.sapMText {
+    display: inline-block;
+    box-sizing: border-box;
+    white-space: pre-line;
+    word-wrap: break-word;
+    cursor: text;
+    font-size: .875rem;
+    font-family: roboto,sans-serif;
+    font-weight: bold;
+    line-height: normal;
+    color: #32363a;
+	margin-left: 7rem;
+	margin-bottom:5%;
+} 
 .Extoolbar .sapMTB {
     height: 2.75rem;
     padding: 0 0.5rem 0 0.25rem;

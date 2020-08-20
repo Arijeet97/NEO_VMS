@@ -24,8 +24,8 @@
 											<IconTabFilter text="Login">
 												<VBox fitContainer="true" alignContent="Center">
 													<items >
-														<Label text="Enter Employee ID" labelFor="idEmpNum" class="LandingLabelInputBox"></Label>
-														<Input id="idEmpNum" value="{oLoginModel>/eId}" class="LandingInputBox" width="80%" placeholder="Employee Id" required="true"></Input>
+														<Label text="Enter Email" labelFor="idEmpNum" class="LandingLabelInputBox"></Label>
+														<Input id="idEmpNum" value="{oLoginModel>/eId}" class="LandingInputBox" width="80%" placeholder="Enter your Email" required="true"></Input>
 														<Label text="Enter Password" labelFor="idEmpPass" class="LandingLabelInputBox"></Label>
 														<Input id="idEmpPass" value="{oLoginModel>/password}" class="LandingInputBox" width="80%" placeholder="Password" type="Password"></Input>
 														<HBox class="LandingButton">

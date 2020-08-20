@@ -78,13 +78,13 @@ sap.ui.define([
 			this.getView().setModel(oModel3, "oGlobalModel");
 			var oAdminModel = this.getOwnerComponent().getModel("oAdminModel");
 			this.getView().setModel(oAdminModel, "oAdminModel");
-			var oDateFormat=sap.ui.core.format.DateFormat.getDateInstance({
-				pattern:"MMM dd, yyyy"
+			var oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+				pattern: "MMM dd, yyyy"
 			});
 			var today = new Date();
-			var newdate=oDateFormat.format(today);
+			var newdate = oDateFormat.format(today);
 			this.getView().getModel("oAdminModel").setProperty("/Date", newdate);
-			
+
 			var meetingDate = new Date();
 			this.getView().getModel("oAdminModel").setProperty("/meetingDate", meetingDate);
 			var evacMessage = "Please Evacuate this building As soon as possible";
@@ -146,7 +146,7 @@ sap.ui.define([
 			});
 
 			//Evacuation
-		
+
 			var sUrl2 = "/JAVA_SERVICE/admin/getAllPresentInside?date=" + newdate;
 			$.ajax({
 				url: sUrl2,
@@ -226,12 +226,12 @@ sap.ui.define([
 			});
 
 			//DashBoard
-            
+
 			this.onCheckedIn();
 			this.onCheckedOut();
 			this.onFrequentVisittor();
 			this.onUpcoming();
-			
+
 			webSocket = new WebSocket("WSS://vms14p2002476963trial.hanatrial.ondemand.com/VMS/chat/" + oAdminModel.getProperty("/eId"));
 			webSocket.onerror = function (event) {
 				var message = JSON.parse(event.data);
@@ -271,9 +271,9 @@ sap.ui.define([
 		_data: {
 			"date": new Date()
 		},
-			onDateChange:function(){
-			var that=this;
-			 
+		onDateChange: function () {
+			var that = this;
+
 			that.onCheckedIn();
 			that.onCheckedOut();
 			that.onFrequentVisittor();
@@ -303,7 +303,7 @@ sap.ui.define([
 					var UpcomingCount = data.length;
 					oAdminModel.setProperty("/UpcomingCount", UpcomingCount);
 					oAdminModel.setProperty("/UpcomingMeeting", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -336,7 +336,7 @@ sap.ui.define([
 					var CheckedInCount = data.length;
 					oAdminModel.setProperty("/CheckedInCount", CheckedInCount);
 					oAdminModel.setProperty("/CheckedIn", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -369,7 +369,7 @@ sap.ui.define([
 					var CheckedOutCount = data.length;
 					oAdminModel.setProperty("/CheckedOutCount", CheckedOutCount);
 					oAdminModel.setProperty("/CheckedOut", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -400,7 +400,7 @@ sap.ui.define([
 				},
 				success: function (data) {
 					oAdminModel.setProperty("/FrequentVisitors", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -472,7 +472,7 @@ sap.ui.define([
 				},
 				success: function (data) {
 					oAdminModel.setProperty("/TotalVisitor", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -515,7 +515,7 @@ sap.ui.define([
 				},
 				success: function (data) {
 					if (data.status === 200) {
-						sap.m.MessageToast.show("Logout Successful");
+
 						var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
 						oRouter.navTo("RouteLanding");
 					}
@@ -526,6 +526,35 @@ sap.ui.define([
 		},
 
 		//PROFILE
+		onRefreshImage: function(){
+			var that = this;
+			var username = that.getView().getModel("oLoginModel").getProperty("/eId");
+			var password = that.getView().getModel("oLoginModel").getProperty("/password");
+			var sUrl = "/JAVA_SERVICE/employee/login2?username=" + username + "&password=" + password;
+			$.ajax({
+				url: sUrl,
+				data: null,
+				async: true,
+				cache: false,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+				},
+				success: function (data) {
+					var email = data.email;
+					var image = data.image;
+					var name = data.name;
+					var contactNo = data.contactNo;
+					that.getView().getModel("oAdminModel").setProperty("/email", email);
+					that.getView().getModel("oAdminModel").setProperty("/image", image);
+					that.getView().getModel("oAdminModel").setProperty("/name", name);
+					that.getView().getModel("oAdminModel").setProperty("/contactNo", contactNo);
+
+				},
+				type: "GET"
+			});
+		},
 		onProfile: function (event) {
 			var that = this;
 			var name = this.getView().getModel("oAdminModel").getProperty("/name");
@@ -599,7 +628,7 @@ sap.ui.define([
 					that.getView().getModel("oAdminModel").setProperty("/image", image);
 					that.getView().getModel("oAdminModel").setProperty("/name", name);
 					that.getView().getModel("oAdminModel").setProperty("/contactNo", contactNo);
-					sap.m.MessageToast.show("You can Edit your Profile Now");
+
 				},
 				type: "GET"
 			});
@@ -633,44 +662,20 @@ sap.ui.define([
 				// },
 				success: function (oData) {
 					if (oData.status === 200) {
-						sap.m.MessageToast.show("Profile Updated Successfully");
+						alert("Profile Updated Successfully");
+						that.onRefreshImage();
 					}
 
 					that._oDialog5.close();
 
 				},
 				error: function (e) {
-					sap.m.MessageToast.show("Update Failed");
+					alert("Update Failed");
 
 				}
 
 			});
-			var username = that.getView().getModel("oLoginModel").getProperty("/eId");
-			var password = that.getView().getModel("oLoginModel").getProperty("/password");
-			var sUrl2 = "/JAVA_SERVICE/employee/login2?username=" + username + "&password=" + password;
-			$.ajax({
-				url: sUrl2,
-				data: null,
-				async: true,
-				cache: false,
-				dataType: "json",
-				contentType: "application/json; charset=utf-8",
-				error: function (err) {
-					sap.m.MessageToast.show("Destination Failed");
-				},
-				success: function (data) {
-					var email2 = data.email;
-					var image2 = data.image;
-					var name2 = data.name;
-					var contactNo2 = data.contactNo;
-					that.getView().getModel("oAdminModel").setProperty("/email", email2);
-					that.getView().getModel("oAdminModel").setProperty("/image", image2);
-					that.getView().getModel("oAdminModel").setProperty("/name", name2);
-					that.getView().getModel("oAdminModel").setProperty("/contactNo", contactNo2);
-					
-				},
-				type: "GET"
-			});
+		
 		},
 		onChangePicture: function () {
 			navigator.camera.getPicture(this.onSuccessPic, this.onFail, {
@@ -747,7 +752,6 @@ sap.ui.define([
 			var oTable = this.byId("idAdminFrequentVisitor");
 			var oBinding = oTable.getBinding("items");
 			oBinding.sort(oSorter);
-			MessageToast.show("Sorted By Date");
 
 		},
 		onVisSearch: function (oEvent) {
@@ -780,7 +784,7 @@ sap.ui.define([
 			var mId = odata.mId;
 			var oAdminModel = that.getOwnerComponent().getModel("oAdminModel");
 			var sUrl1 = "/JAVA_SERVICE/admin/getAllUpcomingMeetings?eId=" + oAdminModel.getProperty("/eId") + "&date=" + oAdminModel.getProperty(
-				"/date");
+				"/Date");
 			$.ajax({
 				url: sUrl1,
 				data: null,
@@ -934,7 +938,7 @@ sap.ui.define([
 							oAdminModel.setProperty("/Notification/" + i + "/AcceptVisibility", false);
 						}
 					}
-					sap.m.MessageToast.show("Notification loaded Successfully");
+
 				}
 
 			});
@@ -975,7 +979,7 @@ sap.ui.define([
 			var del = oItem.getAuthorName();
 			var aDel = del.split(",");
 			var nId = aDel[0];
-			MessageToast.show("Closed: " + oItem.getAuthorName());
+
 			var sUrl = "/JAVA_SERVICE/employee/readNotifications";
 			var payload = {
 				nId: nId,
@@ -1227,7 +1231,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					sap.m.MessageToast.show("Refresh Success");
+					s
 					oAdminModel.setProperty("/getMeetingRequests", data);
 				},
 				type: "GET"
@@ -1248,7 +1252,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					sap.m.MessageToast.show("Refresh Success");
+
 					oAdminModel.setProperty("/getOnSpotMeetingRequest", data);
 				},
 				type: "GET"
@@ -1270,7 +1274,7 @@ sap.ui.define([
 				},
 				success: function (data) {
 					oAdminModel.setProperty("/getPreregister", data);
-					sap.m.MessageToast.show("Refresh  Success");
+
 				},
 				type: "GET"
 			});
@@ -1294,7 +1298,7 @@ sap.ui.define([
 				},
 				success: function (data) {
 					oAdminModel.setProperty("/TotalVisitor", data);
-					sap.m.MessageToast.show("Data Successfully Loaded");
+
 				},
 				type: "GET"
 			});
@@ -1319,7 +1323,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					sap.m.MessageToast.show("Remove Blacklist Successful");
+					sap.m.MessageToast.show("Removed Successfully");
 				}
 			});
 			this.onRefreshBlacklist();
@@ -1344,8 +1348,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					sap.m.MessageToast.show("Blacklisted Successfully");
-				
+					alert("Blacklisted Successfully");
+
 				}
 			});
 			this._oDialog2.close();
@@ -1380,42 +1384,52 @@ sap.ui.define([
 
 		},
 		onNext: function () {
-
-			this._oDialog.close();
-			if (!this._oDialog1) {
-				this._oDialog1 = sap.ui.xmlfragment("idPreRegBookRoom", "inc.inkthn.neo.NEO_VMS.fragments.Admin.PreRegBookRoom", this);
-			}
-			this.getView().addDependent(this._oDialog1);
-			this._oDialog1.open();
-			var that = this;
-			var sTime1 = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetStart").getValue();
-			var eTime2 = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetEnd").getValue();
-			var date1 = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetDate").getValue();
-
-			var sUrl = "/JAVA_SERVICE/employee/getAvailableRooms?begin=" + date1 + " " + sTime1 + "&end=" + date1 + " " + eTime2;
-			var oAdminModel = that.getOwnerComponent().getModel("oAdminModel");
-			$.ajax({
-				url: sUrl,
-				type: "GET",
-				cache: false,
-				async: true,
-				dataType: "json",
-				data: null,
-				// beforeSend: function (xhr) {
-				// 	var param = "/JAVA_SERVICE_CF";
-				// 	var token = that.getCSRFToken(sUrl, param);
-				// 	xhr.setRequestHeader("X-CSRF-Token", token);
-				// 	xhr.setRequestHeader("Accept", "application/json");
-				// },
-				contentType: "application/json",
-				success: function (oData) {
-					oAdminModel.setProperty("/AvailableRoom", oData);
-				},
-				error: function (e) {
-					sap.m.MessageToast.show("Internal server Error");
+			var vfirstName = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idfirstName").getValue();
+			var vlastName = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idlastName").getValue();
+			var vemail = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idEmail").getValue();
+			var vcontactNo = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idPhone").getValue();
+			var vpurpose = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idVisPurp").getValue();
+			var vorganisation = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idVisOrg").getValue();
+			var vdate = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetDate").getValue();
+			var vpark = this.getView().getModel("oHostModel").getProperty("/sParking");
+			if (!vfirstName || !vlastName || !vemail || !vcontactNo || !vpurpose || !vorganisation || !vdate || !vpark) {
+				alert("Please fill all the mandatory details");
+			} else {
+				this._oDialog.close();
+				if (!this._oDialog1) {
+					this._oDialog1 = sap.ui.xmlfragment("idPreRegBookRoom", "inc.inkthn.neo.NEO_VMS.fragments.Admin.PreRegBookRoom", this);
 				}
-			});
+				this.getView().addDependent(this._oDialog1);
+				this._oDialog1.open();
+				var that = this;
+				var sTime1 = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetStart").getValue();
+				var eTime2 = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetEnd").getValue();
+				var date1 = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetDate").getValue();
 
+				var sUrl = "/JAVA_SERVICE/employee/getAvailableRooms?begin=" + date1 + " " + sTime1 + "&end=" + date1 + " " + eTime2;
+				var oAdminModel = that.getOwnerComponent().getModel("oAdminModel");
+				$.ajax({
+					url: sUrl,
+					type: "GET",
+					cache: false,
+					async: true,
+					dataType: "json",
+					data: null,
+					// beforeSend: function (xhr) {
+					// 	var param = "/JAVA_SERVICE_CF";
+					// 	var token = that.getCSRFToken(sUrl, param);
+					// 	xhr.setRequestHeader("X-CSRF-Token", token);
+					// 	xhr.setRequestHeader("Accept", "application/json");
+					// },
+					contentType: "application/json",
+					success: function (oData) {
+						oAdminModel.setProperty("/AvailableRoom", oData);
+					},
+					error: function (e) {
+						sap.m.MessageToast.show("Internal server Error");
+					}
+				});
+			}
 		},
 		onSave: function () {
 			var firstName = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idfirstName").getValue();
@@ -1502,14 +1516,14 @@ sap.ui.define([
 				success: function (data) {
 					var that = this;
 					if (data.mId === null) {
-						sap.m.MessageToast.show("Registration Unsuccessful");
+						alert("Registration Unsuccessful");
 					} else {
 						sap.m.MessageToast.show("Registration Successfully");
 					}
 
 				},
 				error: function (err) {
-					sap.m.MessageToast.show("Registration Failed");
+					alert("Registration Failed");
 				}
 			});
 			this._oDialog1.close();
@@ -1959,9 +1973,7 @@ sap.ui.define([
 			// }
 
 			if (aContexts && aContexts.length) {
-				MessageToast.show("You have chosen " + aContexts.map(function (oContext) {
-					return oContext.getObject().email;
-				}).join(", "));
+
 				var email = aContexts.map(function (oContext) {
 					return oContext.getObject().email;
 				});
@@ -2002,7 +2014,7 @@ sap.ui.define([
 
 				},
 				error: function (e) {
-					sap.m.MessageToast.show("Update Failed");
+					alert("Update Failed");
 
 				}
 
@@ -2049,7 +2061,7 @@ sap.ui.define([
 
 				},
 				error: function (e) {
-					sap.m.MessageToast.show("Update Failed");
+					alert("Update Failed");
 
 				}
 

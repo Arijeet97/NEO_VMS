@@ -32,7 +32,6 @@ sap.ui.define([
 			this.getView().setModel(oModel4, "oVisitorModel");
 			var oVisitorModel1 = this.getOwnerComponent().getModel("oVisitorModel");
 			this.getView().setModel(oVisitorModel1, "oVisitorModel1");
-
 			var today = new Date();
 			this.getView().getModel("oVisitorModel").setProperty("/date", today);
 			var sUrl = "/JAVA_SERVICE/employee/employees";
@@ -86,12 +85,15 @@ sap.ui.define([
 			// var sId = oSplit.split("=");
 			// var i = sId[1];
 			// var eId = parseInt(i, [0]);
-			var eId=this.getView().getModel("oVisitorModel").getProperty("/eId");
+			var eId = this.getView().getModel("oVisitorModel").getProperty("/eId");
 			var date = this.getView().getModel("oVisitorModel").getProperty("/date");
 			var begin = this.getView().getModel("oVisitorModel").getProperty("/begin");
 			var end = this.getView().getModel("oVisitorModel").getProperty("/end");
 			var Visitor = this.getView().getModel("oVisitorModel").getProperty("/NewVisitor");
 			var typeId = 1;
+			if (!firstName || !email || !purpose || !end || !begin || !contactNo || !organisation || !date || !eId || !lastName) {
+				alert("Please Fill all the Mandatory Details");
+			}
 
 			var payload = {
 				firstName: firstName,
@@ -222,6 +224,19 @@ sap.ui.define([
 			var oFileUploader = this.byId("fileUploader");
 			oFileUploader.upload();
 		}
+		// handleValidationError: function (oEvent) {
+		// 	var input = this.getView().byId("idfName").getValue();
+		// 	var regexp = '^[A-Za-z]*$';
+		// 	 var isValid = input.search(regexp);
+			
+		// 	oEvent.getSource().setValueState(oEvent.getParameter("oldValue"));
+		// },
+		// handleValidationSuccess: function (oEvent) {
+		// 	var input = this.getView().byId("idfName").getValue();
+		// 	var regexp = '^[A-Za-z]*$';
+		// 	 var isValid = input.search(regexp);
+		// 	oEvent.getSource().setValueState(sap.ui.core.ValueState.Success);
+		// }
 
 	});
 

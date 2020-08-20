@@ -6,7 +6,7 @@
 				<Label text="Enter your Feedback:" class="otp icontab" labelFor="idFeedback"></Label>
 				<TextArea id="idFeedback" cols="25" rows="5"></TextArea>
 				<Label text="Rating" class="otp icontab" labelFor="idRating"/>
-				<RatingIndicator id="idRating" maxValue="5" class="sapUiSmallMarginBottom" value="4" iconSize="22px" tooltip="Rating Tooltip"/>
+				<RatingIndicator id="idRating" maxValue="5" class="sapUiSmallMarginBottom"  iconSize="22px" tooltip="Rating Tooltip"/>
 			</l:VerticalLayout>
 		</content>
 		<beginButton>
