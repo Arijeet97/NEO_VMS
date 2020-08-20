@@ -57,7 +57,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Upcoming Meetings" level="H3"/>
+					<Title text="Upcoming Meetings" level="H3" class="TableTitle"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<!--<Label text="Sort By:"></Label>-->
 					<!--<ComboBox width="8%">-->
@@ -105,7 +105,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="CheckedIn" level="H3"/>
+					<Title text="CheckedIn" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<!--<Label text="Sort By:"></Label>-->
 					<!--<ComboBox width="8%">-->
@@ -156,7 +156,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="CheckedOut" level="H3"/>
+					<Title text="CheckedOut" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<!--<Label text="Sort By:"></Label>-->
 					<!--<ComboBox width="8%">-->
@@ -214,7 +214,7 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<content>
-					<Title text="Total Visitors" level="H3"/>
+					<Title text="Total Visitors" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<!--<Label text="Sort By:"></Label>-->
 					<!--<ComboBox width="8%">-->
