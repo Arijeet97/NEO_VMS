@@ -197,16 +197,16 @@ sap.ui.define([
 			webSocket = new WebSocket("WSS://vms14p2002476963trial.hanatrial.ondemand.com/VMS/chat/" + oSecurityModel.getProperty("/eId"));
 			webSocket.onerror = function (event) {
 				var message = JSON.parse(event.data);
-				MessageBox.alert(message.content);
+				MessageBox.information(message.content);
 
 			};
 			webSocket.onopen = function (event) {
 				var message = JSON.parse(event.data);
-				MessageBox.alert(message.content);
+				MessageBox.information(message.content);
 			};
 			webSocket.onmessage = function (event) {
 				var message = JSON.parse(event.data);
-				var msg = MessageBox.alert(message.content);
+				var msg = MessageBox.information(message.content);
 				var sUrl7 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oSecurityModel.getProperty("/eId");
 				$.ajax({
 					url: sUrl7,
@@ -401,7 +401,7 @@ sap.ui.define([
 			}
 			this.getView().addDependent(this._oDialog);
 			this._oDialog.open();
-			MessageBox.information("There are " + oSecurityModel.getProperty("/NumOfParking") + " Slots Available in Parking Area.");
+			// MessageBox.information("There are " + oSecurityModel.getProperty("/NumOfParking") + " Slots Available in Parking Area.");
 		},
 		onBookParking: function () {
 			var that = this;

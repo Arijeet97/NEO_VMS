@@ -214,7 +214,7 @@
 					<!--<ComboBox width="8%">-->
 					<!--	<core:Item text="{}"></core:Item>-->
 					<!--</ComboBox>-->
-					<Button tooltip="Sort By Date" type="Ghost" icon="sap-icon://sort" press="onFreqVisSort" ></Button>
+					<!--<Button tooltip="Sort By Date" type="Ghost" icon="sap-icon://sort" press="onFreqVisSort" ></Button>-->
 					<SearchField width="20%" placeholder="Search by Name" liveChange="onFreqVisSearch" class="sapUiSmallMargin" />
 					</content>
 				</OverflowToolbar>

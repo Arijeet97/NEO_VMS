@@ -29,7 +29,7 @@
 					</HBox>
 					<HBox>
 						<Label text="Host: " class="Badge"></Label>
-						<Text text="{oLoginModel>/getBadge/hostName}" class="BadgeText sapUiLargeMarginBegin"></Text>
+						<Text text="{oLoginModel>/getBadge/hostName}" class="BadgeText sapUiSmallMarginBegin sapUiLargeMarginBegin"></Text>
 					</HBox>
 					<HBox>
 						<Label text="Room:" class="Badge"></Label>

@@ -9,7 +9,7 @@
 			<OverflowToolbar>
 				<content>
 					<Title text="Pre Registered Visitors" class="TableTitle" level="H3"/>
-					<ToolbarSpacer width="43%"></ToolbarSpacer>
+					<ToolbarSpacer width="40%"></ToolbarSpacer>
 					<Label text="Select Employee:"></Label>
 					<ComboBox id="idPerID" selectedKey="{oAdminModel>/selectedEid}" items="{oAdminModel>/getEmployeeList}">
 					<core:Item text="{oAdminModel>name}" key="{oAdminModel>eId}"></core:Item>

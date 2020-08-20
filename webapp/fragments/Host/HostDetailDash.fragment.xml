@@ -220,7 +220,7 @@
 					<!--<ComboBox width="8%">-->
 					<!--	<core:Item text="{}"></core:Item>-->
 					<!--</ComboBox>-->
-					<Button tooltip="Sort By Date" type="Ghost" icon="sap-icon://sort" press="onTotalVisSOrt"></Button>
+					<!--<Button tooltip="Sort By Date" type="Ghost" icon="sap-icon://sort" press="onTotalVisSOrt"></Button>-->
 					<SearchField width="20%" placeholder="Search by Name" liveChange="onTotalVisSearch" class="sapUiSmallMargin"/>
 				</content>
 			</OverflowToolbar>

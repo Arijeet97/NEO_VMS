@@ -235,16 +235,16 @@ sap.ui.define([
 			webSocket = new WebSocket("WSS://vms14p2002476963trial.hanatrial.ondemand.com/VMS/chat/" + oAdminModel.getProperty("/eId"));
 			webSocket.onerror = function (event) {
 				var message = JSON.parse(event.data);
-				MessageBox.alert(message.content);
+				MessageBox.information(message.content);
 
 			};
 			webSocket.onopen = function (event) {
 				var message = JSON.parse(event.data);
-				MessageBox.alert(message.content);
+				MessageBox.information(message.content);
 			};
 			webSocket.onmessage = function (event) {
 				var message = JSON.parse(event.data);
-				var msg = MessageBox.alert(message.content);
+				var msg = MessageBox.information(message.content);
 				var sUrl4 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oAdminModel.getProperty("/eId");
 				$.ajax({
 					url: sUrl4,
