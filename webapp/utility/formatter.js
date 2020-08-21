@@ -7,5 +7,13 @@ inc.inkthn.neo.NEO_VMS.utility.formatter = {
 			sValue = "Signature Required";
 		}
 		return sValue;
+	},
+		BlacklList: function (sValue) {
+		if (sValue === 0) {
+			sValue = "BlackListed";
+		} else {
+			sValue = "Remove Request";
+		}
+		return sValue;
 	}
 	};

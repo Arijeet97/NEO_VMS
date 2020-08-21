@@ -89,7 +89,7 @@
 	margin-bottom:1% !important;
 }
 .bowimage{
-	margin-left:35% !important;
+	margin-left:25% !important;
 	margin-top:3% !important;
 }
 .feedback{
@@ -359,7 +359,7 @@ margin-left:10%;
 		color: #f7f7f7;
 }
 .Existing .sapMInputBaseInner {
-    background: #085caf3d;
+    background: #e5e5e5;
     border: none;
 }
 
@@ -562,6 +562,7 @@ margin-left:10%;
     color: #2a5e92 !important;
     margin-left: 0.7rem !important;
     margin-top: 0.7rem !important;
+    margin-bottom: 0.7rem !important;
      margin-right: 0.7rem !important;
      font-family: roboto, sans-serif !important;
 }
@@ -569,7 +570,22 @@ margin-left:10%;
     text-align: center;
     background-color: transparent;
     margin-top: 0.5rem;
-    margin-left: 3rem;
+    margin-left: 4.5rem;
+}
+
+/*.ProfileBtns .sapMOTAPopover .sapMBtn .sapMBtnInner {*/
+    
+/*}*/
+.ProfileBtns .sapMBtn .sapMBtnInner {
+    /*display: inline-block;*/
+    justify-content: Center;
+    border-radius: 1.25rem;
+}
+.ProfileBtns.sapMOTAPopover.sapMPopover .sapMPopoverCont .sapMPopoverScroll>button.sapMBtn {
+    width: 80% !important;
+    max-width: 100% !important;
+    margin-left: 10%;
+    margin-bottom: 2%;
 }
 .TableTitle.sapMTitle {
     position: relative;
@@ -595,3 +611,4 @@ margin-left:10%;
     font-weight: bold;
     font-family: roboto,sans-serif;
 }
+ 

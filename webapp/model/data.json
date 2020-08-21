@@ -102,7 +102,8 @@
             "title": "DashBoard",
             "icon": "sap-icon://bbyd-dashboard",
             "expanded": true,
-            "key": "adminDash"
+            "key": "adminDash",
+            "select":"AdminDashSelect"
        
         },
             {

@@ -5,8 +5,8 @@
 			<l:content>
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onTileRequest" header="Meeting Request" press="onMeetingRequest">
 					<TileContent>
-							<!--<NumericContent class="tileCount" icon="sap-icon://trend-down" value="{oHostModel>/CheckedInCount}" withMargin="false" ></NumericContent>-->
-						<core:Icon src="sap-icon://request"></core:Icon>
+							<NumericContent class="tileCount" icon="sap-icon://request" value="{oHostModel>/OnSpotMeetingRequestCount}" withMargin="false" ></NumericContent>
+						<!--<core:Icon src="sap-icon://request"></core:Icon>-->
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
@@ -14,8 +14,8 @@
 				</GenericTile>
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onTileOngoing" header="Ongoing Meeting" press="OnGoingMeeting">
 					<TileContent >
-						<!--<NumericContent class="tileCount" icon="sap-icon://trend-up" value="{oSecurityModel>/CheckedOutCount}" withMargin="false" ></NumericContent>-->
-						<core:Icon src="sap-icon://present"></core:Icon>
+						<NumericContent class="tileCount" icon="sap-icon://present" value="{oHostModel>/OnGoingMeetingCount}" withMargin="false" ></NumericContent>
+						<!--<core:Icon src="sap-icon://present"></core:Icon>-->
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>

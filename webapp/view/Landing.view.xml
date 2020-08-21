@@ -46,7 +46,7 @@
 														<HBox class="LandingButton">
 															<Button type="Emphasized" text="Verify" press="onPressVerify"></Button>
 															<Button class="sapUiSmallMarginBegin" text="Scan" press="handleBarcodeScannerSuccess" icon="sap-icon://bar-code"/>
-															<Button class="LandingButton" type="Default" text="New Visitor" press="onNewVisitor"></Button>
+															<Button class="LandingButton" type="Default" text="New Appointment" press="onNewVisitor"></Button>
 														</HBox>
 													</items>
 												</VBox>

@@ -105,6 +105,10 @@ sap.ui.define([
 			});
 			
 		},
+		onCancel:function(){
+		var that=this;
+		that._oDialog2.close();
+		},
 		onCheckIn: function () {
 
 			var that = this;

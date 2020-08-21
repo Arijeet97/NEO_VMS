@@ -29,6 +29,12 @@
 				<Text text="{i18n>reason}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>host}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>status}"/>
+			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>action}"/>
 			</Column>
 		</columns>
@@ -39,6 +45,8 @@
 					<Text text="{oAdminModel>contactNo}"></Text>
 					<Text text="{oAdminModel>email}"></Text>
 					<Text text="{oAdminModel>reason}"></Text>
+					<Text text="{oAdminModel>blacklistedBy}" > </Text>
+					<Text text="{path: 'oAdminModel>status', formatter:'inc.inkthn.neo.NEO_VMS.utility.formatter.BlacklList'}" ></Text>
 					<Button text="Remove" type="Transparent" press="onRemoveBlacklist"></Button>	
 				</cells>
 			</ColumnListItem>

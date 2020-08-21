@@ -258,13 +258,19 @@ sap.ui.define([
 
 		},
 		onCancel: function () {
-
+		if(this.bflag===true){
 			this._oDialog.destroy();
 			this._oDialog = null;
 			this._oDialog.close();
-
+		}
+		else{
+			this._oDialog1.destroy();
+			this._oDialog1 = null;
+			this._oDialog1.close();
+		}
 		},
 		onNotify: function () {
+			
 			var that = this;
 			var eId = that.getView().getModel("oSecurityModel").getProperty("/eId");
 			var contactNo = sap.ui.core.Fragment.byId("idNewDelivery", "idEmpId").getValue();
@@ -296,9 +302,11 @@ sap.ui.define([
 				},
 				type: "POST"
 			});
+			this.onRefreshDeliveries();
 			this._oDialog.destroy();
 			this._oDialog = null;
 			this._oDialog.close();
+				
 		},
 		onAcceptDelivery: function (oEvent) {
 			var that = this;
@@ -344,6 +352,7 @@ sap.ui.define([
 				},
 				type: "POST"
 			});
+			this.onRefreshDeliveries();
 		},
 		onRejectDelivery: function (oEvent) {
 			var that = this;
@@ -389,18 +398,21 @@ sap.ui.define([
 				},
 				type: "POST"
 			});
+				this.onRefreshDeliveries();
 		},
 
 		//Parking
 		onSpotRegister: function () {
+			this.bflag=false;
 			var oSecurityModel = this.getOwnerComponent().getModel("oSecurityModel");
 
-			this.bFlag = true;
-			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("idSpotRegister", "inc.inkthn.neo.NEO_VMS.fragments.Security.SpotRegParking", this);
+			
+			if (!this._oDialog1) {
+				this._oDialog1 = sap.ui.xmlfragment("idSpotRegister", "inc.inkthn.neo.NEO_VMS.fragments.Security.SpotRegParking", this);
 			}
-			this.getView().addDependent(this._oDialog);
-			this._oDialog.open();
+			this.getView().addDependent(this._oDialog1);
+			this._oDialog1.open();
+			
 			// MessageBox.information("There are " + oSecurityModel.getProperty("/NumOfParking") + " Slots Available in Parking Area.");
 		},
 		onBookParking: function () {
@@ -455,7 +467,8 @@ sap.ui.define([
 				},
 				type: "POST"
 			});
-
+				this.onRefreshParking();
+				this.onCancel();
 		},
 		onBackOut: function (oEvent) {
 			var that = this;
@@ -502,6 +515,7 @@ sap.ui.define([
 				},
 				type: "POST"
 			});
+				this.onRefreshParking();
 		},
 
 		//DashBoard
@@ -898,16 +912,17 @@ sap.ui.define([
 						displaySize: sap.m.AvatarSize.L, // sap.m.AvatarSize
 						customDisplaySize: "3rem", // sap.ui.core.CSSSize
 						customFontSize: "1.125rem", // sap.ui.core.CSSSize
-						imageFitType: sap.m.AvatarImageFitType.Cover, // sap.m.AvatarImageFitType
+						imageFitType: sap.m.AvatarImageFitType.Cover,
+						showBorder:true // sap.m.AvatarImageFitType
 
 					}),
 					new sap.m.Text({
-						text: name
-
+						text: name,
+						textAlign: 'Center'
 					}),
 					new sap.m.Text({
-						text: email
-
+						text: email,
+						textAlign: 'Center'
 					}),
 					new Button({
 						text: "Edit Profile",
@@ -924,7 +939,7 @@ sap.ui.define([
 						},
 					})
 				]
-			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName PopImage');
+			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName PopImage ProfileBtns');
 			oPopover.openBy(event.getSource());
 		},
 		onLogOut: function () {

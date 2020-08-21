@@ -12,14 +12,14 @@
 		<tnt:sideContent>
 			<tnt:SideNavigation class="masterpage" expanded="true" itemSelect=".onItemSelect">
 				<tnt:NavigationList items="{path: 'oGlobalModel>/AdminMasterDetails'}">
-					<tnt:NavigationListItem text="{oGlobalModel>title}" icon="{oGlobalModel>icon}" expanded="{oGlobalModel>expanded}" key="{oGlobalModel>key}"></tnt:NavigationListItem>
+					<tnt:NavigationListItem text="{oGlobalModel>title}" icon="{oGlobalModel>icon}"   expanded="{oGlobalModel>expanded}" key="{oGlobalModel>key}"  ></tnt:NavigationListItem>
 				</tnt:NavigationList>
 			</tnt:SideNavigation>
 		</tnt:sideContent>
 		<tnt:mainContents>
 			<NavContainer id="detailContainer" initialPage="adminDash">
 				<pages>
-					<ScrollContainer id="adminDash" horizontal="false" vertical="true" height="100%">
+					<ScrollContainer id="adminDash" horizontal="false"  vertical="true" height="100%">
 						<core:Fragment fragmentName="inc.inkthn.neo.NEO_VMS.fragments.Admin.AdminDetailDash" type="XML"></core:Fragment>
 					</ScrollContainer>
 					<ScrollContainer id="adminReport" horizontal="false" vertical="true" height="100%">

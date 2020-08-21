@@ -21,6 +21,7 @@ sap.ui.define([
 			this.getView().setModel(oModel1, "oVisibleModel");
 			var oLoginModel = this.getOwnerComponent().getModel("oLoginModel");
 			this.getView().setModel(oLoginModel, "oLoginModel");
+	
 		},
 
 		//Login As Employee
@@ -140,6 +141,25 @@ sap.ui.define([
 						}
 						that.getView().addDependent(that._oDialog1);
 						that._oDialog1.open();
+					
+							var fiveMinutesLater = new Date();
+							var scs = fiveMinutesLater.setMinutes(fiveMinutesLater.getMinutes() + 5);
+							
+							var countdowntime = scs;
+							
+						var	x = setInterval(function() {
+							var time=sap.ui.core.Fragment.byId("idOnotp", "timer");
+							var now = new Date().getTime();
+							var cTime = countdowntime - now;
+							var minutes = Math.floor((cTime % (1000 * 60 * 60)) / (1000 * 60));
+							var second = Math.floor((cTime % (1000 * 60)) / 1000);
+							time.setValue("OTP Expires in " + minutes + ":" + second + " Minutes");
+							
+							if (cTime < 0) {
+							clearInterval(x);
+							time.setValue("OTP Expires in 0:0 Minutes");
+							}
+							});
 					} else if (data.status === 100) {
 						sap.m.MessageToast.show("checked in");
 						if (!that._oDialog2) {
@@ -393,6 +413,25 @@ sap.ui.define([
 						}
 						that.getView().addDependent(that._oDialog10);
 						that._oDialog10.open();
+							var time=sap.ui.core.Fragment.byId("idForgotOTP", "timer");
+							var fiveMinutesLater = new Date();
+							var scs = fiveMinutesLater.setMinutes(fiveMinutesLater.getMinutes() + 5);
+							
+							var countdowntime = scs;
+							
+						var	x = setInterval(function() {
+							var now = new Date().getTime();
+							// var time = sap.ui.getCore().byId("timer");
+							var cTime = countdowntime - now;
+							var minutes = Math.floor((cTime % (1000 * 60 * 60)) / (1000 * 60));
+							var second = Math.floor((cTime % (1000 * 60)) / 1000);
+							time.setValue("OTP Expires in " + minutes + ":" + second + " Minutes");
+							
+							if (cTime < 0) {
+							clearInterval(x);
+							time.setValue("OTP Expires in 0:0 Minutes");
+							}
+							});
 					} else if (data.status === 500) {
 						alert("Could Not Send");
 					}
@@ -450,9 +489,9 @@ sap.ui.define([
 				sap.ui.core.Fragment.byId("idForgotPassword", "Show").setVisible(true);
 				sap.ui.core.Fragment.byId("idForgotPassword", "Hide").setVisible(false);
 			} else if (Type === "Password") {
-				sap.ui.core.Fragment.byId("idForgotPassword", "idPassCNFForgot").setType("Text");
-				sap.ui.core.Fragment.byId("idForgotPassword", "ShowCNF").setVisible(false);
-				sap.ui.core.Fragment.byId("idForgotPassword", "HideCNF").setVisible(true);
+				sap.ui.core.Fragment.byId("idForgotPassword", "idPassForgot").setType("Text");
+				sap.ui.core.Fragment.byId("idForgotPassword", "Show").setVisible(false);
+				sap.ui.core.Fragment.byId("idForgotPassword", "Hide").setVisible(true);
 			}
 		},
 		onShowCNF: function () {
@@ -476,7 +515,8 @@ sap.ui.define([
 			}else{
 				that._oDialog10.close();
 			}
-		}
+		},
+		
 
 	});
 });

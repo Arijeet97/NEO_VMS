@@ -4,7 +4,8 @@
 		<content>
 		<Label text="Enter the otp here:" class="otp" ></Label>
 		<Input id="otp"  width="50%" class="otp"></Input>
-		 <Image height="10%" width="30%" src="./image/Loading.gif" class="bowimage"></Image>
+		<Input editable="false" id="timer" width="85%" class="otp" value=""/>
+		 <Image height="50%" width="50%" src="./image/lock.gif" class="bowimage"></Image>
 		</content>
 		<beginButton>
 			<Button text="Verify" type="Accept" press="onVerifyOtp"/>

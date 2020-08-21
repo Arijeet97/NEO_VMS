@@ -14,15 +14,17 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/ui/core/UIComponent",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
+	"sap/ui/model/FilterOperator",
+	"../utility/formatter"
 ], function (Controller, JSONModel, Log, MessageToast, Fragment, Sorter, Popover, Button, library, Device, coreLibrary, Core, MessageBox,
-	UIComponent, Filter, FilterOperator) {
+	UIComponent, Filter, FilterOperator,formatter) {
 	"use strict";
 	var webSocket;
 	var ButtonType = library.ButtonType,
 		PlacementType = library.PlacementType;
 	var oView;
 	return Controller.extend("inc.inkthn.neo.NEO_VMS.controller.Admin", {
+		formatter: formatter,
 		oView: null,
 		onInit: function () {
 			oView = this.getView();
@@ -231,7 +233,9 @@ sap.ui.define([
 			this.onCheckedOut();
 			this.onFrequentVisittor();
 			this.onUpcoming();
-
+           this.OnGoingMeeting();
+           this.onMyVisitors();
+           this.onFacilities();
 			webSocket = new WebSocket("WSS://vms14p2002476963trial.hanatrial.ondemand.com/VMS/chat/" + oAdminModel.getProperty("/eId"));
 			webSocket.onerror = function (event) {
 				var message = JSON.parse(event.data);
@@ -497,6 +501,7 @@ sap.ui.define([
 		onItemSelect: function (oEvent) {
 			var oItem = oEvent.getParameter("item");
 			this.byId("detailContainer").to(this.getView().createId(oItem.getKey()));
+			
 		},
 		onLogOut: function () {
 			var that = this;
@@ -570,33 +575,35 @@ sap.ui.define([
 						displaySize: sap.m.AvatarSize.L, // sap.m.AvatarSize
 						customDisplaySize: "3rem", // sap.ui.core.CSSSize
 						customFontSize: "1.125rem", // sap.ui.core.CSSSize
-						imageFitType: sap.m.AvatarImageFitType.Cover, // sap.m.AvatarImageFitType
+						imageFitType: sap.m.AvatarImageFitType.Cover, 
+						showBorder:true // sap.m.AvatarImageFitType
 
 					}),
 					new sap.m.Text({
-						text: name
+						text: name,
+						textAlign: 'Center'
 
 					}),
 					new sap.m.Text({
-						text: email
-
+						text: email,
+						textAlign: 'Center'
 					}),
 					new Button({
 						text: "Edit Profile",
-						type: ButtonType.Transparent,
+						type: ButtonType.Ghost,
 						press: function (oEvent) {
 							that.onEditProfile(oEvent);
 						}
 					}),
 					new Button({
 						text: 'Logout',
-						type: ButtonType.Transparent,
+						type: ButtonType.Ghost,
 						press: function (oEvent) {
 							that.onLogOut(oEvent);
 						}
 					})
 				]
-			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName PopImage');
+			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName PopImage ProfileBtns');
 			oPopover.openBy(event.getSource());
 		},
 		onEditProfile: function () {
@@ -1605,6 +1612,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
+						var MeetingRequestsCount = data.length;
+					oAdminModel.setProperty("/MeetingRequestsCount", MeetingRequestsCount);
 					oAdminModel.setProperty("/getMeetingRequests", data);
 				},
 				type: "GET"
@@ -1631,6 +1640,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
+						var OnSpotMeetingRequestCount = data.length;
+					oAdminModel.setProperty("/OnSpotMeetingRequestCount", OnSpotMeetingRequestCount);
 					oAdminModel.setProperty("/getOnSpotMeetingRequest", data);
 				},
 				type: "GET"
@@ -1710,6 +1721,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
+					var OnGoingMeetingCount = data.length;
+					oAdminModel.setProperty("/OnGoingMeetingCount", OnGoingMeetingCount);
 					oAdminModel.setProperty("/getOnGoingMeeting", data);
 				},
 				type: "GET"
@@ -2149,6 +2162,7 @@ sap.ui.define([
 			oPopover.openBy(event.getSource());
 		}
 
+	
 	});
 
 });

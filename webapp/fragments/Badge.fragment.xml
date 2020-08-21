@@ -41,5 +41,8 @@
 		<beginButton>
 			<Button text="CheckIn" type="Accept" press="onCheckIn"/>
 		</beginButton>
+		<endButton>
+			<Button text="Close" type="Reject" press="onCancel"/>
+		</endButton>
 	</Dialog>
 </core:FragmentDefinition>

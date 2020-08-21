@@ -190,6 +190,8 @@ sap.ui.define([
 			this.onCheckedOut();
 			this.onTotalVisittor();
 			this.onUpcoming();
+			this.OnGoingMeeting();
+			this.onMeetingRequest();
 			webSocket = new WebSocket("WSS://vms14p2002476963trial.hanatrial.ondemand.com/VMS/chat/" + oHostModel.getProperty("/eId"));
 			webSocket.onerror = function (event) {
 				var message = JSON.parse(event.data);
@@ -888,6 +890,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
+					var OnSpotMeetingRequestCount = data.length;
+					oHostModel.setProperty("/OnSpotMeetingRequestCount", OnSpotMeetingRequestCount);
 					oHostModel.setProperty("/getOnSpotMeetingRequest", data);
 				},
 				type: "GET"
@@ -914,6 +918,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
+					var OnGoingMeetingCount = data.length;
+					oHostModel.setProperty("/OnGoingMeetingCount", OnGoingMeetingCount);
 					oHostModel.setProperty("/getOnGoingMeeting", data);
 				},
 				type: "GET"
@@ -1129,16 +1135,17 @@ sap.ui.define([
 						displaySize: sap.m.AvatarSize.L, // sap.m.AvatarSize
 						customDisplaySize: "3rem", // sap.ui.core.CSSSize
 						customFontSize: "1.125rem", // sap.ui.core.CSSSize
-						imageFitType: sap.m.AvatarImageFitType.Cover, // sap.m.AvatarImageFitType
+						imageFitType: sap.m.AvatarImageFitType.Cover, 
+						showBorder:true // sap.m.AvatarImageFitType
 
 					}),
 					new sap.m.Text({
-						text: name
-
+						text: name,
+							textAlign: 'Center'
 					}),
 					new sap.m.Text({
-						text: email
-
+						text: email,
+						textAlign: 'Center'
 					}),
 
 					new Button({
@@ -1156,7 +1163,7 @@ sap.ui.define([
 						}
 					})
 				]
-			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName PopImage');
+			}).addStyleClass('sapMOTAPopover sapTntToolHeaderPopover ProfileName PopImage ProfileBtns');
 			oPopover.openBy(event.getSource());
 		},
 		onEditProfile: function () {
