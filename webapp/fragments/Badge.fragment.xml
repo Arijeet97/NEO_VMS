@@ -8,7 +8,7 @@
 			<HBox>
 				<VBox>
 				<Avatar src="data:image/png;base64,{oLoginModel>/getBadge/photo}" class="sapUiMediumMarginBegin sapUiMediumMarginTop" displaySize="L" imageFitType="Cover"/>
-				<Image src="data:image/png;base64,{oLoginModel>/getBadge/qrCode}" height="100px" width="100px" class="sapUiMediumMarginBegin sapUiSmallMarginTop" ></Image>
+				<Image src="data:image/png;base64,{oLoginModel>/getBadge/qrCode}" height="100px" width="100px" class="BadgeQR sapUiSmallMarginTop" ></Image>
 			</VBox>
 				<VBox class="sapUiSmallMarginBeginEnd sapUiMediumMarginTop sapUiMediumMarginBottom">
 					<HBox>
@@ -25,15 +25,15 @@
 					</HBox>
 					<HBox>
 						<Label text="Purpose:" class="Badge"></Label>
-						<Text text="{oLoginModel>/getBadge/purpose}" class="BadgeText sapUiMediumMarginBegin"></Text>
+						<Text text="{oLoginModel>/getBadge/purpose}" class="PBadgeMargin"></Text>
 					</HBox>
 					<HBox>
 						<Label text="Host: " class="Badge"></Label>
-						<Text text="{oLoginModel>/getBadge/hostName}" class="BadgeText sapUiSmallMarginBegin sapUiLargeMarginBegin"></Text>
+						<Text text="{oLoginModel>/getBadge/hostName}" class="HBadgeMargin"></Text>
 					</HBox>
 					<HBox>
-						<Label text="Room:" class="Badge"></Label>
-						<Text text="{oLoginModel>/getBadge/meetingRoom}" class="BadgeText sapUiLargeMarginBegin "></Text>
+						<Label text="Room: " class="Badge"></Label>
+						<Text text="{oLoginModel>/getBadge/meetingRoom}" class="RBadgeMargin"></Text>
 					</HBox>
 				</VBox>
 			</HBox>

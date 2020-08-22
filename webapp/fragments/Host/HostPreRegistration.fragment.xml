@@ -39,7 +39,7 @@
 				<Text text="{i18n>status}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
-				<Text text="{i18n>action}"/>
+				<Text text="{i18n>details}"/>
 			</Column>
 		</columns>
 		<items>

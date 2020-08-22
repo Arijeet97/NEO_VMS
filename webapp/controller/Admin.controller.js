@@ -266,10 +266,18 @@ sap.ui.define([
 					},
 					type: "GET"
 				});
-				setTimeout(function () {
-					msg.close();
-				}, 2000);
+			
 			};
+			
+			var endDate = new Date();
+			var eDate = oDateFormat.format(endDate);
+			this.getView().getModel("oAdminModel").setProperty("/eDate", eDate);
+			
+			var startDate = new Date();
+			startDate.setDate(startDate.getDate() - 30);
+				var sDate = oDateFormat.format(startDate);
+			this.getView().getModel("oAdminModel").setProperty("/sDate", sDate);
+			this.onReports();
 		},
 		//date
 		_data: {
@@ -430,8 +438,8 @@ sap.ui.define([
 		// Reports
 		onReports: function () {
 			var that = this;
-			var sdate = this.getView().byId("sdate").getValue();
-			var edate = this.getView().byId("edate").getValue();
+			var sdate =	this.getView().getModel("oAdminModel").getProperty("/sDate");
+			var edate = 	this.getView().getModel("oAdminModel").getProperty("/eDate");
 			var oAdminModel = that.getOwnerComponent().getModel("oAdminModel");
 			var sUrl2 = "/JAVA_SERVICE/admin/report?begin=" + sdate + "&end=" + edate;
 			$.ajax({
@@ -669,7 +677,7 @@ sap.ui.define([
 				// },
 				success: function (oData) {
 					if (oData.status === 200) {
-						alert("Profile Updated Successfully");
+						MessageBox.alert("Profile Updated Successfully");
 						that.onRefreshImage();
 					}
 
@@ -677,7 +685,7 @@ sap.ui.define([
 
 				},
 				error: function (e) {
-					alert("Update Failed");
+					MessageBox.alert("Update Failed");
 
 				}
 
@@ -700,7 +708,7 @@ sap.ui.define([
 
 		},
 		onFail: function (message) {
-			alert("Failed because: " + message);
+			MessageBox.alert("Failed because: " + message);
 		},
 
 		// SEARCHING  
@@ -1355,7 +1363,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					alert("Blacklisted Successfully");
+					MessageBox.alert("Blacklisted Successfully");
 
 				}
 			});
@@ -1400,7 +1408,7 @@ sap.ui.define([
 			var vdate = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetDate").getValue();
 			var vpark = this.getView().getModel("oHostModel").getProperty("/sParking");
 			if (!vfirstName || !vlastName || !vemail || !vcontactNo || !vpurpose || !vorganisation || !vdate || !vpark) {
-				alert("Please fill all the mandatory details");
+				MessageBox.alert("Please fill all the mandatory details");
 			} else {
 				this._oDialog.close();
 				if (!this._oDialog1) {
@@ -1523,14 +1531,14 @@ sap.ui.define([
 				success: function (data) {
 					var that = this;
 					if (data.mId === null) {
-						alert("Registration Unsuccessful");
+						MessageBox.alert("Registration Unsuccessful");
 					} else {
 						sap.m.MessageToast.show("Registration Successfully");
 					}
 
 				},
 				error: function (err) {
-					alert("Registration Failed");
+					MessageBox.alert("Registration Failed");
 				}
 			});
 			this._oDialog1.close();
@@ -2027,7 +2035,7 @@ sap.ui.define([
 
 				},
 				error: function (e) {
-					alert("Update Failed");
+					MessageBox.alert("Update Failed");
 
 				}
 
@@ -2074,7 +2082,7 @@ sap.ui.define([
 
 				},
 				error: function (e) {
-					alert("Update Failed");
+					MessageBox.alert("Update Failed");
 
 				}
 

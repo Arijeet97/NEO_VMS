@@ -2,18 +2,18 @@
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:ui="sap.suite.ui.microchart" xmlns:viz.data="sap.viz.ui5.data">
 	<l:HorizontalLayout class="date">
 		<Label class="dateReport" text=" Start Date:"/>
-		<DatePicker class="date" id="sdate" valueFormat="MMM dd, yyyy" />
+		<DatePicker class="date" id="sdate" value="{oAdminModel>/sDate}" valueFormat="MMM dd, yyyy" />
 	</l:HorizontalLayout>
 	<l:HorizontalLayout class="date">
 		<Label class="dateReport" text="End Date:"/>
-		<DatePicker class="date" id="edate" valueFormat="MMM dd, yyyy" />
+		<DatePicker class="date" id="edate" value="{oAdminModel>/eDate}" valueFormat="MMM dd, yyyy" />
 	</l:HorizontalLayout>
 	<Button text="get data" class="date" type="Emphasized" press="onReports"></Button>
 	<!--<Button icon="sap-icon://download" class="date" id="idbtn1" text="Export Pdf"  type="Ghost" press="onDownloadPdf"></Button>-->
 	<!--<Button icon="sap-icon://download" class="date" text="Export Excel"   type="Ghost" press="onDownloadExcel"></Button>-->
 	<l:VerticalLayout width="100%">
 		<!--<FlexBox width="22rem" height="13rem" class="donut" alignItems="Center" justifyContent="SpaceBetween">-->
-			<l:Grid defaultSpan="XL3 L6 M6 S12">
+			<l:Grid defaultSpan="XL6 L6 M6 S12">
 			<l:content>
 	
 			<ui:InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="4" press="press">
@@ -26,11 +26,11 @@
 				
 			</ui:InteractiveDonutChart>
 			
-			<ui:InteractiveBarChart labelWidth="25%" displayedBars="3" class="Microchart" selectionChanged="selectionChanged" press="press">
+			<ui:InteractiveBarChart labelWidth="25%" displayedBars="3"  selectionChanged="selectionChanged" press="press">
 						<ui:bars>
-							<ui:InteractiveBarChartBar label="Frequent Visitors" value="{oAdminModel>/DFrequentVisitor}" color="Critical"/>
-							<ui:InteractiveBarChartBar label="Blacklisted Visitors" value="{oAdminModel>/DBlacklisted}" color="Good" />
-							<ui:InteractiveBarChartBar label="Others" value="{oAdminModel>/DOthers}" color="Error"/>
+							<ui:InteractiveBarChartBar label="Frequent Visitors" value="{oAdminModel>/DFrequentVisitor}" color="Good"/>
+							<ui:InteractiveBarChartBar label="Blacklisted Visitors" value="{oAdminModel>/DBlacklisted}" color="Error" />
+							<ui:InteractiveBarChartBar label="Others" value="{oAdminModel>/DOthers}" color="Critical"/>
 						</ui:bars>
 					
 				</ui:InteractiveBarChart>

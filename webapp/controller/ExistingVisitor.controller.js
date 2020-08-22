@@ -4,8 +4,9 @@ sap.ui.define([
 	"sap/ui/core/Fragment",
 	"sap/ui/core/UIComponent",
 	"sap/ui/core/Core",
-	"sap/m/MessageToast"
-], function (Controller, JSONModel, Fragment, UIComponent, Core, MessageToast) {
+	"sap/m/MessageToast",
+	"sap/m/MessageBox"
+], function (Controller, JSONModel, Fragment, UIComponent, Core, MessageToast,MessageBox) {
 	"use strict";
 	var oView;
 	return Controller.extend("inc.inkthn.neo.NEO_VMS.controller.ExistingVisitor", {
@@ -70,11 +71,11 @@ sap.ui.define([
 							that.getView().byId("badgeBtn").setEnabled(true);
 
 					} else {
-						alert("Edit Details Failed");
+						MessageBox.alert("Edit Details Failed");
 					}
 				},
 				error: function (err) {
-					alert("Registration Failed");
+					MessageBox.alert("Registration Failed");
 				}
 			});
 		},
@@ -199,7 +200,7 @@ sap.ui.define([
            
 		},
 		onFail: function (message) {
-			alert("Failed because: " + message);
+			MessageBox.alert("Failed because: " + message);
 		}
 	});
 

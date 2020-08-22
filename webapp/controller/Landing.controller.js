@@ -5,8 +5,9 @@ sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/core/Core",
 	"sap/m/MessageToast",
-	"sap/ndc/BarcodeScanner"
-], function (Controller, JSONModel, Fragment, UIComponent, Core, MessageToast, BarcodeScanner) {
+	"sap/ndc/BarcodeScanner",
+		"sap/m/MessageBox"
+], function (Controller, JSONModel, Fragment, UIComponent, Core, MessageToast, BarcodeScanner,MessageBox) {
 	"use strict";
 
 	return Controller.extend("inc.inkthn.neo.NEO_VMS.controller.Landing", {
@@ -90,7 +91,7 @@ sap.ui.define([
 						}
 						sap.m.MessageToast.show("Logged In Successfully!");
 					} else if (oData.status === false) {
-						alert("User doesn't exist");
+						MessageBox.alert("User doesn't exist");
 					}
 				},
 				error: function (e) {
@@ -118,7 +119,7 @@ sap.ui.define([
 		onPressVerify: function () {
 			this.bflag = true;
 			var that = this;
-
+				var oLoginModel = this.getOwnerComponent().getModel("oLoginModel");
 			var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");
 			var sUrl = "/JAVA_SERVICE/visitor/sendOtp";
 			var item = {
@@ -167,8 +168,51 @@ sap.ui.define([
 						}
 						that.getView().addDependent(that._oDialog2);
 						that._oDialog2.open();
-					} else if (data.status === 500) {
-						alert("Could Not Send");
+					} else if(data.status === 300){
+						var oRouter6 = sap.ui.core.UIComponent.getRouterFor(that);
+							oRouter6.navTo("RouteExistingVisitor");
+							var sUrl2 = "/JAVA_SERVICE/visitor/getVisitorDetails?vhId=" + vhId;
+							$.ajax({
+								url: sUrl2,
+								data: null,
+								async: true,
+								cache: false,
+								dataType: "json",
+								contentType: "application/json; charset=utf-8",
+								error: function (err) {
+									sap.m.MessageToast.show("Destination Failed");
+								},
+								success: function (data1) {
+									var ExvhId = data1.vhId;
+									var visitorName = data1.visitorName;
+									var eId = data1.eId;
+									var email = data1.email;
+									var contactNo = data1.contactNo;
+									var puprose = data1.puprose;
+									var organisation = data1.organisation;
+									var hostName = data1.hostName;
+									var date = data1.date;
+									var proofType = data1.proofType;
+									var proofNo = data1.proofNo;
+									oLoginModel.setProperty("/ExvhId", ExvhId);
+									oLoginModel.setProperty("/ExeId", eId);
+									oLoginModel.setProperty("/ExvisitorName", visitorName);
+									oLoginModel.setProperty("/Exemail", email);
+									oLoginModel.setProperty("/ExcontactNo", contactNo);
+									oLoginModel.setProperty("/Expuprose", puprose);
+									oLoginModel.setProperty("/Exorganisation", organisation);
+									oLoginModel.setProperty("/ExhostName", hostName);
+									oLoginModel.setProperty("/Exdate", date);
+									oLoginModel.setProperty("/ExpersonalIdType", proofType);
+									oLoginModel.setProperty("/ExidentityNo", proofNo);
+
+								},
+								type: "GET"
+							});
+						
+					}
+					else if (data.status === 500) {
+						MessageBox.alert("Could Not Send");
 					}
 				},
 				type: "POST"
@@ -239,10 +283,10 @@ sap.ui.define([
 								type: "GET"
 							});
 						} else if (data.status === 300) {
-							alert("Otp Expired Please Try Again");
+							MessageBox.alert("Otp Expired Please Try Again");
 
 						} else if (data.status === 500) {
-							alert("Could Not Verify");
+							MessageBox.alert("Could Not Verify");
 						}
 
 					},
@@ -277,9 +321,9 @@ sap.ui.define([
 							that.getView().addDependent(that._oDialog11);
 							that._oDialog11.open();
 						} else if (data.status === 300) {
-							alert("expired");
+							MessageBox.alert("expired");
 						} else {
-							alert("Could not verify");
+							MessageBox.alert("Could not verify");
 						}
 
 					}
@@ -348,11 +392,15 @@ sap.ui.define([
 				},
 				type: "POST"
 			});
-
+			that._oDialog2.close();
+			that._oDialog2.destroy();
+			that._oDialog2 = null;
 		},
 		onCheckOutCancel: function () {
 			var that = this;
 			that._oDialog2.close();
+			that._oDialog2.destroy();
+			that._oDialog2 = null;
 			sap.ui.core.Fragment.byId("idcheckoutfrag", "idFeedback").setValue("");
 			sap.ui.core.Fragment.byId("idcheckoutfrag", "idRating").setValue("");
 		},
@@ -379,17 +427,19 @@ sap.ui.define([
 			jQuery.sap.require("sap.ndc.BarcodeScanner");
 			sap.ndc.BarcodeScanner.scan(
 				function (mResult) {
-					alert("Scan Successful\n" +
+					MessageBox.alert("Scan Successful\n" +
 						"Result: " + mResult.text + "\n" +
 						"Format: " + mResult.format + "\n" +
 						"Cancelled: " + mResult.cancelled);
 					var qrCode = mResult.text;
 					that.getView().getModel("oLoginModel").setProperty("/visitorid", qrCode);
+					that.onPressVerify();
 				},
 				function (Error) {
-					alert("Scanning failed: " + Error);
+					MessageBox.alert("Scanning failed: " + Error);
 				}
 			);
+			
 		},
 
 		//FORGOT PASSWORD
@@ -433,7 +483,7 @@ sap.ui.define([
 							}
 							});
 					} else if (data.status === 500) {
-						alert("Could Not Send");
+						MessageBox.alert("Could Not Send");
 					}
 				},
 				type: "GET"
@@ -464,13 +514,13 @@ sap.ui.define([
 					},
 					success: function (data) {
 						if (data.status === 200) {
-							alert("Password Reset Successful");
+							MessageBox.alert("Password Reset Successful");
 							that._oDialog11.close();
 						}
 					}
 				});
 			} else {
-				alert("Password Didn't Match");
+				MessageBox.alert("Password Didn't Match");
 			}
 
 		},

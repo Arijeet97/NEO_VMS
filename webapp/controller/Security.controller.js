@@ -295,7 +295,7 @@ sap.ui.define([
 						sap.m.MessageToast.show("Notification Sent Successfully");
 
 					} else if (data.status === 300) {
-						alert("Mobile Number Doesn't Exist");
+						MessageBox.alert("Mobile Number Doesn't Exist");
 					} else {
 						sap.m.MessageToast.show("Server Not Responding");
 					}
@@ -881,7 +881,7 @@ sap.ui.define([
 				// },
 				success: function (oData) {
 					if (oData.status === 200) {
-						alert("Profile Updated Successfully");
+						MessageBox.alert("Profile Updated Successfully");
 						that.onRefreshPicture();
 					}
 					// this._oDialog3.close();
@@ -890,7 +890,7 @@ sap.ui.define([
 					// this._oDialog3 = null;
 				},
 				error: function (e) {
-					alert("Update Failed");
+					MessageBox.alert("Update Failed");
 					// this._oDialog3.close();
 				}
 
@@ -984,7 +984,7 @@ sap.ui.define([
 
 		},
 		onFail: function (message) {
-			alert("Failed because: " + message);
+			MessageBox.alert("Failed because: " + message);
 		},
 		onCancelProfile: function () {
 			this._oDialog3.close();

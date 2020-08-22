@@ -2,6 +2,7 @@
 	"PreRegFormData":[],
 	"DeliveryData":[],
 	"visitor":[],
-	"NewVisitor":[]	
+	"NewVisitor":[]	,
+	"VisitorsArray":[]
 	
 }

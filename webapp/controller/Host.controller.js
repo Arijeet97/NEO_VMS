@@ -263,7 +263,7 @@ sap.ui.define([
 			var vdate = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetDate").getValue();
 			var vpark = this.getView().getModel("oHostModel").getProperty("/sParking");
 			if (!vfirstName || !vlastName || !vemail || !vcontactNo || !vpurpose || !vorganisation || !vdate || !vpark) {
-				alert("Please fill all the mandatory details");
+				MessageBox.alert("Please fill all the mandatory details");
 			} else {
 				this._oDialog.close();
 				if (!this._oDialog1) {
@@ -386,7 +386,7 @@ sap.ui.define([
 				success: function (data) {
 					var that = this;
 					if (data.mId === null) {
-						alert("Registration Unsuccessful");
+						MessageBox.alert("Registration Unsuccessful");
 					} else {
 						sap.m.MessageToast.show("Registration Successfull");
 
@@ -961,7 +961,7 @@ sap.ui.define([
 
 				},
 				error: function (e) {
-					alert("Extension Failed");
+					MessageBox.alert("Extension Failed");
 					that._oDialog9.close();
 				}
 
@@ -993,7 +993,7 @@ sap.ui.define([
 
 				},
 				error: function (e) {
-					alert("Something happened wrong");
+					MessageBox.alert("Something happened wrong");
 				}
 
 			});
@@ -1083,7 +1083,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					alert("Request Raised Successfully");
+					MessageBox.alert("Request Raised Successfully");
 				}
 			});
 			this.onRefreshBlacklist();
@@ -1229,7 +1229,7 @@ sap.ui.define([
 				// },
 				success: function (oData) {
 					if (oData.status === 200) {
-						alert("Profile Updated Successfully");
+						MessageBox.alert("Profile Updated Successfully");
 						that.onRefreshPicture();
 					}
 					// this._oDialog3.close();
@@ -1238,7 +1238,7 @@ sap.ui.define([
 					// this._oDialog3 = null;
 				},
 				error: function (e) {
-					alert("Update Failed");
+					MessageBox.alert("Update Failed");
 					// this._oDialog3.close();
 				}
 
@@ -1261,7 +1261,7 @@ sap.ui.define([
 
 		},
 		onFail: function (message) {
-			alert("Failed because: " + message);
+			MessageBox.alert("Failed because: " + message);
 		},
 
 		//EXPAND FRAGMENT   

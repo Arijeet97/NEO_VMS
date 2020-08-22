@@ -15,13 +15,13 @@
 						<VBox>
 							<f:SimpleForm layout="ColumnLayout" editable="true" id="idSimpleFormPreReg" title="Enter Personal Details">
 								<f:content>
+									<Label text="{i18n>Email}" required="true"/>
+									<Input id="idEmail" type="Email" class="InputBox" value="{oVisitorModel>/email}" editable="true" change="onVerifyVisitor" required="true"/>
 									<Label text="{i18n>firstname}" required="true"/>
-									<Input id="idfName" class="InputBox" type="Text" value="{oVisitorModel>/firstName}" validationError="handleValidationError"
+									<Input id="idfName" class="InputBox" type="Text" value="{oVisitorModel>/firstName}" editable="true" validationError="handleValidationError"
 										validationSuccess="handleValidationSuccess" valueLiveUpdate="true" required="true"/>
 									<Label text="{i18n>lastname}" required="true"/>
-									<Input id="idlName" class="InputBox" type="Text" value="{oVisitorModel>/lastName}" required="true"/>
-									<Label text="{i18n>Email}" required="true"/>
-									<Input id="idEmail" type="Email" class="InputBox" value="{oVisitorModel>/email}" required="true"/>
+									<Input id="idlName" class="InputBox" type="Text" value="{oVisitorModel>/lastName}" editable="true" required="true"/>
 									<Label text="{i18n>Phone}" required="true"/>
 									<Input id="idPhone" type="Number" class="InputBox" value="{oVisitorModel>/contactNo}" required="true"/>
 									<Label text="{i18n>Identity}"/>
@@ -54,13 +54,13 @@
 										class="MeetInputBox" required="true"/>
 								</f:content>
 							</f:SimpleForm>
-							<Table id="idNewVisitor" inset="true" items="{path: 'oVisitorModel>/NewVisitor'}" visible="{oViewModel>/AddVisVisibility}">
+							<Table id="idNewVisitor" inset="true" items="{path: 'oPreRegForm>/PreRegFormData'}" visible="{oViewModel>/AddVisVisibility}">
 								<headerToolbar>
 									<OverflowToolbar>
 										<content>
 											<Title text="Add Visitor" level="H1" class="Visitortable"/>
-											<ToolbarSpacer></ToolbarSpacer>
-											<Button icon="sap-icon://add-employee" type="Emphasized" press="addVis"></Button>
+											
+											
 										</content>
 									</OverflowToolbar>
 								</headerToolbar>
@@ -90,14 +90,12 @@
 								<items>
 									<ColumnListItem >
 										<cells>
-											<Input id="idfname" value="{oVisitorModel>fName}"></Input>
-											<Input id="idlname" value="{oVisitorModel>lName}"></Input>
-											<Input id="idEmail1" value="{oVisitorModel>emailId}"></Input>
-											<Input id="idPhone1" value="{oVisitorModel>phoneNo}"></Input>
-											<ComboBox id="idPer" selectedKey="{oVisitorModel>proofType}" items="{oViewModel>/list}" class="InputBox">
-												<core:Item text="{oViewModel>Identity}" key="{oViewModel>Identity}"></core:Item>
-											</ComboBox>
-											<Input id="idPerIDNum1" value="{oVisitorModel>idNo}"></Input>
+											<Text  text="{oPreRegForm>fName}"></Text>
+											<Text  text="{oPreRegForm>lName}"></Text>
+											<Text  text="{oPreRegForm>emailId}"></Text>
+											<Text  text="{oPreRegForm>phoneNo}"></Text>
+											<Text  text="{oPreRegForm>proofType}"></Text>
+											<Text text="{oPreRegForm>idNo}"></Text>
 											<Button icon="sap-icon://delete" type="Reject" press="onVisCancel"></Button>
 										</cells>
 									</ColumnListItem>
@@ -111,7 +109,7 @@
 						</HBox>
 						<OverflowToolbar>
 							<ToolbarSpacer/>
-							<Button text="{i18n>ADD}" type="Emphasized" press="onAddVisible"/>
+							<Button text="{i18n>ADD}" type="Emphasized" press="addVis"/>
 							<Button id="idSubmitBtn" type="Success" text="Submit" press="onSubmit" enabled="false"/>
 							<Button text="Close" type="Reject" press="onCancel"/>
 						</OverflowToolbar>

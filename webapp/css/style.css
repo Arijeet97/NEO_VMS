@@ -271,7 +271,7 @@ margin-left: 20%;
 	margin-top: 3%;
 }    
 .Microchart{
-		margin-left: 50%;
+		margin-left: 10%;
 }
 .datelabel {
     margin-left: 5%;
@@ -501,7 +501,44 @@ margin-left:10%;
     display: inline-block;
     white-space: nowrap;
     cursor: text;
+   
     overflow: hidden;
+}
+.PBadgeMargin.sapMText {
+    color: #3c4b5a;
+    font-size: 1rem;
+   font-family: roboto, sans-serif;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+    cursor: text;
+    overflow: hidden;
+    margin-left:1.7rem;
+}
+.HBadgeMargin.sapMText {
+    color: #3c4b5a;
+    font-size: 1rem;
+   font-family: roboto, sans-serif;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+    cursor: text;
+    overflow: hidden;
+     margin-left:3.45rem;
+}
+.RBadgeMargin.sapMText {
+    color: #3c4b5a;
+    font-size: 1rem;
+   font-family: roboto, sans-serif;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+    cursor: text;
+    overflow: hidden;
+     margin-left:2.85rem;
+}
+.BadgeQR{
+	margin-left: 1.3rem !important;
 }
 .badgehead .sapMHdrCntrBGTransparent {
     background-color:#354a5f;
