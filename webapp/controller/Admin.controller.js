@@ -1770,13 +1770,13 @@ sap.ui.define([
 				success: function (oData) {
 					if (oData.status === 200) {
 						sap.m.MessageToast.show("Meeting Extended Successfully");
-						this._oDialog10.close();
+						that._oDialog10.close();
 					}
 
 				},
 				error: function (e) {
 					sap.m.MessageToast.show("Update Failed");
-					this._oDialog10.close();
+					that._oDialog10.close();
 				}
 
 			});

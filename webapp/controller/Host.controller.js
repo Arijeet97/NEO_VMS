@@ -1001,8 +1001,9 @@ sap.ui.define([
 		},
 
 		//BLACKLIST
-		onEnterBlacklist: function () {
+		onEnterBlacklist: function (oEvent) {
 			var that = this;
+			
 			var sUrl = "/JAVA_SERVICE/employee/addBlacklisted";
 			var eId = that.getView().getModel("oHostModel").getProperty("/eId");
 			var vId = that.getView().getModel("oHostModel").getProperty("/vId");
@@ -1022,6 +1023,9 @@ sap.ui.define([
 				},
 				success: function (data) {
 					sap.m.MessageToast.show("Blacklisted Successfully");
+					var path=this.getView().byId("idHostCheckedOut").getBindingContext("items").getObject();
+					var source=path[that.Path].setEnabled(false);
+					
 					var oHostModel = that.getOwnerComponent().getModel("oHostModel");
 					var sUrl1 = "/JAVA_SERVICE/employee/getBlacklistedVisitors?eId=" + oHostModel.getProperty("/eId");
 					$.ajax({
@@ -1046,12 +1050,18 @@ sap.ui.define([
 			this._oDialog2.destroy();
 			this._oDialog2 = null;
 			this.onRefreshBlacklist();
-			// this.getView().getModel("oViewModel").setProperty("/TextVisibility", true);
-			// this.getView().getModel("oViewModel").setProperty("/ButtonVisibility", false);
+			 //this.getView().getModel("oViewModel").setProperty("/TextVisibility", true);
+			 //this.getView().getModel("oViewModel").setProperty("/ButtonVisibility", false);
 
 		},
 		onDoBlacklist: function (oEvent) {
 			var that = this;
+			var oHostModel = that.getOwnerComponent().getModel("oHostModel");
+			var oItem = oEvent.getSource().getBindingContext("oHostModel").getPath();
+			var x = oItem.split("/");
+			var y = x[2];
+			this.Path = parseInt(y, 0);
+			
 			var odata = oEvent.getSource().getBindingContext("oHostModel").getObject();
 			var vId = odata.vId;
 			that.getView().getModel("oHostModel").setProperty("/vId", vId);

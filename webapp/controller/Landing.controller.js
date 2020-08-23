@@ -132,8 +132,7 @@ sap.ui.define([
 				dataType: "json",
 				error: function (err) {
 					sap.m.MessageToast.show("Destination Failed");
-					var oRouter6 = sap.ui.core.UIComponent.getRouterFor(that);
-					oRouter6.navTo("RouteExistingVisitor");
+					
 				},
 				success: function (data) {
 					if (data.status === 200) {
