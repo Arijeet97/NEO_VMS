@@ -11,10 +11,10 @@
 					<Title text="Upcoming Meetings" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<Button icon="sap-icon://synchronize" tooltip="Refresh" press="onRefreshPreReg"></Button>
-					<Label text="Sort By:"></Label>
-					<ComboBox width="8%">
-						<core:Item text="{}"></core:Item>
-					</ComboBox>
+					<!--<Label text="Sort By:"></Label>-->
+					<!--<ComboBox width="8%">-->
+					<!--	<core:Item text="{}"></core:Item>-->
+					<!--</ComboBox>-->
 					<Button text="Add Visitor +" type="Emphasized" press="onAdd"></Button>
 				</content>
 			</OverflowToolbar>

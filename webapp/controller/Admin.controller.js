@@ -1246,7 +1246,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					s
+						var MeetingRequestsCount = data.length;
+					oAdminModel.setProperty("/MeetingRequestsCount", MeetingRequestsCount);
 					oAdminModel.setProperty("/getMeetingRequests", data);
 				},
 				type: "GET"
@@ -1267,7 +1268,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-
+						var OnSpotMeetingRequestCount = data.length;
+					oAdminModel.setProperty("/OnSpotMeetingRequestCount", OnSpotMeetingRequestCount);
 					oAdminModel.setProperty("/getOnSpotMeetingRequest", data);
 				},
 				type: "GET"

@@ -20,7 +20,7 @@
 						</ComboBox>
 						<Label text="{i18n>IDNUMBER}"/>
 						<Input id="idPerIDNum" type="Number" class="InputBox" />
-						<Label text="{i18n>Parking }" required="true"/>
+						<Label text="{i18n>Parking}" required="true"/>
 						<ComboBox id="idPerPark" selectedKey="{oAdminModel>/sParking}" items="{oViewModel>/list1}">
 						<core:Item text="{oViewModel>ParkingType}" key="{oViewModel>Parkingid}"  ></core:Item>
 						</ComboBox>

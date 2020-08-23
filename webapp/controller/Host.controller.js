@@ -1405,6 +1405,8 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
+					var OnSpotMeetingRequestCount = data.length;
+					oHostModel.setProperty("/OnSpotMeetingRequestCount", OnSpotMeetingRequestCount);
 					oHostModel.setProperty("/getOnSpotMeetingRequest", data);
 
 				},

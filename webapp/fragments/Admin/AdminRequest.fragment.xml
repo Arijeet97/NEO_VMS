@@ -16,7 +16,7 @@
 					<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop"  id="onMyVisitors" header="My Visitors" press="onMyVisitors">
 						<TileContent>
 							<!--<core:Icon src="sap-icon://trend-down"></core:Icon>-->
-							<NumericContent class="tileCount" icon="sap-icon://trend-down" value="{oAdminModel>/getOnSpotMeetingRequest}" withMargin="false" ></NumericContent>
+							<NumericContent class="tileCount" icon="sap-icon://trend-down" value="{oAdminModel>/OnSpotMeetingRequestCount}" withMargin="false" ></NumericContent>
 						</TileContent>
 						<layoutData>
 							<l:GridData span="XL3 L3 M6 S12"/>
