@@ -26,7 +26,7 @@
     box-shadow: 0 0 0 0.0625rem rgba(0, 0, 0, 0.1), 0 0.125rem 0.5rem 0 rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
     border: .0625rem solid transparent;
-    width: 100%;
+    
 }
 
 .card.sapFCard .sapFCardHeader {

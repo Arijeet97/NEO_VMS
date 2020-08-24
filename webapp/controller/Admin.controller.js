@@ -1408,7 +1408,7 @@ sap.ui.define([
 			var vpurpose = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idVisPurp").getValue();
 			var vorganisation = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idVisOrg").getValue();
 			var vdate = sap.ui.core.Fragment.byId("idAddVisitorFrag", "idMeetDate").getValue();
-			var vpark = this.getView().getModel("oHostModel").getProperty("/sParking");
+			var vpark = this.getView().getModel("oAdminModel").getProperty("/sParking");
 			if (!vfirstName || !vlastName || !vemail || !vcontactNo || !vpurpose || !vorganisation || !vdate || !vpark) {
 				MessageBox.alert("Please fill all the mandatory details");
 			} else {
@@ -1622,9 +1622,11 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
+					
 						var MeetingRequestsCount = data.length;
 					oAdminModel.setProperty("/MeetingRequestsCount", MeetingRequestsCount);
 					oAdminModel.setProperty("/getMeetingRequests", data);
+				
 				},
 				type: "GET"
 			});
@@ -1679,8 +1681,12 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
+					if(data.status===200){
 					sap.m.MessageToast.show("Meeting Approved Successfully");
-
+					}
+					else {
+						sap.m.MessageToast.show("Meeting Approval Unsuccessful");
+					}
 				},
 				type: "POST"
 			});

@@ -187,8 +187,8 @@ sap.ui.define([
 				error: function (err) {
 					sap.m.MessageToast.show("Destination Failed");
 				},
-				success: function (data) {
-					var NotifCount = data.toString();
+				success: function (data1) {
+					var NotifCount = data1.toString();
 					oSecurityModel.setProperty("/NotifCount", NotifCount);
 				},
 				type: "GET"
@@ -705,6 +705,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
+					 
 					oSecurityModel.setProperty("/Notification", data);
 
 				}

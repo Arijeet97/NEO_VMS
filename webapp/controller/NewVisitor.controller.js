@@ -334,7 +334,7 @@ sap.ui.define([
 				begin: begin,
 				end: end,
 
-				Visitor: Visitor
+				visitor: Visitor
 			};
 			var sUrl = "/JAVA_SERVICE/visitor/newVisitor";
 			$.ajax({
