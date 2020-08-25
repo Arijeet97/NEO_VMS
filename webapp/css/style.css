@@ -668,3 +668,12 @@ margin-left:10%;
 .PreRegButton{
     margin-left: 3.5rem !important;	
 }
+.frequentBar.sapSuiteIBCBar {
+    background-color: #e88509 !important;
+}
+.blacklistBar.sapSuiteIBCBar {
+    background-color: #c91d1d !important;
+}
+.othersBar.sapSuiteIBCBar {
+    background-color: #0f9007 !important;
+}

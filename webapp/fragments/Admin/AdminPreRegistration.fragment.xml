@@ -8,11 +8,10 @@
 					<Title text="Pre Registered Visitors" class="TableTitle" level="H3"/>
 					<ToolbarSpacer width="40%"></ToolbarSpacer>
 					<Label text="Select Employee:"></Label>
-					<ComboBox id="idPerID" selectedKey="{oAdminModel>/selectedEid}" items="{oAdminModel>/getEmployeeList}">
+					<ComboBox id="idPerID" selectedKey="{oAdminModel>/selectedEid}" items="{oAdminModel>/getEmployeeList}" change="onRefreshPreReg">
 					<core:Item text="{oAdminModel>name}" key="{oAdminModel>eId}"></core:Item>
 					</ComboBox>
-					<Button icon="sap-icon://synchronize" tooltip="Refresh" type="Ghost" press="onRefreshPreReg"></Button>
-					<Button text="Add Visitor +" type="Emphasized" press="onAdd"></Button>
+					<Button text="Add Visitor +" type="Emphasized" press="onAdd" ></Button>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>

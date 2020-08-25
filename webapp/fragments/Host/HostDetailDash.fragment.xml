@@ -59,7 +59,7 @@
 					<Title text="Upcoming Meetings" level="H3" class="TableTitle"/>
 					<ToolbarSpacer></ToolbarSpacer>
 				
-					<SearchField width="20%" placeholder="Search by Purpose" liveChange="onUpcomingSearch" class="sapUiSmallMargin"/>
+					<SearchField width="20%" placeholder="Search by Purpose" liveChange="onUpcomingSearch" class="sapUiSmallMargin sapUiSizeCompact"/>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
@@ -104,7 +104,7 @@
 					<Title text="CheckedIn" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 
-					<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedInSearch" class="sapUiSmallMargin"/>
+					<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedInSearch" class="sapUiSmallMargin sapUiSizeCompact"/>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
@@ -153,7 +153,7 @@
 					<ToolbarSpacer></ToolbarSpacer>
 				
 					
-					<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedOutSearch" class="sapUiSmallMargin"/>
+					<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedOutSearch" class="sapUiSmallMargin sapUiSizeCompact"/>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
@@ -210,7 +210,7 @@
 					<Title text="Total Visitors" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					
-					<SearchField width="20%" placeholder="Search by Name" liveChange="onTotalVisSearch" class="sapUiSmallMargin"/>
+					<SearchField width="20%" placeholder="Search by Name" liveChange="onTotalVisSearch" class="sapUiSmallMargin sapUiSizeCompact"/>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
@@ -238,7 +238,7 @@
 					<Text text="{oHostModel>contactNo}"/>
 					<Text text="{oHostModel>organization}"/>
 					<Text text="{oHostModel>purpose}"/>
-				   	<Toolbar>
+				   	<Toolbar style="Clear">
 					<Button id="idBlacklistBtn1" class="blacklistBtnT" icon="sap-icon://sys-cancel" type="Reject" press="onDoBlacklist" visible="{oHostModel>ButtonVisibilityT}"></Button>
 					<Text id="idBlacklistTxt1" class="blacklistTextT"  text="Blacklisted" visible="{oHostModel>TextVisibilityT}"></Text>
 				</Toolbar>

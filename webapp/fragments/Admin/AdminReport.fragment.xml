@@ -28,9 +28,9 @@
 		<FlexBox height="13rem" class="donut" alignItems="Center" justifyContent="SpaceBetween" >
 			<ui:InteractiveBarChart labelWidth="25%" displayedBars="3"  selectionChanged="selectionChanged" press="press">
 						<ui:bars>
-							<ui:InteractiveBarChartBar label="Frequent Visitors" value="{oAdminModel>/DFrequentVisitor}" color="Good"/>
-							<ui:InteractiveBarChartBar label="Blacklisted Visitors" value="{oAdminModel>/DBlacklisted}" color="Error" />
-							<ui:InteractiveBarChartBar label="Others" value="{oAdminModel>/DOthers}" color="Critical"/>
+							<ui:InteractiveBarChartBar label="Frequent Visitors" value="{oAdminModel>/DFrequentVisitor}" color="Good" class="frequentBar"/>
+							<ui:InteractiveBarChartBar label="Blacklisted Visitors" value="{oAdminModel>/DBlacklisted}" color="Error" class="blacklistBar"/>
+							<ui:InteractiveBarChartBar label="Others" value="{oAdminModel>/DOthers}" color="Critical" class="othersBar"/>
 						</ui:bars>
 					
 				</ui:InteractiveBarChart>

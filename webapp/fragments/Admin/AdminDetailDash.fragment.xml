@@ -7,7 +7,6 @@
 		<l:VerticalLayout width="100%" class="TileStyle">
 				<l:Grid>
 				<l:content>
-					
 					<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onUpcoming" header="Upcoming Meetings" press="onUpcoming">
 						<TileContent>
 								<NumericContent class="tileCount" icon="sap-icon://appointment" value="{oAdminModel>/UpcomingCount}" withMargin="false" ></NumericContent>
@@ -55,8 +54,7 @@
 					<content>
 						<Title text="Upcoming Meetings" class="TableTitle" level="H3"/>
 						<ToolbarSpacer></ToolbarSpacer>
-					
-						<SearchField width="20%" placeholder="Search by Purpose" liveChange="onUpcomingSearch" class="sapUiSmallMargin" />
+						<SearchField width="20%" placeholder="Search by Purpose" liveChange="onUpcomingSearch" class="sapUiSmallMargin sapUiSizeCompact"/>
 					</content>
 				</OverflowToolbar>
 			</headerToolbar>
@@ -101,7 +99,7 @@
 						<Title text="CheckedIn" class="TableTitle" level="H3"/>
 						<ToolbarSpacer></ToolbarSpacer>
 						
-						<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedInSearch" class="sapUiSmallMargin" />
+						<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedInSearch" class="sapUiSmallMargin sapUiSizeCompact" />
 					</content>
 				</OverflowToolbar>
 			</headerToolbar>
@@ -148,7 +146,7 @@
 						<Title text="CheckedOut" class="TableTitle" level="H3"/>
 						<ToolbarSpacer></ToolbarSpacer>
 					
-						<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedInSearch" class="sapUiSmallMargin" />
+						<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedInSearch" class="sapUiSmallMargin sapUiSizeCompact" />
 					</content>
 				</OverflowToolbar>
 			</headerToolbar>
@@ -204,7 +202,7 @@
 						<Title text="Frequent Visitors" class="TableTitle" level="H3"/>
 						<ToolbarSpacer></ToolbarSpacer>
 					
-					<SearchField width="20%" placeholder="Search by Name" liveChange="onFreqVisSearch" class="sapUiSmallMargin" />
+					<SearchField width="20%" placeholder="Search by Name" liveChange="onFreqVisSearch" class="sapUiSmallMargin sapUiSizeCompact" />
 					</content>
 				</OverflowToolbar>
 			</headerToolbar>

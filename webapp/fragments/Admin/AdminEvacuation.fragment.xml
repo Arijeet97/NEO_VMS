@@ -19,7 +19,7 @@
 						<Title id="Visitors" text="Visitors Present"/>
 						<ToolbarSpacer/>
 						<ToolbarSeparator/>
-						<SearchField placeholder="Search By Name" liveChange="onVisSearch" search="onVisSearch" class="sapUiSmallMargin" width="13rem"/>
+						<SearchField placeholder="Search By Name" liveChange="onVisSearch" search="onVisSearch" class="sapUiSmallMargin sapUiSizeCompact" width="13rem"/>
 					</OverflowToolbar>
 				</ui:extension>
 				<ui:columns>
@@ -45,7 +45,7 @@
 						<Title id="Employees" text="Employees"/>
 						<ToolbarSpacer/>
 						<ToolbarSeparator/>
-						<SearchField placeholder="Search By Name" liveChange="onEmpSearch" search="onEmpSearch" class="sapUiSmallMargin"  width="13rem"/>
+						<SearchField placeholder="Search By Name" liveChange="onEmpSearch" search="onEmpSearch" class="sapUiSmallMargin sapUiSizeCompact"  width="13rem"/>
 					</OverflowToolbar>
 				</ui:extension>
 				<ui:columns>
