@@ -1,9 +1,6 @@
 <core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<!--	<l:HorizontalLayout class="date">-->
-	<!--	<Label class="datelabel" text="Date:"/>-->
-	<!--	<DatePicker class="date" id="evacDate" dateValue="{oSecurityModel>/Date}" valueFormat="MMM dd, yyyy"/>-->
-	<!--</l:HorizontalLayout>-->
+
 	<Table id="SecurityDelivery" inset="true" items="{ path: 'oSecurityModel>/getRecentDeliveries'}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>

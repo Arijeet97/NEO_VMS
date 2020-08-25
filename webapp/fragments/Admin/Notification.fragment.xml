@@ -4,9 +4,7 @@
 			<Button text="Close" type="Back" press="onNotificationPopoverClose"/>
 		</endButton>
 		<content>
-			<!--<List id="list" mode="Delete" delete="handleDelete" enableBusyIndicator="true" growing="true" items="{ path: 'oHostModel>/Notification' }">-->
-			<!--<StandardListItem title="{oHostModel>contents}" iconDensityAware="false" iconInset="false"/>-->
-			<!--</List>-->
+		
 			<List items="{path: 'oAdminModel>/Notification'}">
 				<layoutData>
 				<FlexItemData maxWidth="10%"/>

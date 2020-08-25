@@ -11,7 +11,7 @@
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onExpected" header="Expected Visitors" press="onExpected">
 					<TileContent>
 							<NumericContent class="tileCount" icon="sap-icon://trend-down" value="{oSecurityModel>/ExpectedCount}" withMargin="false" ></NumericContent>
-						<!--<core:Icon src="sap-icon://trend-down"></core:Icon>-->
+					
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
@@ -20,7 +20,7 @@
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onNoShow" header="No Show Visitors" press="onNoShow">
 					<TileContent >
 						<NumericContent class="tileCount" icon="sap-icon://trend-up" value="{oSecurityModel>/NoShowCount}" withMargin="false" ></NumericContent>
-						<!--<core:Icon src="sap-icon://trend-up"></core:Icon>-->
+					
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>

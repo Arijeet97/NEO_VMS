@@ -55,25 +55,7 @@ sap.ui.define([
 			});
 
 		},
-		// addVis: function () {
-		// 	// var PreRegData=this.byId(sap.ui.core.Fragment.createId("idAddItemFrag", "idVisitor").getModel("PreRegData"));
-		// 	var oVisitorModel = this.getView().getModel("oVisitorModel");
-		// 	var item = oVisitorModel.getProperty("/NewVisitor");
-		// 	var obj = {
-		// 		"fName": "",
-		// 		"lName": "",
-		// 		"emailId": "",
-		// 		"phoneNo": "",
-		// 		"proofType": "",
-		// 		"idNo": ""
-		// 	};
-		// 	oVisitorModel.getData().NewVisitor.push(obj);
-		// 	// oVisitorModel.setData({
-		// 	// 	"NewVisitor": item
-		// 	// });
-		// 	oVisitorModel.refresh();
-
-		// },
+	
 		addVis:function(){
 			this.bflag=true;
 		     if (!this._oDialog) {
@@ -295,8 +277,10 @@ sap.ui.define([
 		}
 		},
 		onSubmit: function () {
-			var that = this;
+			var oDialog = new sap.m.BusyDialog();
+			oDialog.open();
 			var firstName = this.getView().getModel("oVisitorModel").getProperty("/firstName");
+			var that = this;
 			var lastName = this.getView().getModel("oVisitorModel").getProperty("/lastName");
 			var email = this.getView().getModel("oVisitorModel").getProperty("/email");
 			var contactNo = this.getView().getModel("oVisitorModel").getProperty("/contactNo");
@@ -304,15 +288,12 @@ sap.ui.define([
 			var identityNo = this.getView().getModel("oVisitorModel").getProperty("/identityNo");
 			var organisation = this.getView().getModel("oVisitorModel").getProperty("/organisation");
 			var purpose = this.getView().getModel("oVisitorModel").getProperty("/purpose");
-			// var oSplit = this.getView().getModel("oVisitorModel").getProperty("/eId");
-			// var sId = oSplit.split("=");
-			// var i = sId[1];
-			// var eId = parseInt(i, [0]);
+		
 			var eId = this.getView().getModel("oVisitorModel").getProperty("/eId");
 			var date = this.getView().getModel("oVisitorModel").getProperty("/date");
 			var begin = this.getView().getModel("oVisitorModel").getProperty("/begin");
 			var end = this.getView().getModel("oVisitorModel").getProperty("/end");
-			// var Visitor = this.getView().getModel("oVisitorModel").getProperty("/NewVisitor");
+			
 			var Visitor = this.getView().getModel("oPreRegForm").getProperty("/PreRegFormData");
 			var typeId = 1;
 			if (!firstName || !email || !purpose || !end || !begin || !contactNo || !organisation || !date || !eId || !lastName) {
@@ -345,15 +326,11 @@ sap.ui.define([
 				data: {
 					"data": JSON.stringify(payload)
 				},
-				// beforeSend: function (xhr) {
-				// 	var param = "/JAVA_SERVICE_CF";
-				// 	var token = that.getCSRFToken(sUrl, param);
-				// 	xhr.setRequestHeader("X-CSRF-Token", token);
-				// 	xhr.setRequestHeader("Accept", "application/json");
-				// },
+			
 				success: function (oData) {
 					if (oData.status === 200) {
 						sap.m.MessageToast.show("Registered  Successfully");
+						oDialog.close();
 						if (!that._oDialog1) {
 							that._oDialog1 = sap.ui.xmlfragment("idOnSpotSuccess", "inc.inkthn.neo.NEO_VMS.fragments.OnSpotSuccess", that);
 						}
@@ -392,14 +369,7 @@ sap.ui.define([
 			var oRouter1 = sap.ui.core.UIComponent.getRouterFor(this);
 			oRouter1.navTo("RouteLanding");
 		},
-		// onAddVisible: function () {
-		// 	var visibility = this.getView().getModel("oViewModel").getProperty("/AddVisVisibility");
-		// 	if (visibility === false) {
-		// 		this.getView().getModel("oViewModel").setProperty("/AddVisVisibility", true);
-		// 	} else {
-		// 		this.getView().getModel("oViewModel").setProperty("/AddVisVisibility", false);
-		// 	}
-		// },
+	
 		onAddVisible: function () {
 				this.getView().getModel("oViewModel").setProperty("/AddVisVisibility", true);
 			var fName=this.getView().getModel("oVisitorModel").getProperty("/NewfirstName");
@@ -483,19 +453,7 @@ sap.ui.define([
 			var oFileUploader = this.byId("fileUploader");
 			oFileUploader.upload();
 		}
-		// handleValidationError: function (oEvent) {
-		// 	var input = this.getView().byId("idfName").getValue();
-		// 	var regexp = '^[A-Za-z]*$';
-		// 	 var isValid = input.search(regexp);
-			
-		// 	oEvent.getSource().setValueState(oEvent.getParameter("oldValue"));
-		// },
-		// handleValidationSuccess: function (oEvent) {
-		// 	var input = this.getView().byId("idfName").getValue();
-		// 	var regexp = '^[A-Za-z]*$';
-		// 	 var isValid = input.search(regexp);
-		// 	oEvent.getSource().setValueState(sap.ui.core.ValueState.Success);
-		// }
+	
 		
 
 	});

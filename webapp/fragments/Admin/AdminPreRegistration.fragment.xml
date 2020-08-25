@@ -1,9 +1,6 @@
 <core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<!--<l:HorizontalLayout class="date">-->
-	<!--	<Label class="datelabel" text="Date:"/>-->
-	<!--	<DatePicker class="date" dateValue="{/date}"/>-->
-	<!--</l:HorizontalLayout>-->
+
 	<Table id="AdminVisitor" inset="true" items="{ path: 'oAdminModel>/getPreregister'}" alternateRowColors="true" >
 		<headerToolbar>
 			<OverflowToolbar>
@@ -48,11 +45,7 @@
 					<Text text="{oAdminModel>contactNo}"></Text>
 					<Text text="{oAdminModel>puprose}"></Text>
 					<Text text="{oAdminModel>organisation}"></Text>
-					<!--<Toolbar style="Clear">-->
-						<!--<Button tooltip="Edit Visitor Details" icon="sap-icon://edit-outside" type="Accept"></Button>-->
-					<!--	<Button tooltip="Delete Visitor" icon="sap-icon://delete" type="Reject"></Button>-->
-					<!--	<Button tooltip="Expand" icon="sap-icon://navigation-right-arrow" press="onExpandPreRegVis"></Button>-->
-					<!--</Toolbar>-->
+				
 				</cells>
 			</ColumnListItem>
 		</items>

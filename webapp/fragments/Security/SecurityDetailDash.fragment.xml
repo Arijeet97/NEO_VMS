@@ -10,7 +10,7 @@
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onCheckInTile" header="Checked In" press="onCheckedIn">
 					<TileContent>
 							<NumericContent class="tileCount" icon="sap-icon://trend-down" value="{oSecurityModel>/CheckedInCount}" withMargin="false" ></NumericContent>
-						<!--<core:Icon src="sap-icon://trend-down"></core:Icon>-->
+					
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
@@ -19,7 +19,7 @@
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onCheckOutTile" header="Checked Out" press="onCheckedOut">
 					<TileContent >
 						<NumericContent class="tileCount" icon="sap-icon://trend-up" value="{oSecurityModel>/CheckedOutCount}" withMargin="false" ></NumericContent>
-						<!--<core:Icon src="sap-icon://trend-up"></core:Icon>-->
+					
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
@@ -40,7 +40,7 @@
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
-		<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+		<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>MeetId}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
@@ -83,7 +83,7 @@
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>MeetId}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">

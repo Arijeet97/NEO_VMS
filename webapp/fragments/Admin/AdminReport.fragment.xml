@@ -8,15 +8,14 @@
 		<Label class="dateReport" text="End Date:"/>
 		<DatePicker class="date" id="edate" value="{oAdminModel>/eDate}" valueFormat="MMM dd, yyyy" />
 	</l:HorizontalLayout>
-	<Button text="get data" class="date" type="Emphasized" press="onReports"></Button>
-	<!--<Button icon="sap-icon://download" class="date" id="idbtn1" text="Export Pdf"  type="Ghost" press="onDownloadPdf"></Button>-->
-	<!--<Button icon="sap-icon://download" class="date" text="Export Excel"   type="Ghost" press="onDownloadExcel"></Button>-->
+	<Button text="Get data" class="date" type="Emphasized" press="onReports"></Button>
+
 	<l:VerticalLayout width="100%">
-		<!--<FlexBox width="22rem" height="13rem" class="donut" alignItems="Center" justifyContent="SpaceBetween">-->
 			<l:Grid defaultSpan="XL6 L6 M6 S12">
 			<l:content>
+		<FlexBox  height="13rem" class="donut" alignItems="Center" justifyContent="SpaceBetween">
 	
-			<ui:InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="4" press="press">
+			<ui:InteractiveDonutChart  selectionChanged="onSelectionChanged" displayedSegments="4" press="press">
 				
 				<ui:segments>
 					<ui:InteractiveDonutChartSegment label="Frequent Visitors" value="{oAdminModel>/DFrequentVisitor}" displayedValue="{oAdminModel>/DFrequentVisitor}%"/>
@@ -25,7 +24,8 @@
 				</ui:segments>
 				
 			</ui:InteractiveDonutChart>
-			
+		</FlexBox>	
+		<FlexBox height="13rem" class="donut" alignItems="Center" justifyContent="SpaceBetween" >
 			<ui:InteractiveBarChart labelWidth="25%" displayedBars="3"  selectionChanged="selectionChanged" press="press">
 						<ui:bars>
 							<ui:InteractiveBarChartBar label="Frequent Visitors" value="{oAdminModel>/DFrequentVisitor}" color="Good"/>
@@ -34,10 +34,10 @@
 						</ui:bars>
 					
 				</ui:InteractiveBarChart>
+	</FlexBox>
 	
 	</l:content>
 		</l:Grid>
-	<!--</FlexBox>-->
 		 
 	</l:VerticalLayout>
 		<Table id="idAdminTotalVisitor" inset="true" items="{path: 'oAdminModel>/TotalVisitor'}" alternateRowColors="true" >

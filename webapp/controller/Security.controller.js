@@ -70,7 +70,7 @@ sap.ui.define([
 			this.onAvailableSlots();
 			this.onNoShow();
 			this.onExpected();
-
+			this.getView().byId("navlist").setSelectedKey("securityDash");
 			//Evacuation
 
 			var sUrl2 = "/JAVA_SERVICE/admin/getAllPresentInside?date=" + newdate;
@@ -89,7 +89,7 @@ sap.ui.define([
 					var visitor = data.visitorResponses;
 					oSecurityModel.setProperty("/getAllPresent", emp);
 					oSecurityModel.setProperty("/getAllPresent1", visitor);
-					// sap.m.MessageToast.show("Refresh  Success");
+				
 
 				},
 				type: "GET"
@@ -249,7 +249,7 @@ sap.ui.define([
 		},
 		//Delivery
 		onAdd: function () {
-			this.bFlag = true;
+		
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("idNewDelivery", "inc.inkthn.neo.NEO_VMS.fragments.Security.NewDelivery", this);
 			}
@@ -258,16 +258,16 @@ sap.ui.define([
 
 		},
 		onCancel: function () {
-		if(this.bflag===true){
+		
+			this._oDialog.close();
 			this._oDialog.destroy();
 			this._oDialog = null;
-			this._oDialog.close();
-		}
-		else{
+		},
+		onCancelPark:function(){
+			this._oDialog1.close();
 			this._oDialog1.destroy();
 			this._oDialog1 = null;
-			this._oDialog1.close();
-		}
+		
 		},
 		onNotify: function () {
 			
@@ -403,7 +403,7 @@ sap.ui.define([
 
 		//Parking
 		onSpotRegister: function () {
-			this.bflag=false;
+			
 			var oSecurityModel = this.getOwnerComponent().getModel("oSecurityModel");
 
 			
@@ -412,8 +412,7 @@ sap.ui.define([
 			}
 			this.getView().addDependent(this._oDialog1);
 			this._oDialog1.open();
-			
-			// MessageBox.information("There are " + oSecurityModel.getProperty("/NumOfParking") + " Slots Available in Parking Area.");
+		
 		},
 		onBookParking: function () {
 			var that = this;
@@ -792,6 +791,8 @@ sap.ui.define([
 		//Profile
 		onRefreshPicture: function(){
 			var that = this;
+				var oDialog =new sap.m.BusyDialog();
+			oDialog.open();
 			var username = that.getView().getModel("oLoginModel").getProperty("/eId");
 			var password = that.getView().getModel("oLoginModel").getProperty("/password");
 			var sUrl = "/JAVA_SERVICE/employee/login2?username=" + username + "&password=" + password;
@@ -804,6 +805,7 @@ sap.ui.define([
 				contentType: "application/json; charset=utf-8",
 				error: function (err) {
 					sap.m.MessageToast.show("Destination Failed");
+						oDialog.close();
 				},
 				success: function (data) {
 					var email = data.email;
@@ -814,6 +816,7 @@ sap.ui.define([
 					that.getView().getModel("oSecurityModel").setProperty("/image", image);
 					that.getView().getModel("oSecurityModel").setProperty("/name", name);
 					that.getView().getModel("oSecurityModel").setProperty("/contactNo", contactNo);
+						oDialog.close();
 
 				},
 				type: "GET"
@@ -855,6 +858,9 @@ sap.ui.define([
 		},
 		onSaveProfile: function () {
 			var that = this;
+				var oDialog =new sap.m.BusyDialog();
+			oDialog.open();
+			
 			var eId = that.getView().getModel("oSecurityModel").getProperty("/eId");
 			var email = that.getView().getModel("oSecurityModel").getProperty("/email");
 			var contactNo = that.getView().getModel("oSecurityModel").getProperty("/contactNo");
@@ -874,25 +880,21 @@ sap.ui.define([
 				dataType: "json",
 				async: true,
 				data: item,
-				// beforeSend: function (xhr) {
-				// 	var param = "/JAVA_SERVICE_CF";
-				// 	var token = that.getCSRFToken(sUrl, param);
-				// 	xhr.setRequestHeader("X-CSRF-Token", token);
-				// 	xhr.setRequestHeader("Accept", "application/json");
-				// },
+			
 				success: function (oData) {
 					if (oData.status === 200) {
 						MessageBox.alert("Profile Updated Successfully");
+										oDialog.close();
 						that.onRefreshPicture();
 					}
-					// this._oDialog3.close();
+					
 					that._oDialog3.close();
-					// this._oDialog3.destroy();
-					// this._oDialog3 = null;
+				
 				},
 				error: function (e) {
 					MessageBox.alert("Update Failed");
-					// this._oDialog3.close();
+						oDialog.close();
+			
 				}
 
 			});
@@ -963,6 +965,8 @@ sap.ui.define([
 
 						var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
 						oRouter.navTo("RouteLanding");
+						that.getView().getModel("oLoginModel").setProperty("/eId","");
+						that.getView().getModel("oLoginModel").setProperty("/password","");
 					}
 				},
 				type: "POST"
@@ -1007,17 +1011,11 @@ sap.ui.define([
 			oBinding.filter([oFilter]);
 		},
 		handleClose: function (oEvent) {
-			// reset the filter
+
 			var oBinding = oEvent.getSource().getBinding("items");
 			oBinding.filter([]);
 
 			var aContexts = oEvent.getParameter("selectedContexts");
-
-			// for(var i=0;i<aContexts.length;i++){
-
-			// 	aContexts.map(function (oContext) { return oContext.getObject().contactNo; })
-
-			// }
 
 			if (aContexts && aContexts.length) {
 

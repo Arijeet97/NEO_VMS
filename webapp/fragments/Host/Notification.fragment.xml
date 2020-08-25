@@ -19,7 +19,7 @@
 						<Button id="idRejectDelivery" text="Reject" press=".onRejectPress" visible="{oHostModel>AcceptVisibility}"/>
 					</buttons>
 				</NotificationListItem>
-				<!--<Button text="sample"></Button>-->
+				
 				</List>
 			</content>
 		</ResponsivePopover>

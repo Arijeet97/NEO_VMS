@@ -29,9 +29,7 @@ sap.ui.define([
 		onPressLogin: function (oEvent) {
 			var oDialog = this.byId("BusyDialog");
 			oDialog.open();
-			setTimeout(function () {
-				oDialog.close();
-			}, 6000);
+		
 			var username = this.getView().getModel("oLoginModel").getProperty("/eId");
 			var password = this.getView().getModel("oLoginModel").getProperty("/password");
 			var that = this;
@@ -47,12 +45,7 @@ sap.ui.define([
 				data: {
 					"data": JSON.stringify(item)
 				},
-				// beforeSend: function (xhr) {
-				// 	var param = "/JAVA_SERVICE_CF";
-				// 	var token = that.getCSRFToken(sUrl, param);
-				// 	xhr.setRequestHeader("X-CSRF-Token", token);
-				// 	xhr.setRequestHeader("Accept", "application/json");
-				// },
+			
 				success: function (oData) {
 					if (oData.status === true) {
 						if (oData.role === "Employee") {
@@ -66,6 +59,7 @@ sap.ui.define([
 							that.getView().getModel("oHostModel").setProperty("/EMPemail", email);
 							var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
 							oRouter.navTo("RouteHost");
+										oDialog.close();
 						} else if (oData.role === "Admin") {
 							var eId1 = oData.eid;
 							var image1 = oData.image;
@@ -77,6 +71,7 @@ sap.ui.define([
 							that.getView().getModel("oAdminModel").setProperty("/EMPemail", email1);
 							var oRouter1 = sap.ui.core.UIComponent.getRouterFor(that);
 							oRouter1.navTo("RouteAdmin");
+							oDialog.close();
 						} else if (oData.role === "Security") {
 							var eId2 = oData.eid;
 							var image2 = oData.image;
@@ -88,10 +83,12 @@ sap.ui.define([
 							that.getView().getModel("oSecurityModel").setProperty("/EMPemail", email2);
 							var oRouter2 = sap.ui.core.UIComponent.getRouterFor(that);
 							oRouter2.navTo("RouteSecurity");
+							oDialog.close();
 						}
 						sap.m.MessageToast.show("Logged In Successfully!");
 					} else if (oData.status === false) {
 						MessageBox.alert("User doesn't exist");
+						oDialog.close();
 					}
 				},
 				error: function (e) {
@@ -101,18 +98,23 @@ sap.ui.define([
 						that.getView().getModel("oHostModel").setProperty("/eId", eId);
 						var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
 						oRouter.navTo("RouteHost");
+						oDialog.close();
 
 					} else if (oValue === "AKR") {
 						var oRouter1 = sap.ui.core.UIComponent.getRouterFor(that);
 						oRouter1.navTo("RouteAdmin");
+						oDialog.close();
 					} else if (oValue === "JG") {
 						var oRouter2 = sap.ui.core.UIComponent.getRouterFor(that);
 						oRouter2.navTo("RouteSecurity");
+						oDialog.close();
 					}
 					sap.m.MessageToast.show("Server Not Responding");
+						oDialog.close();
 				}
 
 			});
+		
 		},
 
 		//Existing Visitor
@@ -356,6 +358,8 @@ sap.ui.define([
 				success: function (data) {
 					if (data.status === 200) {
 						sap.m.MessageToast.show("Feedback Sent Successful");
+						that.getView().getModel("oLoginModel").setProperty("/visitorid","");
+						
 
 					} else if (data.status === 500) {
 						sap.m.MessageToast.show("Something Happened Wrong");
@@ -398,17 +402,16 @@ sap.ui.define([
 		onCheckOutCancel: function () {
 			var that = this;
 			that._oDialog2.close();
-			that._oDialog2.destroy();
-			that._oDialog2 = null;
+		
 			sap.ui.core.Fragment.byId("idcheckoutfrag", "idFeedback").setValue("");
 			sap.ui.core.Fragment.byId("idcheckoutfrag", "idRating").setValue("");
+					that.getView().getModel("oLoginModel").setProperty("/visitorid","");
 		},
 		onSuccess: function () {
 			var that = this;
-
-			that._oDialog2.close();
 			that._oDialog9.close();
-
+			
+        	that.getView().getModel("oLoginModel").setProperty("/visitorid","");
 		},
 		//New Visitor
 		onNewVisitor: function () {
@@ -470,7 +473,7 @@ sap.ui.define([
 							
 						var	x = setInterval(function() {
 							var now = new Date().getTime();
-							// var time = sap.ui.getCore().byId("timer");
+						
 							var cTime = countdowntime - now;
 							var minutes = Math.floor((cTime % (1000 * 60 * 60)) / (1000 * 60));
 							var second = Math.floor((cTime % (1000 * 60)) / 1000);

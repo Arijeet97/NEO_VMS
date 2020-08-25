@@ -3,19 +3,18 @@
 	<l:HorizontalLayout class="date">
 		<Label class="datelabel" text="Date:"/>
 		<DatePicker class="date" value="{oHostModel>/Date}" valueFormat="MMM dd, yyyy" change="onDateChange"/>
+	
 	</l:HorizontalLayout>
 	<l:VerticalLayout width="100%" class="TileStyle">
 		<l:Grid>
 			<l:content>
-				<!--<l:HorizontalLayout>-->
+			
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop tileimage" id="onUpcoming" header="Upcoming Meetings"
 					press="onUpcoming">
 					<TileContent>
-						<!--<content>-->
-						<!--<Image height="65%" width="10%"  src="./image/tile1.jpg" ></Image>	-->
-						<!--</content>-->
+					
 						<NumericContent class="tileCount" icon="sap-icon://appointment" value="{oHostModel>/UpcomingCount}" withMargin="false"></NumericContent>
-						<!--<core:Icon src="sap-icon://appointment"></core:Icon>-->
+					
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
@@ -24,7 +23,7 @@
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop " id="onCheckInTile" header="Checked In" press="onCheckedIn">
 					<TileContent>
 						<NumericContent class="tileCount" icon="sap-icon://trend-down" value="{oHostModel>/CheckedInCount}" withMargin="false"></NumericContent>
-						<!--<core:Icon src="sap-icon://trend-down"></core:Icon>-->
+					
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
@@ -33,7 +32,7 @@
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop " id="onCheckOutTile" header="Checked Out" press="onCheckedOut">
 					<TileContent >
 						<NumericContent class="tileCount" icon="sap-icon://trend-up" value="{oHostModel>/CheckedOutCount}" withMargin="false"></NumericContent>
-						<!--<core:Icon src="sap-icon://trend-up"></core:Icon>-->
+					
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
@@ -42,13 +41,13 @@
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop " id="onTotalVis" header="Total Visitors" press="onTotalVisittor">
 					<TileContent >
 						<NumericContent class="tileCount" icon="sap-icon://account" value="{oHostModel>/TotalVisitorCount}" withMargin="false"></NumericContent>
-						<!--<core:Icon src="sap-icon://account"></core:Icon>-->
+				
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
 					</layoutData>
 				</GenericTile>
-				<!--</l:HorizontalLayout>-->
+		
 			</l:content>
 		</l:Grid>
 	</l:VerticalLayout>
@@ -59,16 +58,13 @@
 				<content>
 					<Title text="Upcoming Meetings" level="H3" class="TableTitle"/>
 					<ToolbarSpacer></ToolbarSpacer>
-					<!--<Label text="Sort By:"></Label>-->
-					<!--<ComboBox width="8%">-->
-					<!--	<core:Item text="{}"></core:Item>-->
-					<!--</ComboBox>-->
+				
 					<SearchField width="20%" placeholder="Search by Purpose" liveChange="onUpcomingSearch" class="sapUiSmallMargin"/>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns class="tableColumns">
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>Meeting ID}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
@@ -107,16 +103,13 @@
 				<content>
 					<Title text="CheckedIn" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
-					<!--<Label text="Sort By:"></Label>-->
-					<!--<ComboBox width="8%">-->
-					<!--	<core:Item text="{}"></core:Item>-->
-					<!--</ComboBox>-->
+
 					<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedInSearch" class="sapUiSmallMargin"/>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>MeetId}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
@@ -158,16 +151,14 @@
 				<content>
 					<Title text="CheckedOut" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
-					<!--<Label text="Sort By:"></Label>-->
-					<!--<ComboBox width="8%">-->
-					<!--	<core:Item text="{}"></core:Item>-->
-					<!--</ComboBox>-->
+				
+					
 					<SearchField width="20%" placeholder="Search by Name" liveChange="onCheckedOutSearch" class="sapUiSmallMargin"/>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>MeetId}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
@@ -202,9 +193,11 @@
 					<Text text="{oHostModel>purpose}"/>
 					<Text text="{oHostModel>vId}"/>
 					<Text text="{oHostModel>checkedOut}"/>
-					<Button id="idBlacklistBtn" icon="sap-icon://sys-cancel" type="Reject" press="onDoBlacklist" visible="{oViewModel>/ButtonVisibility}"></Button>
-					<Text id="idBlacklistTxt" text="Blacklisted" visible="{oViewModel>/TextVisibility}"></Text>
-					<!--<Image src="data:icon2/png;base64,{oHostModel>/icon2}" displaySize="S" imageFitType="Cover" press="onDoBlacklist"/>-->
+					<Toolbar>
+					<Button id="idBlacklistBtn" class="blacklistBtn" icon="sap-icon://sys-cancel" type="Reject" press="onDoBlacklist" visible="{oHostModel>ButtonVisibility}"></Button>
+					<Text id="idBlacklistTxt" class="blacklistText"  text="Blacklisted" visible="{oHostModel>TextVisibility}"></Text>
+				</Toolbar>
+					
 				</cells>
 			</ColumnListItem>
 		</items>
@@ -216,17 +209,13 @@
 				<content>
 					<Title text="Total Visitors" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
-					<!--<Label text="Sort By:"></Label>-->
-					<!--<ComboBox width="8%">-->
-					<!--	<core:Item text="{}"></core:Item>-->
-					<!--</ComboBox>-->
-					<!--<Button tooltip="Sort By Date" type="Ghost" icon="sap-icon://sort" press="onTotalVisSOrt"></Button>-->
+					
 					<SearchField width="20%" placeholder="Search by Name" liveChange="onTotalVisSearch" class="sapUiSmallMargin"/>
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>name}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
@@ -249,7 +238,10 @@
 					<Text text="{oHostModel>contactNo}"/>
 					<Text text="{oHostModel>organization}"/>
 					<Text text="{oHostModel>purpose}"/>
-					<Button id="idBlacklist" icon="sap-icon://sys-cancel" type="Reject" press="onDoBlacklist"></Button>
+				   	<Toolbar>
+					<Button id="idBlacklistBtn1" class="blacklistBtnT" icon="sap-icon://sys-cancel" type="Reject" press="onDoBlacklist" visible="{oHostModel>ButtonVisibilityT}"></Button>
+					<Text id="idBlacklistTxt1" class="blacklistTextT"  text="Blacklisted" visible="{oHostModel>TextVisibilityT}"></Text>
+				</Toolbar>
 				</cells>
 			</ColumnListItem>
 		</items>

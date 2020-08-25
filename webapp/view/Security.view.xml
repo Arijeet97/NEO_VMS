@@ -19,7 +19,7 @@
 	</tnt:header>
 		<tnt:sideContent>
 			<tnt:SideNavigation class="masterpage" expanded="true" itemSelect=".onItemSelect">
-				<tnt:NavigationList items="{path: 'oGlobalModel>/SecurityMasterDetails'}">
+				<tnt:NavigationList id="navlist" items="{path: 'oGlobalModel>/SecurityMasterDetails'}">
 					<tnt:NavigationListItem text="{oGlobalModel>title}" icon="{oGlobalModel>icon}" expanded="{oGlobalModel>expanded}" key="{oGlobalModel>key}"></tnt:NavigationListItem>
 				</tnt:NavigationList>
 			</tnt:SideNavigation>

@@ -6,7 +6,7 @@
 				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onTileRequest" header="Meeting Request" press="onMeetingRequest">
 					<TileContent>
 							<NumericContent class="tileCount" icon="sap-icon://request" value="{oHostModel>/OnSpotMeetingRequestCount}" withMargin="false" ></NumericContent>
-						<!--<core:Icon src="sap-icon://request"></core:Icon>-->
+					
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
@@ -32,16 +32,12 @@
 					<Title text="Meeting Request" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<Button icon="sap-icon://synchronize" tooltip="Refresh" press="onRefreshMeetingReq"></Button>
-					<!--<Label text="Sort By:"></Label>-->
-					<!--<ComboBox width="8%">-->
-					<!--	<core:Item text="{}"></core:Item>-->
-					<!--</ComboBox>-->
-					<!--<Input placeholder="Search" width="15%"></Input>-->
+				
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>Meeting ID}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
@@ -86,10 +82,7 @@
 				<content>
 					<Title text="Ongoing Meetings" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
-					<!--<Label text="Sort By:"></Label>-->
-					<!--<ComboBox width="8%">-->
-					<!--	<core:Item text="{}"></core:Item>-->
-					<!--</ComboBox>-->
+				
 						<SearchField width="20%" placeholder="Search by Purpose" liveChange="onUpcomingSearch" class="sapUiSmallMargin" />
 				</content>
 			</OverflowToolbar>

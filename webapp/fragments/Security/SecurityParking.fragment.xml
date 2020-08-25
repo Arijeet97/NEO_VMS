@@ -1,9 +1,6 @@
 <core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns="sap.m"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<!--<l:HorizontalLayout class="date">-->
-	<!--	<Label class="datelabel" text="Date:"/>-->
-	<!--	<DatePicker class="date" dateValue="{/date}"/>-->
-	<!--</l:HorizontalLayout>-->
+
 	<l:VerticalLayout width="100%" class="TileStyle">
 		<l:Grid>
 			<l:content>

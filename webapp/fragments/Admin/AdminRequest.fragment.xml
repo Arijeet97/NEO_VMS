@@ -3,10 +3,10 @@
 	    <l:VerticalLayout width="100%" class="TileStyle">
 				<l:Grid>
 				<l:content>
-					<!--<l:HorizontalLayout>-->
+				
 					<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onFacilities" header="Facilities Requests" press="onFacilities">
 						<TileContent>
-							<!--<core:Icon src="sap-icon://appointment"></core:Icon>-->
+							
 							<NumericContent class="tileCount" icon="sap-icon://appointment" value="{oAdminModel>/MeetingRequestsCount}" withMargin="false" ></NumericContent>
 						</TileContent>
 						<layoutData>
@@ -15,7 +15,7 @@
 					</GenericTile>
 					<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop"  id="onMyVisitors" header="My Visitors" press="onMyVisitors">
 						<TileContent>
-							<!--<core:Icon src="sap-icon://trend-down"></core:Icon>-->
+						
 							<NumericContent class="tileCount" icon="sap-icon://trend-down" value="{oAdminModel>/OnSpotMeetingRequestCount}" withMargin="false" ></NumericContent>
 						</TileContent>
 						<layoutData>
@@ -25,7 +25,7 @@
 					<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" id="onTileOngoing" header="Ongoing Meetings" press="OnGoingMeeting">
 					<TileContent >
 						<NumericContent class="tileCount" icon="sap-icon://present" value="{oAdminModel>/OnGoingMeetingCount}" withMargin="false" ></NumericContent>
-						<!--<core:Icon src="sap-icon://present"></core:Icon>-->
+					
 					</TileContent>
 					<layoutData>
 						<l:GridData span="XL3 L3 M6 S12"/>
@@ -41,11 +41,7 @@
 						<Title text="Requests" class="TableTitle" level="H3"/>
 						<ToolbarSpacer></ToolbarSpacer>
 							<Button icon="sap-icon://synchronize" tooltip="Refresh" press="onRefreshFacilityReq"></Button>
-						<!--<Label text="Sort By:"></Label>-->
-						<!--<ComboBox width="8%">-->
-						<!--	<core:Item text="{}"></core:Item>-->
-						<!--</ComboBox>-->
-						<!--<Input placeholder="Search" width="15%"></Input>-->
+						
 					</content>
 				</OverflowToolbar>
 			</headerToolbar>
@@ -93,11 +89,7 @@
 					<Title text="Meeting Request" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
 					<Button icon="sap-icon://synchronize" tooltip="Refresh" press="onRefreshMyVisitorReq"></Button>
-					<!--<Label text="Sort By:"></Label>-->
-					<!--<ComboBox width="8%">-->
-					<!--	<core:Item text="{}"></core:Item>-->
-					<!--</ComboBox>-->
-					<!--<Input placeholder="Search" width="15%"></Input>-->
+				
 				</content>
 			</OverflowToolbar>
 		</headerToolbar>
@@ -147,10 +139,7 @@
 				<content>
 					<Title text="OnGoing Meetings" class="TableTitle" level="H3"/>
 					<ToolbarSpacer></ToolbarSpacer>
-					<!--<Label text="Sort By:"></Label>-->
-					<!--<ComboBox width="8%">-->
-					<!--	<core:Item text="{}"></core:Item>-->
-					<!--</ComboBox>-->
+				
 						<SearchField width="20%" placeholder="Search by Purpose" liveChange="onUpcomingSearch" class="sapUiSmallMargin" />
 				</content>
 			</OverflowToolbar>

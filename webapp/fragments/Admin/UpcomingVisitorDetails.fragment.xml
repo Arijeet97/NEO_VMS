@@ -12,9 +12,7 @@
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
-				<Text text="{i18n>idVisID}"/>
-			</Column>
+		
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>name}"/>
 			</Column>
@@ -29,7 +27,7 @@
 		<items>
 			<ColumnListItem >
 				<cells>
-					<Text text="{oAdminModel>vhId}"></Text>
+				
 					<Text text="{oAdminModel>name}"></Text>
 					<Text text="{oAdminModel>email}"></Text>
 					<Text text="{oAdminModel>contactNo}"></Text>
@@ -38,6 +36,9 @@
 		</items>
 	</Table>
 	</content>
+	<beginButton>
+		<Button text="{i18n>cancelmeet}" type="Reject" press="onMeetingCancel"/>
+	</beginButton>
 	<endButton>
 			<Button text="{i18n>Cancel}" type="Reject" press="onUpcomingVisitorCancel"/>
 		</endButton>

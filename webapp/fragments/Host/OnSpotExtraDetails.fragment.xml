@@ -12,9 +12,7 @@
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
-				<Text text="{i18n>idVisID}"/>
-			</Column>
+		
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>name}"/>
 			</Column>
@@ -28,7 +26,7 @@
 		<items>
 			<ColumnListItem >
 				<cells>
-					<Text text="{oHostModel>vhId}"></Text>
+				
 					<Text text="{oHostModel>name}"></Text>
 					<Text text="{oHostModel>email}"></Text>
 					<Text text="{oHostModel>contactNo}"></Text>

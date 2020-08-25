@@ -28,7 +28,7 @@
 			<Button text="{i18n>book}" type="Ghost" press="onBookParking"/>
 		</beginButton>
 		<endButton>
-			<Button text="{i18n>Cancel}" type="Reject" press="onCancel"/>
+			<Button text="{i18n>Cancel}" type="Reject" press="onCancelPark"/>
 		</endButton>
 	</Dialog>
 </core:FragmentDefinition>

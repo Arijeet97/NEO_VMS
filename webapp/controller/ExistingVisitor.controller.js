@@ -35,6 +35,8 @@ sap.ui.define([
 
 		onEditDetailsSubmit: function () {
 			var that=this;
+				var oDialog =new sap.m.BusyDialog();
+			oDialog.open();
 			var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");
 			var visitorName = this.getView().getModel("oLoginModel").getProperty("/ExvisitorName");
 			var email = this.getView().getModel("oLoginModel").getProperty("/Exemail");
@@ -57,6 +59,8 @@ sap.ui.define([
 				imageString: imageString
 
 			};
+		
+			
 			var sUrl = "/JAVA_SERVICE/visitor/existingVisitor1";
 			$.ajax({
 				url: sUrl,
@@ -69,18 +73,22 @@ sap.ui.define([
 					if (data.status === 200) {
 						sap.m.MessageToast.show("Your Details Updated Successfully");
 							that.getView().byId("badgeBtn").setEnabled(true);
-
+							oDialog.close();
 					} else {
 						MessageBox.alert("Edit Details Failed");
+							oDialog.close();
 					}
 				},
 				error: function (err) {
 					MessageBox.alert("Registration Failed");
+						oDialog.close();
 				}
 			});
 		},
 		ongetBatch:function(){
 				var that=this;
+			var oDialog =new sap.m.BusyDialog();
+			oDialog.open();
 			var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");
 			var oLoginModel = that.getView().getModel("oLoginModel");
 			var sUrl1 = "/JAVA_SERVICE/visitor/getBadgeDetails?vhId=" + vhId;
@@ -93,9 +101,11 @@ sap.ui.define([
 				contentType: "application/json; charset=utf-8",
 				error: function (err) {
 					sap.m.MessageToast.show("Destination Failed");
+						oDialog.close();
 				},
 				success: function (odata) {
 					oLoginModel.setProperty("/getBadge", odata);
+						oDialog.close();
 					if (!that._oDialog2) {
 						that._oDialog2 = sap.ui.xmlfragment("idbadge", "inc.inkthn.neo.NEO_VMS.fragments.Badge", that);
 					}
@@ -114,6 +124,8 @@ sap.ui.define([
 
 			var that = this;
 			that._oDialog2.close();
+				var oDialog =new sap.m.BusyDialog();
+			oDialog.open();
 			var vhId = this.getView().getModel("oLoginModel").getProperty("/visitorid");
 
 			var item = {
@@ -131,13 +143,16 @@ sap.ui.define([
 				success: function (data) {
 					if (data.status === 200) {
 						
+							oDialog.close();
 						if (!that._oDialog4) {
 							that._oDialog4 = sap.ui.xmlfragment("idOnSuccess", "inc.inkthn.neo.NEO_VMS.fragments.ExistSuccess", that);
 						}
 						that.getView().addDependent(that._oDialog4);
 						that._oDialog4.open();
+						that.getView().getModel("oLoginModel").setProperty("/visitorid","");
 
 					} else if (data.status === 500) {
+							oDialog.close();
 						sap.m.MessageToast.show("Something Happened Wrong");
 					}
 				},
@@ -155,21 +170,6 @@ sap.ui.define([
 			var oRouter2 = sap.ui.core.UIComponent.getRouterFor(that);
 			oRouter2.navTo("RouteLanding");
 		},
-		// handleUploadComplete: function (oEvent) {
-		// 	var sResponse = oEvent.getParameter("response");
-		// 	if (sResponse) {
-		// 		var sMsg = "";
-		// 		var m = /^\[(\d\d\d)\]:(.*)$/.exec(sResponse);
-		// 		if (m[1] == "200") {
-		// 			sMsg = "Return Code: " + m[1] + "\n" + m[2] + "(Upload Success)";
-		// 			oEvent.getSource().setValue("");
-		// 		} else {
-		// 			sMsg = "Return Code: " + m[1] + "\n" + m[2] + "(Upload Error)";
-		// 		}
-
-		// 		MessageToast.show(sMsg);
-		// 	}
-		// },
 
 		handleUploadPress: function () {
 			var oFileUploader = this.byId("fileUploader");
