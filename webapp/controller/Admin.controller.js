@@ -232,19 +232,8 @@ sap.ui.define([
 			};
 			webSocket.onmessage = function (event) {
 				var message = JSON.parse(event.data);
-				// var image=message.image;
-			
-				var picture=new sap.m.Avatar({
-						src: 'data:image/png;base64,' + message.image ,// sap.ui.core.URI
-						displayShape: sap.m.AvatarShape.Circle, // sap.m.AvatarShape
-						displaySize: sap.m.AvatarSize.L, // sap.m.AvatarSize
-						customDisplaySize: "3rem", // sap.ui.core.CSSSize
-						customFontSize: "1.125rem", // sap.ui.core.CSSSize
-						imageFitType: sap.m.AvatarImageFitType.Cover, 
-						showBorder:true // sap.m.AvatarImageFitType
-
-					});
-				 MessageBox.information(message.content+picture);
+				
+				 MessageBox.information(message.content);
 				 
 				var sUrl4 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oAdminModel.getProperty("/eId");
 				$.ajax({
