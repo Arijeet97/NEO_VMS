@@ -206,7 +206,7 @@ sap.ui.define([
 			};
 			webSocket.onmessage = function (event) {
 				var message = JSON.parse(event.data);
-				var msg = MessageBox.information(message.content);
+				 MessageBox.information(message.content);
 				var sUrl4 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
 				$.ajax({
 					url: sUrl4,
@@ -224,9 +224,7 @@ sap.ui.define([
 					},
 					type: "GET"
 				});
-				setTimeout(function () {
-					msg.close();
-				}, 2000);
+			
 			};
 
 		},
@@ -1180,14 +1178,14 @@ sap.ui.define([
 
 					new Button({
 						text: "Edit Profile",
-						type: ButtonType.Transparent,
+						type: ButtonType.Ghost,
 						press: function (oEvent) {
 							that.onEditProfile(oEvent);
 						}
 					}),
 					new Button({
 						text: 'Logout',
-						type: ButtonType.Transparent,
+						type: ButtonType.Ghost,
 						press: function (oEvent) {
 							that.onLogOut(oEvent);
 						}

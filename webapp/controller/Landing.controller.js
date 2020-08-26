@@ -429,10 +429,10 @@ sap.ui.define([
 			jQuery.sap.require("sap.ndc.BarcodeScanner");
 			sap.ndc.BarcodeScanner.scan(
 				function (mResult) {
-					MessageBox.alert("Scan Successful\n" +
-						"Result: " + mResult.text + "\n" +
-						"Format: " + mResult.format + "\n" +
-						"Cancelled: " + mResult.cancelled);
+					// MessageBox.alert("Scan Successful\n" +
+					// 	"Result: " + mResult.text + "\n" +
+					// 	"Format: " + mResult.format + "\n" +
+					// 	"Cancelled: " + mResult.cancelled);
 					var qrCode = mResult.text;
 					that.getView().getModel("oLoginModel").setProperty("/visitorid", qrCode);
 					that.onPressVerify();

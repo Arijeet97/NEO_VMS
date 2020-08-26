@@ -151,8 +151,9 @@
 				</OverflowToolbar>
 			</headerToolbar>
 			<columns>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Left">
-				<Text text="{i18n>MeetId}"/>
+		
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>visId}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>name}"/>
@@ -167,9 +168,6 @@
 				<Text text="{i18n>Purpose}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
-				<Text text="{i18n>visId}"/>
-			</Column>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>Time}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
@@ -179,12 +177,12 @@
 			<items>
 				<ColumnListItem >
 					<cells>
-						<Text text="{oAdminModel>mId}"/>
+					
+					<Text text="{oAdminModel>vId}"/>
 					<Text text="{oAdminModel>name}"/>
 					<Text text="{oAdminModel>contactNo}"/>
 					<Text text="{oAdminModel>organisation}"/>
 					<Text text="{oAdminModel>purpose}"/>
-					<Text text="{oAdminModel>vId}"/>
 					<Text text="{oAdminModel>checkedOut}"/>
 					<Toolbar style="Clear">
 					<Button id="idBlacklistBtn" class="blacklistBtn" icon="sap-icon://sys-cancel" type="Reject" press="onDoBlacklist" visible="{oAdminModel>ButtonVisibility}"></Button>

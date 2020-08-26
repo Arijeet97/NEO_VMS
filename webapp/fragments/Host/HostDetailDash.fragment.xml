@@ -158,8 +158,9 @@
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
+			
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
-				<Text text="{i18n>MeetId}"/>
+				<Text text="{i18n>visId}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>name}"/>
@@ -174,9 +175,6 @@
 				<Text text="{i18n>Purpose}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
-				<Text text="{i18n>visId}"/>
-			</Column>
-			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>Time}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
@@ -186,12 +184,12 @@
 		<items>
 			<ColumnListItem >
 				<cells>
-					<Text text="{oHostModel>mId}"/>
+				
+					<Text text="{oHostModel>vId}"/>
 					<Text text="{oHostModel>name}"/>
 					<Text text="{oHostModel>contactNo}"/>
 					<Text text="{oHostModel>organisation}"/>
 					<Text text="{oHostModel>purpose}"/>
-					<Text text="{oHostModel>vId}"/>
 					<Text text="{oHostModel>checkedOut}"/>
 					<Toolbar>
 					<Button id="idBlacklistBtn" class="blacklistBtn" icon="sap-icon://sys-cancel" type="Reject" press="onDoBlacklist" visible="{oHostModel>ButtonVisibility}"></Button>

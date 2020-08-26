@@ -108,12 +108,7 @@ sap.ui.define([
 						that._oDialog3.open();
 							
 					}
-					else if(oData.status === 100){
-						sap.m.MessageToast.show("New Visitor Verification Not Required");
-					}
-					else{
-						sap.m.MessageToast.show("Error");
-					}
+				
 
 				},
 				error: function (e) {
