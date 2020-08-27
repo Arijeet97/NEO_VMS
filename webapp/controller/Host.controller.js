@@ -168,7 +168,7 @@ sap.ui.define([
 			});
 
 			//notiF coUNT
-			var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+			var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications1?eId=" + oHostModel.getProperty("/eId");
 			$.ajax({
 				url: sUrl3,
 				data: null,
@@ -207,7 +207,7 @@ sap.ui.define([
 			webSocket.onmessage = function (event) {
 				var message = JSON.parse(event.data);
 				 MessageBox.information(message.content);
-				var sUrl4 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+				var sUrl4 = "/JAVA_SERVICE/employee/noOfNotifications1?eId=" + oHostModel.getProperty("/eId");
 				$.ajax({
 					url: sUrl4,
 					data: null,
@@ -575,7 +575,7 @@ sap.ui.define([
 					sap.m.MessageToast.show("Destination Failed");
 				},
 				success: function (data) {
-					var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+					var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications1?eId=" + oHostModel.getProperty("/eId");
 					$.ajax({
 						url: sUrl3,
 						data: null,
@@ -638,7 +638,7 @@ sap.ui.define([
 								sap.m.MessageToast.show("Destination Failed");
 							},
 							success: function (data1) {
-								var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+								var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications1?eId=" + oHostModel.getProperty("/eId");
 								$.ajax({
 									url: sUrl3,
 									data: null,
@@ -704,7 +704,7 @@ sap.ui.define([
 								sap.m.MessageToast.show("Destination Failed");
 							},
 							success: function (data1) {
-								var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications?eId=" + oHostModel.getProperty("/eId");
+								var sUrl3 = "/JAVA_SERVICE/employee/noOfNotifications1?eId=" + oHostModel.getProperty("/eId");
 								$.ajax({
 									url: sUrl3,
 									data: null,
