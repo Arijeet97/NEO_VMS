@@ -267,6 +267,12 @@ sap.ui.define([
 			this._oDialog1 = null;
 		
 		},
+		onBadgeCancel:function(){
+			var that=this;
+			 that._oDialog2.close();
+			that._oDialog2.destroy();
+			that._oDialog2= null;	
+		},
 		onNotify: function () {
 			
 			var that = this;
@@ -593,7 +599,41 @@ sap.ui.define([
 			});
 
 		},
-
+		getBadge:function(oEvent){
+				var that=this;
+			var oDialog =new sap.m.BusyDialog();
+			oDialog.open();
+			var odata = oEvent.getSource().getBindingContext("oSecurityModel").getObject();
+			var vhId = odata.vhId;
+			var oSecurityModel = that.getView().getModel("oSecurityModel");
+			var sUrl1 = "/JAVA_SERVICE/visitor/getBadgeDetails?vhId=" + vhId;
+			$.ajax({
+				url: sUrl1,
+				data: null,
+				async: false,
+				cache: false,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				error: function (err) {
+					sap.m.MessageToast.show("Destination Failed");
+						oDialog.close();
+				},
+				success: function (odata1) {
+					oSecurityModel.setProperty("/getBadge", odata1);
+						oDialog.close();
+					if (!that._oDialog2) {
+						that._oDialog2 = sap.ui.xmlfragment("idbadge1", "inc.inkthn.neo.NEO_VMS.fragments.Security.Badge", that);
+					}
+					that.getView().addDependent(that._oDialog2);
+					that._oDialog2.open();
+				},
+				type: "GET"
+			});
+		},
+         onPrint:function(){
+         	
+           window.print();
+         },
 		//Today Log
 		onExpected: function () {
 			this.getView().byId("onExpected").addStyleClass("TilePress");

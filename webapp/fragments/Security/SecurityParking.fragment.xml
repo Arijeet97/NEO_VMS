@@ -15,7 +15,7 @@
 					</layoutData>
 				</GenericTile>
 
-				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" header="On Spot " press="onSpotRegister">
+				<GenericTile class="tileLayout sapUiMediumMarginBegin sapUiSmallMarginTop" header="Park Vehicle" press="onSpotRegister">
 					<TileContent >
 						<core:Icon src="sap-icon://insurance-car"></core:Icon>
 					</TileContent>

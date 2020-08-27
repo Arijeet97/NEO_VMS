@@ -58,6 +58,9 @@
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
 				<Text text="{i18n>Time}"/>
 			</Column>
+			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
+				<Text text="{i18n>accesscard}"/>
+			</Column>
 		</columns>
 		<items>
 			<ColumnListItem >
@@ -68,6 +71,7 @@
 					<Text text="{oSecurityModel>organisation}"/>
 					<Text text="{oSecurityModel>purpose}"/>
 					<Text text="{oSecurityModel>checkedIn}"/>
+					<Button text="Show Card" press="getBadge"></Button>
 				</cells>
 			</ColumnListItem>
 		</items>
@@ -102,7 +106,7 @@
 				<Text text="{i18n>visId}"/>
 			</Column>
 			<Column minScreenWidth="Medium" demandPopin="true" hAlign="Center">
-				<Text text="{i18n>date_Time}"/>
+				<Text text="{i18n>Time}"/>
 			</Column>
 		</columns>
 		<items>
