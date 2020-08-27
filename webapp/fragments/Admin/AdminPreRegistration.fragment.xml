@@ -6,7 +6,7 @@
 			<OverflowToolbar>
 				<content>
 					<Title text="Pre Registered Visitors" class="TableTitle" level="H3"/>
-					<ToolbarSpacer width="40%"></ToolbarSpacer>
+					<ToolbarSpacer width="46%"></ToolbarSpacer>
 					<Label text="Select Employee:"></Label>
 					<ComboBox id="idPerID" selectedKey="{oAdminModel>/selectedEid}" items="{oAdminModel>/getEmployeeList}" change="onRefreshPreReg">
 					<core:Item text="{oAdminModel>name}" key="{oAdminModel>eId}"></core:Item>
